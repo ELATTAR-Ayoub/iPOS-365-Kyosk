@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-padding-top: 20rem;
+  /* cursor: none !important; */
+}
+
+:root {
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  font-weight: 300;
+  scroll-behavior: smooth;
+  transition: scroll-behavior 1s ease-in-out;
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  @apply bg-secondary text-secondary-foreground flex flex-col gap-8 row-start-2 items-center min-h-screen w-full;
+}
+
+a {
+  cursor: pointer;
+  @apply font-bold text-xs text-[#4D81E7] !no-underline hover:!underline;
+}
+
+/* Selections  */
+
+::-moz-selection {
+  /* Code for Firefox */
+  @apply text-secondary bg-ring;
+}
+
+::selection {
+  @apply text-secondary bg-ring;
+}
+
+/* scrollbar width */
+::-webkit-scrollbar {
+  @apply w-0;
+}
+
+/* scrollbar Track */
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  @apply rounded-full;
+}
+
+/* scrollbar Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-popover;
+}
+
+/* scrollbar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
+
+/* body */
+
+.screen-height-with-header {
+  @apply pt-[90px];
+}
+
+.hide-on-mobile {
+  @apply !hidden sm:!flex;
+}
+
+.center-in-screen {
+  @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.center-in-parent {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.ellipsis-on-1line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-on-2line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@layer base {
+  :root {
+    /* chadcn */
+    --background: 0 0% 100%;
+    --foreground: 215 30% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 30% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 30% 16%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 22 80% 59%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --successful: 176 82% 39%;
+    --successful-foreground: 0 0% 98%;
+    --warning: 45.9 96.7% 64.5%;
+    --warning-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 215 30% 16%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.4rem;
+  }
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 215 30% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 30% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 30% 16%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 22 80% 59%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --successful: 176 82% 39%;
+    --successful-foreground: 0 0% 98%;
+    --warning: 45.9 96.7% 64.5%;
+    --warning-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 215 30% 16%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
