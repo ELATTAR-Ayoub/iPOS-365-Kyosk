@@ -12,7 +12,7 @@ const UIConfigSlice = createSlice({
   name: "UIConfig",
   initialState,
   reducers: {
-    setUIState(state, action: PayloadAction<UIConfig>) {
+    setUIState(_state, action: PayloadAction<UIConfig>) {
       return action.payload;
     },
     increment(state) {
