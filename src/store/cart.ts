@@ -16,10 +16,6 @@ const cartConfigSlice = createSlice({
   initialState,
   reducers: {
     // Action to update the entire cartConfig state
-    setUIState(state, action: PayloadAction<cartConfig>) {
-      state = action.payload;
-    },
-
     setProducts(state, action) {
       state.products = action.payload;
     },
@@ -79,7 +75,6 @@ const cartConfigSlice = createSlice({
 });
 
 export const {
-  setUIState,
   setProducts,
   setProductQuantity,
   addProduct,
