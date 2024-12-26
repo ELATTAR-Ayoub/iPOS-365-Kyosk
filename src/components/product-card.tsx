@@ -7,7 +7,14 @@ import {
   TemperatureOption,
 } from "@/constants/interfaces";
 import styles from "@/styles";
-import { ArrowRight, Flame, Snowflake, Trash2 } from "lucide-react";
+import {
+  ArrowRight,
+  CopyPlus,
+  Flame,
+  Recycle,
+  Snowflake,
+  Trash2,
+} from "lucide-react";
 
 // Comp
 import { Button } from "./ui/button";
@@ -30,12 +37,16 @@ import { RadioGroup } from "./ui/radio-group";
 import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Separator } from "@radix-ui/react-separator";
 import { Badge } from "./ui/badge";
+import { VariantIcon } from "./icons/variants-icon";
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
+import { GreenEarthIcon } from "./icons/green-earth-icon";
 
 // ProductCard component
 const ProductCard = ({ product }: { product: Product }) => {
   const dispatch = useDispatch();
   const [showIcePercentage, setShowIcePercentage] = useState(false);
   const [note, setNote] = useState("");
+  const [tumbler, setTumbler] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [temperature, setTemperature] = useState(product.temperature[0]);
   const [variantOptions, setvariantOptions] = useState(
@@ -79,13 +90,16 @@ const ProductCard = ({ product }: { product: Product }) => {
   function addToCart() {
     const selectedProduct: CartProduct = {
       ...product,
-      addOns: addOns.map(({ name, type, options, selectedOption, price }) => ({
-        name,
-        type,
-        options,
-        selectedOption,
-        price,
-      })),
+      addOns: addOns.map(
+        ({ name, type, options, selectedOption, price, icon }) => ({
+          name,
+          type,
+          options,
+          selectedOption,
+          price,
+          icon,
+        })
+      ),
       nonpaidAddons: nonPaidAddons.map(
         ({ name, type, options, selectedOption }) => ({
           name,
@@ -98,6 +112,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       icePercentage,
       variantOptions,
       note,
+      tumbler,
       quantity: quantity,
       cartUID: "id-" + Math.random().toString(36).substr(2, 16),
     };
@@ -214,70 +229,81 @@ const ProductCard = ({ product }: { product: Product }) => {
               <div
                 className={`grid gap-4 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3   overflow-hidden `}
               >
-                {showIcePercentage && (
-                  <>
-                    {" "}
-                    <Separator
-                      className=" h-[2px] bg-muted"
-                      decorative={true}
-                    />
-                    {/* Ice percentage */}
-                    <div
-                      className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center w-full gap-2`}
-                    >
-                      <h3 className={` ${styles.small} font-semibold`}>Ice</h3>
-                      <RadioGroup
-                        className="grid grid-cols-3 w-full gap-2"
-                        defaultValue={icePercentage.selectedOption.toString()}
-                        onValueChange={(value: string) => {
-                          // Convert the selected value to a number
-                          const selectedValue = value;
+                <Separator
+                  className={` h-[2px] bg-muted ${
+                    !showIcePercentage && "hidden"
+                  }`}
+                  decorative={true}
+                />
 
-                          setIcePercentage((prevIcePercentage) => {
-                            // Assuming icePercentage is an object or array, and we are replacing or updating the relevant value.
-                            return {
-                              ...prevIcePercentage,
-                              selectedOption: selectedValue, // If you need to update a specific field, ensure this matches your structure
-                            };
-                          });
+                {/* Ice percentage */}
+                <div
+                  className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center w-full gap-2 ${
+                    !showIcePercentage && "hidden"
+                  }`}
+                >
+                  <div className={`flex justify-start items-center gap-2`}>
+                    <Snowflake className="h-4 w-4 text-blue-400" />
 
-                          console.log(
-                            `Updated Ice Percentage: ${icePercentage.name}, Value: ${icePercentage.selectedOption}`
-                          );
-                        }}
+                    <h3 className={` ${styles.Xsmall} font-semibold`}>Ice</h3>
+                  </div>
+                  <RadioGroup
+                    className="grid grid-cols-3 w-full gap-2"
+                    defaultValue={icePercentage.selectedOption.toString()}
+                    onValueChange={(value: string) => {
+                      // Convert the selected value to a number
+                      const selectedValue = value;
+
+                      setIcePercentage((prevIcePercentage) => {
+                        // Assuming icePercentage is an object or array, and we are replacing or updating the relevant value.
+                        return {
+                          ...prevIcePercentage,
+                          selectedOption: selectedValue, // If you need to update a specific field, ensure this matches your structure
+                        };
+                      });
+
+                      console.log(
+                        `Updated Ice Percentage: ${icePercentage.name}, Value: ${icePercentage.selectedOption}`
+                      );
+                    }}
+                  >
+                    {product.icePercentage.options.map((optionLabel) => (
+                      <Label
+                        htmlFor={`icePercentage-${optionLabel}`}
+                        className={`toggleBaseStyle`}
+                        key={optionLabel}
                       >
-                        {product.icePercentage.options.map((optionLabel) => (
-                          <Label
-                            htmlFor={`icePercentage-${optionLabel}`}
-                            className={`toggleBaseStyle`}
-                            key={optionLabel}
-                          >
-                            <RadioGroupItem
-                              value={optionLabel.toString()}
-                              id={`icePercentage-${optionLabel}`}
-                              className="sr-only"
-                            />
-                            {optionLabel}
-                          </Label>
-                        ))}
-                      </RadioGroup>
-                    </div>{" "}
-                  </>
-                )}
+                        <RadioGroupItem
+                          value={optionLabel.toString()}
+                          id={`icePercentage-${optionLabel}`}
+                          className="sr-only"
+                        />
+                        {optionLabel}
+                      </Label>
+                    ))}
+                  </RadioGroup>
+                </div>
 
                 <Separator className=" h-[2px] bg-muted" decorative={true} />
-
                 {/* non paid addones */}
-
                 <div className={`grid w-full gap-3`}>
                   {product.nonpaidAddons.map((addOn, addOnIndex) => (
                     <div
                       key={addOnIndex}
                       className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2`}
                     >
-                      <h3 className={` ${styles.small} font-semibold`}>
-                        {addOn.name}
-                      </h3>
+                      <div className={`flex justify-start items-center gap-2`}>
+                        <div className={` h-5 w-5`}>
+                          <img
+                            className=" w-full h-full object-cover"
+                            src={addOn.icon}
+                            alt={addOn.name}
+                          ></img>{" "}
+                        </div>
+                        <h3 className={` ${styles.Xsmall} font-semibold`}>
+                          {addOn.name}
+                        </h3>
+                      </div>
                       <RadioGroup
                         className="grid grid-cols-3 w-full gap-2"
                         defaultValue={addOn.selectedOption.toString()}
@@ -323,15 +349,17 @@ const ProductCard = ({ product }: { product: Product }) => {
                     </div>
                   ))}
                 </div>
-
                 {/* Variants */}
-
                 <Separator className=" h-[2px] bg-muted" decorative={true} />
-
                 <div
                   className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
                 >
-                  <h3 className={` ${styles.small} font-semibold`}>Variants</h3>
+                  <div className={`flex justify-start items-center gap-2`}>
+                    <VariantIcon size={20} />
+                    <h3 className={` ${styles.Xsmall} font-semibold`}>
+                      Variants
+                    </h3>
+                  </div>
                   <RadioGroup
                     className="grid grid-cols-3 w-full gap-2"
                     defaultValue={variantOptions.name}
@@ -382,13 +410,15 @@ const ProductCard = ({ product }: { product: Product }) => {
                     })}
                   </RadioGroup>
                 </div>
-
                 <Separator className=" h-[2px] bg-muted" decorative={true} />
-
                 {/* addones */}
-
                 <div className={`${styles.flexStart} flex-col gap-4 w-full`}>
-                  <h3 className={` ${styles.small} font-semibold`}>Add-ons</h3>
+                  <div className={`flex justify-start items-center gap-2 pb-1`}>
+                    <CopyPlus className="h-4 w-4 " />
+                    <h3 className={` ${styles.Xsmall} font-semibold`}>
+                      Add-ons
+                    </h3>
+                  </div>
 
                   {product.addOns.map((addOn, addOnIndex) => (
                     <div
@@ -398,9 +428,19 @@ const ProductCard = ({ product }: { product: Product }) => {
                         key={addOnIndex}
                         className={`${styles.flexBetween} gap-2 w-full`}
                       >
-                        <h4 className={` ${styles.Xsmall} w-1/3 font-semibold`}>
-                          {addOn.name}
-                        </h4>
+                        <div className={`${styles.flexCenter} gap-2`}>
+                          <div className={` h-5 w-5`}>
+                            <img
+                              className=" w-full h-full object-cover"
+                              src={addOn.icon}
+                              alt={addOn.name}
+                            ></img>{" "}
+                          </div>
+                          <h4 className={` ${styles.Xsmall} font-semibold`}>
+                            {addOn.name}
+                          </h4>
+                        </div>
+
                         <div className={`${styles.flexCenter} gap-2 `}>
                           <div
                             className={` ${styles.small} whitespace-nowrap grid place-items-center font-medium`}
@@ -521,16 +561,49 @@ const ProductCard = ({ product }: { product: Product }) => {
                           </div>
                         </div>
                       </div>
-                      <Separator
-                        className=" h-[2px] bg-muted w-10/12"
-                        decorative={true}
-                      />
+                      {addOnIndex != addOns.length - 1 && (
+                        <Separator
+                          className=" h-[2px] bg-muted w-10/12"
+                          decorative={true}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
+                <Separator className=" h-[2px] bg-muted" decorative={true} />
+                {/* Use Tumbler */}
+                <div
+                  className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
+                >
+                  <div className={`flex justify-start items-center gap-2`}>
+                    <Recycle className="h-4 w-4 " />
+                    <h3 className={` ${styles.Xsmall} font-semibold`}>
+                      Use Tumbler
+                    </h3>
+                  </div>
 
+                  <ToggleGroup
+                    className="w-full"
+                    type="single"
+                    defaultValue={tumbler ? "true" : "false"}
+                    onValueChange={(value) => {
+                      setTumbler(value === "true");
+                    }}
+                  >
+                    <ToggleGroupItem
+                      value="true"
+                      aria-label="Toggle personal cup"
+                      variant="default"
+                      className="w-full"
+                    >
+                      <GreenEarthIcon className="text-green-500" size={32} />
+                      {/* <Leaf className="text-green-500 w-4 h-4" /> */}
+                      Use Your Personal Cup{" "}
+                    </ToggleGroupItem>
+                  </ToggleGroup>
+                </div>
+                <Separator className=" h-[2px] bg-muted " decorative={true} />
                 {/* Note */}
-
                 <form>
                   <Label
                     htmlFor="search"
@@ -546,7 +619,6 @@ const ProductCard = ({ product }: { product: Product }) => {
                     onChange={(e) => setNote(e.target.value)}
                   />
                 </form>
-
                 {error && (
                   <p className={` ${styles.Xsmall} text-destructive`}>
                     Please make sure to select all Addons.

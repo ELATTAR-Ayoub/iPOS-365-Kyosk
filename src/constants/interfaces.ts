@@ -17,7 +17,7 @@ export type AddOnOption = {
   options: string[]; // Options for the add-on (percentage or quantity)
   selectedOption: number; // The selected option for the add-on
   price: Price;
-  // icon: string;
+  icon?: string;
 };
 
 export type NonPaidAddons = {
@@ -25,7 +25,7 @@ export type NonPaidAddons = {
   type: "percentage"; // Type of add-on: either "percentage" or "quantity"
   options: string[]; // Options for the add-on (percentage or quantity)
   selectedOption: string | number; // The selected option for the add-on
-  // icon: string;
+  icon?: string;
 };
 
 // The size options can be dynamic based on the product's available sizes
@@ -69,4 +69,5 @@ export interface CartProduct {
   categories: string[];
   note: string; // Whether the product is Customisable by the client or not
   quantity: number; // Whether the product is Customisable by the client or not
+  tumbler: boolean;
 }

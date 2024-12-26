@@ -37,6 +37,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/09DNKnW/Bobba.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -45,6 +46,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/zbHb7KQ/Cheese.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -53,6 +55,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/FX1XwL1/Mushroom.png",
 
         price: { value: 10, currency: "$" },
       },
@@ -61,6 +64,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/w01ytF3/Bacon.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -69,6 +73,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/C1Vd3MX/Onions.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -77,6 +82,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/7vcvw28/Pepperoni.png",
         price: { value: 10, currency: "$" },
       },
     ],
@@ -86,6 +92,7 @@ const products: Product[] = [
         type: "percentage",
         options: ["20%", "50%", "70%"],
         selectedOption: "50%", // Optional
+        icon: "https://i.ibb.co/7YWh9k2/Honey.png",
       },
     ],
     isAvailable: true,
@@ -118,6 +125,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/09DNKnW/Bobba.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -126,6 +134,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/zbHb7KQ/Cheese.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -134,6 +143,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/FX1XwL1/Mushroom.png",
 
         price: { value: 10, currency: "$" },
       },
@@ -142,6 +152,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/w01ytF3/Bacon.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -150,6 +161,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/C1Vd3MX/Onions.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -158,6 +170,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/7vcvw28/Pepperoni.png",
         price: { value: 10, currency: "$" },
       },
     ],
@@ -167,6 +180,7 @@ const products: Product[] = [
         type: "percentage",
         options: ["20%", "50%", "70%"],
         selectedOption: "50%", // Optional
+        icon: "https://i.ibb.co/7YWh9k2/Honey.png",
       },
     ],
     isAvailable: true,
@@ -189,7 +203,7 @@ const products: Product[] = [
     icePercentage: {
       name: "Ice",
       type: "percentage",
-      options: ["30%", "50%", "70%"],
+      options: ["20%", "50%", "70%"],
       selectedOption: "50%", // Optional
     },
     addOns: [
@@ -198,6 +212,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/09DNKnW/Bobba.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -206,6 +221,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/zbHb7KQ/Cheese.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -214,6 +230,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/FX1XwL1/Mushroom.png",
 
         price: { value: 10, currency: "$" },
       },
@@ -222,6 +239,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/w01ytF3/Bacon.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -230,6 +248,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/C1Vd3MX/Onions.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -238,6 +257,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/7vcvw28/Pepperoni.png",
         price: { value: 10, currency: "$" },
       },
     ],
@@ -247,6 +267,7 @@ const products: Product[] = [
         type: "percentage",
         options: ["20%", "50%", "70%"],
         selectedOption: "50%", // Optional
+        icon: "https://i.ibb.co/7YWh9k2/Honey.png",
       },
     ],
     isAvailable: true,
@@ -270,7 +291,7 @@ const products: Product[] = [
     icePercentage: {
       name: "Ice",
       type: "percentage",
-      options: ["10%", "25%", "50%"],
+      options: ["20%", "50%", "70%"],
       selectedOption: "50%", // Optional
     },
     addOns: [
@@ -279,6 +300,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/09DNKnW/Bobba.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -287,6 +309,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/zbHb7KQ/Cheese.png",
 
         price: { value: 20, currency: "$" },
       },
@@ -295,6 +318,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/FX1XwL1/Mushroom.png",
 
         price: { value: 10, currency: "$" },
       },
@@ -303,14 +327,16 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/w01ytF3/Bacon.png",
 
         price: { value: 5, currency: "$" },
       },
       {
-        name: "Onions",
+        name: "Onions ",
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/C1Vd3MX/Onions.png",
 
         price: { value: 5, currency: "$" },
       },
@@ -319,20 +345,7 @@ const products: Product[] = [
         type: "quantity",
         options: ["0", "5"],
         selectedOption: 0, // Optional
-        price: { value: 10, currency: "$" },
-      },
-      {
-        name: "Tea",
-        type: "quantity",
-        options: ["0", "5"],
-        selectedOption: 0, // Optional
-        price: { value: 10, currency: "$" },
-      },
-      {
-        name: "Hot Sauce",
-        type: "quantity",
-        options: ["0", "5"],
-        selectedOption: 0, // Optional
+        icon: "https://i.ibb.co/7vcvw28/Pepperoni.png",
         price: { value: 10, currency: "$" },
       },
     ],
@@ -342,6 +355,7 @@ const products: Product[] = [
         type: "percentage",
         options: ["20%", "50%", "70%"],
         selectedOption: "50%", // Optional
+        icon: "https://i.ibb.co/7YWh9k2/Honey.png",
       },
     ],
     isAvailable: true,
