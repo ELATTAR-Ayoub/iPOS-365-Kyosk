@@ -1,13 +1,10 @@
-import Link from "next/link";
-
 // styles
 import styles from "@/styles";
 
 // components
 
-import { Input } from "@/components/ui/input";
-import Loader from "@/components/Loader";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "react-router-dom";
 
 export function SmallFooter() {
   return (
@@ -17,11 +14,11 @@ export function SmallFooter() {
       <p className={` `}>© 2024 Posive. All rights reserved.</p>
 
       <div className={`${styles.flexStart} gap-2`}>
-        <Link className=" underline" href={"#"}>
+        <Link className=" underline" to={"#"}>
           Term & Condition
         </Link>
         <Separator orientation={"vertical"} className="shrink-0 h-4" />
-        <Link className=" underline" href={"#"}>
+        <Link className=" underline" to={"#"}>
           Privacy & Policy
         </Link>
       </div>
