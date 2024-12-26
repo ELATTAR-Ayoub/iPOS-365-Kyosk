@@ -70,4 +70,5 @@ export interface CartProduct {
   note: string; // Whether the product is Customisable by the client or not
   quantity: number; // Whether the product is Customisable by the client or not
   tumbler: boolean;
+  price: Price;
 }

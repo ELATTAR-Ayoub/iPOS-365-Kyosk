@@ -10,12 +10,18 @@ import "./index.css";
 // Pages
 import MenuPage from "./pages/MenuPage.tsx";
 import Index from "./pages/Index.tsx";
+import LuggagePage from "./pages/LuggagePage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Index />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/luggage",
+    element: <LuggagePage />,
     errorElement: <NotFoundPage />,
   },
   {

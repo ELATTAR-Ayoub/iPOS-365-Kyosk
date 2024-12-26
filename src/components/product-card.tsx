@@ -114,6 +114,10 @@ const ProductCard = ({ product }: { product: Product }) => {
       note,
       tumbler,
       quantity: quantity,
+      price: {
+        currency: variantOptions.price.currency,
+        value: getTotalPrice(),
+      },
       cartUID: "id-" + Math.random().toString(36).substr(2, 16),
     };
     dispatch(addProduct({ product: selectedProduct }));
@@ -143,13 +147,15 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   function getTotalPrice() {
     // Use the variant price as a base
-    let totalPriceValue = variantOptions.price.value * quantity;
+    let totalPriceValue = variantOptions.price.value;
 
     // Find how much Addons add to the price
     addOns.forEach((addOn) => {
       const t = addOn.price.value * addOn.selectedOption;
       totalPriceValue = totalPriceValue + t;
     });
+
+    totalPriceValue = totalPriceValue * quantity;
 
     // Discounts in future
 
@@ -594,7 +600,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                       value="true"
                       aria-label="Toggle personal cup"
                       variant="default"
-                      className="w-full"
+                      className="w-full "
                     >
                       <GreenEarthIcon className="text-green-500" size={32} />
                       {/* <Leaf className="text-green-500 w-4 h-4" /> */}

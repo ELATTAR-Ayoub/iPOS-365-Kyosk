@@ -49,7 +49,9 @@ import { Label } from "@/components/ui/label";
 
 const Menu = () => {
   // values
-  const [selectedCategories, setSelectedCategories] = useState("all menu");
+  const [selectedCategories, setSelectedCategories] = useState(
+    categories[0].title.toLowerCase()
+  );
 
   return (
     <section
@@ -69,7 +71,7 @@ const Menu = () => {
         {/* categories */}
         <RadioGroup
           className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[6.2rem]`}
-          value={"custom"}
+          value={selectedCategories}
           onValueChange={(value) => {
             setSelectedCategories(value.toLowerCase());
             console.log(value);
@@ -79,14 +81,10 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={categorie.title}
-              className={`buttonBaseStyle !rounded-xl ${
-                selectedCategories == categorie.title.toLowerCase()
-                  ? "bg-accent/20 text-primary border-accent/30 shadow hover:bg-accent/30"
-                  : "bg-secondary text-secondary-foreground shadow hover:bg-accent/30  "
-              }`}
+              className={`buttonBaseStyle !rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
             >
               <RadioGroupItem
-                value={categorie.title}
+                value={categorie.title.toLowerCase()}
                 id={categorie.title}
                 className="sr-only"
               />

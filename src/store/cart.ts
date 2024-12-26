@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // State type
 interface cartConfig {
   products: CartProduct[];
+  luggage: string;
 }
 
 // Initial state
 const initialState: cartConfig = {
   products: [],
+  luggage: "",
 };
 
 const cartConfigSlice = createSlice({
@@ -18,6 +20,10 @@ const cartConfigSlice = createSlice({
     // Action to update the entire cartConfig state
     setProducts(state, action) {
       state.products = action.payload;
+    },
+
+    setLuggage(state, action) {
+      state.luggage = action.payload;
     },
 
     setProductQuantity: (
@@ -75,6 +81,7 @@ const cartConfigSlice = createSlice({
 });
 
 export const {
+  setLuggage,
   setProducts,
   setProductQuantity,
   addProduct,
