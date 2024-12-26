@@ -1,31 +1,61 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import Image from "next/image";
+import { useState } from "react";
 
 // styles
 import styles from "../styles/index";
 
 // components
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SearchForm } from "./forms/search-form";
+import { Link } from "react-router-dom";
 
-// auth
-
-// constant
-
-// constants
-
-import { selectMenuToggle, setMenuToggle } from "@/store/UIConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { DropdownMenuIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+// components
 
 const Header = () => {
+  // value
+  const [date] = useState(() => {
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    return formatter.format(now);
+  });
+
+  const [time] = useState(() => {
+    const now = new Date();
+    return `${now.getHours()} : ${now.getMinutes()}`;
+  });
+
   return (
-    <header
-      className={` fixed right-4 sm:left-1/2 sm:-translate-x-1/2 bottom-4 ${styles.flexCenterStart} z-30 text-primary `}
-    ></header>
+    <header className={` ${styles.flexBetween} z-30 w-full h-12 `}>
+      <div className={`${styles.flexCenter} gap-3 `}>
+        <Link className={` h-12 aspect-square `} to={"/"}>
+          <img
+            className=" h-full w-full object-cover"
+            src="pics/Lava_logo.jpg"
+            alt=""
+          />
+        </Link>
+
+        <div className={`${styles.flexStart} flex-col `}>
+          <h1 className="text-base font-bold">Welcome to Lava tea house</h1>
+          <div
+            className={`${styles.flexCenter} gap-1 text-[12px] border-muted-foreground rounded-md`}
+          >
+            <p>{date}</p>{" "}
+            <div className=" h-1 bg-muted-foreground aspect-square rounded-full"></div>{" "}
+            <p>{time}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className={`${styles.flexCenter} gap-3`}>
+        <SearchForm className=" hidden md:block" />
+      </div>
+    </header>
   );
 };
 

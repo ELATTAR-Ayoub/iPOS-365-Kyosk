@@ -26,15 +26,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply min-h-screen w-full;
+}
+
+#root {
+  @apply h-full w-full;
 }
 
 .App {
-  @apply bg-secondary text-secondary-foreground flex flex-col gap-8 row-start-2 items-center min-h-screen w-full;
+  @apply bg-muted text-foreground flex flex-col gap-8 row-start-2 items-center h-full w-full;
 }
 
 a {
   cursor: pointer;
-  @apply font-bold text-xs text-[#4D81E7] !no-underline hover:!underline;
+  @apply font-bold text-xs text-[#4D81E7] !no-underline hover:!underline hover:scale-105 transition-all;
 }
 
 /* Selections  */
@@ -50,7 +55,7 @@ a {
 
 /* scrollbar width */
 ::-webkit-scrollbar {
-  @apply w-0;
+  @apply w-[0px] h-0;
 }
 
 /* scrollbar Track */
@@ -61,7 +66,7 @@ a {
 
 /* scrollbar Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-popover;
+  @apply bg-accent;
 }
 
 /* scrollbar Handle on hover */
@@ -70,6 +75,18 @@ a {
 }
 
 /* body */
+
+.buttonBaseStyle {
+  @apply h-24 w-20 aspect-square px-4 py-2 inline-flex items-center justify-center flex-col gap-4 border whitespace-nowrap rounded-lg text-sm font-medium transition-transform focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-95 cursor-pointer;
+}
+
+.toggleBaseStyle {
+  @apply w-full flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm
+  cursor-pointer transition-colors
+  [&:has([data-state=checked])]:bg-primary
+  [&:has([data-state=checked])]:text-primary-foreground
+  hover:bg-muted active:scale-95 hover:scale-105;
+}
 
 .screen-height-with-header {
   @apply pt-[90px];
@@ -87,26 +104,82 @@ a {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-.ellipsis-on-1line {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+.inv-rad {
+  --inv-rad-tl-size: 0;
+  --inv-rad-tr-size: 0;
+  --inv-rad-bl-size: 0;
+  --inv-rad-br-size: 0;
+  -webkit-mask-position: left top, right top, left bottom, right bottom;
+  mask-position: left top, right top, left bottom, right bottom;
+  mask-mode: match-source, match-source, match-source, match-source;
+  -webkit-mask-origin: border-box, border-box, border-box, border-box;
+  mask-origin: border-box, border-box, border-box, border-box;
+  -webkit-mask-clip: border-box, border-box, border-box, border-box;
+  mask-clip: border-box, border-box, border-box, border-box;
+  -webkit-mask-composite: source-over, source-over, source-over, source-over;
+  mask-composite: add, add, add, add;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 51% 51%;
+  mask-size: 51% 51%;
 }
 
-.ellipsis-on-2line {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.inv-rad-6 {
+  --inv-rad-tl-size: 1.5rem;
+  --inv-rad-tr-size: 1.5rem;
+  --inv-rad-bl-size: 1.5rem;
+  --inv-rad-br-size: 1.5rem;
+  -webkit-mask-image: radial-gradient(
+      var(--inv-rad-tl-size, 0) at left top,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-tr-size, 0) at right top,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-bl-size, 0) at left bottom,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-br-size, 0) at right bottom,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    );
+  mask-image: radial-gradient(
+      var(--inv-rad-tl-size, 0) at left top,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-tr-size, 0) at right top,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-bl-size, 0) at left bottom,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    ),
+    radial-gradient(
+      var(--inv-rad-br-size, 0) at right bottom,
+      rgba(0, 0, 0, 0) 98%,
+      rgb(0, 0, 0)
+    );
+}
+
+.pos-item-drop-shadow {
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.045))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.02));
 }
 
 @layer base {
   :root {
     /* chadcn */
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 215 30% 16%;
     --card: 0 0% 100%;
     --card-foreground: 215 30% 16%;
@@ -116,7 +189,7 @@ a {
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
+    --muted: 240 5.9% 90%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 22 80% 59%;
     --accent-foreground: 240 5.9% 10%;
@@ -134,10 +207,10 @@ a {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.4rem;
+    --radius: 0.6rem;
   }
   .light {
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 215 30% 16%;
     --card: 0 0% 100%;
     --card-foreground: 215 30% 16%;

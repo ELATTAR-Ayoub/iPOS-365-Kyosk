@@ -13,13 +13,26 @@ export type Price = {
 
 export type AddOnOption = {
   name: string; // The name of the add-on (e.g., "Sugar", "Cheese")
-  type: "percentage" | "quantity"; // Type of add-on: either "percentage" or "quantity"
+  type: "quantity"; // Type of add-on: either "percentage" or "quantity"
+  options: string[]; // Options for the add-on (percentage or quantity)
+  selectedOption: number; // The selected option for the add-on
+  price: Price;
+  // icon: string;
+};
+
+export type NonPaidAddons = {
+  name: string; // The name of the add-on (e.g., "Sugar", "Cheese")
+  type: "percentage"; // Type of add-on: either "percentage" or "quantity"
   options: string[]; // Options for the add-on (percentage or quantity)
   selectedOption: string | number; // The selected option for the add-on
+  // icon: string;
 };
 
 // The size options can be dynamic based on the product's available sizes
-export type SizeOption = "small" | "medium" | "large";
+export type VariantOptions = {
+  name: string;
+  price: Price;
+};
 
 // The size options can be dynamic based on the product's available sizes
 export type TemperatureOption = "cold" | "hot";
@@ -29,10 +42,11 @@ export interface Product {
   image: string; // URL or path to the image
   title: string; // Product title
   description: string; // Product description
-  prices: Price[]; // Array of prices with different currencies
-  sizeOptions: SizeOption[]; // Array of size options (could be small, medium, large or a subset)
+  variantOptions: VariantOptions[]; // Array of size options (could be small, medium, large or a subset)
   temperature: TemperatureOption[]; // Can be "cold", "hot", or both (based on the product)
+  icePercentage: NonPaidAddons; // If the temperature is cold, then this value pops out
   addOns: AddOnOption[]; // Array of add-ons like sugar, ice, etc.
+  nonpaidAddons: NonPaidAddons[];
   isAvailable: boolean; // Whether the product is currently available
   customisable: boolean; // Whether the product is Customisable by the client or not
   categories: string[];
@@ -45,10 +59,11 @@ export interface CartProduct {
   image: string; // URL or path to the image
   title: string; // Product title
   description: string; // Product description
-  prices: Price[]; // Array of prices with different currencies
-  sizeOptions: string; // Array of size options (could be small, medium, large or a subset)
+  variantOptions: VariantOptions; // Array of size options (could be small, medium, large or a subset)
   temperature: string; // Can be "cold", "hot", or both (based on the product)
+  icePercentage: NonPaidAddons; // If the temperature is cold, then this value pops out
   addOns: AddOnOption[]; // Array of add-ons like sugar, ice, etc.
+  nonpaidAddons: NonPaidAddons[];
   isAvailable: boolean; // Whether the product is currently available
   customisable: boolean; // Whether the product is Customisable by the client or not
   categories: string[];

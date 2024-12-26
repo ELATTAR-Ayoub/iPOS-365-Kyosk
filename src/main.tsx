@@ -8,7 +8,7 @@ import { store } from "@/store/store.ts";
 import "./index.css";
 
 // Pages
-import About from "./pages/About.tsx";
+import MenuPage from "./pages/MenuPage.tsx";
 import Index from "./pages/Index.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/about",
-    element: <About />,
+    path: "/menu",
+    element: <MenuPage />,
     errorElement: <NotFoundPage />,
   },
 ]);
