@@ -55,10 +55,10 @@ const Header = ({ showSearch = true }: HeaderProps) => {
         showSearchMobile && "gap-2"
       } `}
     >
-      <div className={` ${styles.flexBetween} w-full h-10 sm:h-12 xl:h-28`}>
+      <div className={` ${styles.flexBetween} w-full h-10 sm:h-12 xl:h-24`}>
         <div className={`${styles.flexCenter} gap-2 xl:gap-4 sm:gap-3 `}>
           <Link
-            className={` h-10 sm:h-12 xl:h-28 aspect-square rounded-md overflow-hidden `}
+            className={` h-10 sm:h-12 xl:h-24 aspect-square rounded-md overflow-hidden `}
             to={"/"}
           >
             <img
