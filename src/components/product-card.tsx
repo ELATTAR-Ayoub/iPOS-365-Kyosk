@@ -164,17 +164,17 @@ const ProductCard = ({ product }: { product: Product }) => {
   }
 
   return (
-    <div className={`relative w-[48%] sm:w-40 xl:w-52 h-fit rounded-xl `}>
+    <div className={`relative w-[48%] sm:w-40 lg:w-52 h-fit rounded-xl `}>
       {/* image */}
 
-      <div className=" h-64 xl:h-80 cursor-pointer pos-item-drop-shadow ">
+      <div className=" h-64 lg:h-80 cursor-pointer pos-item-drop-shadow ">
         <div className="h-3/4 relative ">
           {/* <!-- Image Section --> */}
           <div
             onClick={() => {
               setIsDialogOpen(true);
             }}
-            className="absolute w-32 h-32 xl:h-40 xl:w-40 top-0 left-1/2 transform -translate-x-1/2 z-30 bg-muted rounded-lg"
+            className="absolute w-32 h-32 lg:h-40 lg:w-40 top-0 left-1/2 transform -translate-x-1/2 z-30 bg-muted rounded-lg"
           >
             <img
               className="w-full h-full object-cover"
@@ -184,15 +184,15 @@ const ProductCard = ({ product }: { product: Product }) => {
           </div>
           {/* <!-- Content Overlay Section --> */}
           <div className="absolute bg-secondary top-[30%] left-0 w-full z-20 rounded-t-2xl rounded-br-2xl h-3/4 ">
-            <div className={` space-y-1 w-full h-full mt-16 xl:mt-20 p-4`}>
+            <div className={` space-y-1 w-full h-full mt-16 lg:mt-20 p-4`}>
               <h2
-                className={` text-sm xl:text-base font-semibold line-clamp-1 leading-tight `}
+                className={` text-sm lg:text-base font-semibold line-clamp-1 leading-tight `}
               >
                 {product.title}
               </h2>
 
               <p
-                className={` text-xs xl:text-sm font-medium opacity-70 line-clamp-2 `}
+                className={` text-xs lg:text-sm font-medium opacity-70 line-clamp-2 `}
               >
                 {product.description}
               </p>
@@ -200,12 +200,12 @@ const ProductCard = ({ product }: { product: Product }) => {
           </div>
         </div>
         {/* <!-- Price and Action Section --> */}
-        <div className="flex items-center mt-[9px] xl:mt-3 h-12 xl:h-14 gap-2">
+        <div className="flex items-center mt-[9px] lg:mt-3 h-12 lg:h-14 gap-2">
           {/* <!-- Price Section --> */}
           <div className="relative w-[calc(80%-12px)] h-full z-8 ">
             <div className=" bg-secondary peer rounded-b-2xl flex items-center justify-start w-full h-full text-accent font-bold px-4">
               <p
-                className={` ${styles.normal} xl:text-2xl opacity-70 font-bold `}
+                className={` ${styles.normal} lg:text-2xl opacity-70 font-bold `}
               >
                 <span>{product.variantOptions[0].price.currency}</span>{" "}
                 {product.variantOptions[0].price.value}
@@ -217,7 +217,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <Button
             variant={"muted"}
             onClick={() => setIsDialogOpen(true)}
-            className=" rounded-full z-20 hover:-rotate-12 xl:w-12 xl:h-12 "
+            className=" rounded-full z-20 hover:-rotate-12 lg:w-12 lg:h-12 "
             size="icon"
           >
             {" "}
@@ -246,12 +246,12 @@ const ProductCard = ({ product }: { product: Product }) => {
               className={` relative ${styles.flexEnd} flex-col gap-1 self-end w-3/5  `}
             >
               <DialogTitle
-                className={` ${styles.normal} xl:text-3xl font-bold`}
+                className={` ${styles.normal} lg:text-3xl font-bold`}
               >
                 {product.title}
               </DialogTitle>
               <DialogDescription
-                className={` ${styles.Xsmall} xl:text-2xl text-primary font-semibold`}
+                className={` ${styles.Xsmall} lg:text-2xl text-primary font-semibold`}
               >
                 {product.description}
               </DialogDescription>
@@ -291,7 +291,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
           {/* Content */}
           <div
-            className={`grid gap-4 xl:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3   overflow-hidden `}
+            className={`grid gap-4 lg:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3   overflow-hidden `}
           >
             <Separator
               className={` h-[2px] bg-muted ${!showIcePercentage && "hidden"}`}
@@ -305,9 +305,9 @@ const ProductCard = ({ product }: { product: Product }) => {
               }`}
             >
               <div className={`flex justify-start items-center gap-2`}>
-                <Snowflake className="size-4 xl:size-7 text-blue-400" />
+                <Snowflake className="size-4 lg:size-7 text-blue-400" />
 
-                <h3 className={` ${styles.Xsmall} xl:text-2xl font-semibold`}>
+                <h3 className={` ${styles.Xsmall} lg:text-2xl font-semibold`}>
                   Ice
                 </h3>
               </div>
@@ -357,7 +357,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                   className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2`}
                 >
                   <div className={`flex justify-start items-center gap-2`}>
-                    <div className={` size-4 xl:size-7`}>
+                    <div className={` size-4 lg:size-7`}>
                       <img
                         className=" w-full h-full object-cover"
                         src={addOn.icon}
@@ -365,7 +365,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                       ></img>{" "}
                     </div>
                     <h3
-                      className={` ${styles.Xsmall} xl:text-2xl font-semibold`}
+                      className={` ${styles.Xsmall} lg:text-2xl font-semibold`}
                     >
                       {addOn.name}
                     </h3>
@@ -421,8 +421,8 @@ const ProductCard = ({ product }: { product: Product }) => {
               className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
             >
               <div className={`flex justify-start items-center gap-2`}>
-                <VariantIcon className="size-4 xl:size-7" size={20} />
-                <h3 className={` ${styles.Xsmall} xl:text-2xl font-semibold`}>
+                <VariantIcon className="size-4 lg:size-7" size={20} />
+                <h3 className={` ${styles.Xsmall} lg:text-2xl font-semibold`}>
                   Variants
                 </h3>
               </div>
@@ -479,28 +479,28 @@ const ProductCard = ({ product }: { product: Product }) => {
             <Separator className=" h-[2px] bg-muted" decorative={true} />
             {/* addones */}
             <div
-              className={`${styles.flexStart} flex-col gap-4 xl:gap-8 w-full`}
+              className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full`}
             >
               <div className={`flex justify-start items-center gap-2 pb-1`}>
-                <CopyPlus className="size-4 xl:size-7 " />
-                <h3 className={` ${styles.Xsmall} xl:text-2xl font-semibold`}>
+                <CopyPlus className="size-4 lg:size-7 " />
+                <h3 className={` ${styles.Xsmall} lg:text-2xl font-semibold`}>
                   Add-ons
                 </h3>
               </div>
 
               <div
-                className={`${styles.flexStart} flex-col gap-4 xl:gap-8 w-full pt-7`}
+                className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full pt-7`}
               >
                 {product.addOns.map((addOn, addOnIndex) => (
                   <div
-                    className={`grid place-items-center gap-1 xl:gap-8 px-2 w-full`}
+                    className={`grid place-items-center gap-1 lg:gap-8 px-2 w-full`}
                   >
                     <div
                       key={addOnIndex}
                       className={`${styles.flexBetween} gap-2 w-full`}
                     >
-                      <div className={`${styles.flexCenter} gap-2 xl:gap-4`}>
-                        <div className={` size-4 xl:size-12`}>
+                      <div className={`${styles.flexCenter} gap-2 lg:gap-4`}>
+                        <div className={` size-4 lg:size-12`}>
                           <img
                             className=" w-full h-full object-cover"
                             src={addOn.icon}
@@ -508,7 +508,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                           ></img>{" "}
                         </div>
                         <h4
-                          className={` ${styles.Xsmall} xl:text-2xl font-semibold`}
+                          className={` ${styles.Xsmall} lg:text-2xl font-semibold`}
                         >
                           {addOn.name}
                         </h4>
@@ -516,7 +516,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
                       <div className={`${styles.flexCenter} gap-2 `}>
                         <div
-                          className={` ${styles.small} xl:text-xl whitespace-nowrap grid place-items-center font-semibold`}
+                          className={` ${styles.small} lg:text-xl whitespace-nowrap grid place-items-center font-semibold`}
                         >
                           {addOn.selectedOption > 0 ? (
                             `+ ${(
@@ -536,7 +536,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                             size={"icon"}
                             className={` ${
                               addOn.selectedOption == 0 && "hidden"
-                            } size-8 xl:size-10 hover:scale-100 `}
+                            } size-8 lg:size-10 hover:scale-100 `}
                             onClick={() => {
                               const minValue = addOn.options[0]; // Min value
                               console.log("minValue", minValue);
@@ -583,14 +583,14 @@ const ProductCard = ({ product }: { product: Product }) => {
                           <div
                             className={` ${
                               addOn.selectedOption == 0 && "hidden"
-                            } grid place-items-center size-8 xl:size-10 font-bold text-base xl:text-xl `}
+                            } grid place-items-center size-8 lg:size-10 font-bold text-base lg:text-xl `}
                           >
                             {addOn.selectedOption || addOn.options[0]}
                           </div>
                           <Button
                             variant={"default2"}
                             size={"icon"}
-                            className="size-8 xl:size-10 hover:scale-100"
+                            className="size-8 lg:size-10 hover:scale-100"
                             onClick={() => {
                               const maxValue = addOn.options.slice(-1)[0]; // Min value
                               console.log("maxValue", maxValue);
@@ -650,8 +650,8 @@ const ProductCard = ({ product }: { product: Product }) => {
               className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
             >
               <div className={`flex justify-start items-center gap-2`}>
-                <Recycle className="size-4 xl:size-7" />
-                <h3 className={` ${styles.Xsmall} xl:text-2xl font-semibold`}>
+                <Recycle className="size-4 lg:size-7" />
+                <h3 className={` ${styles.Xsmall} lg:text-2xl font-semibold`}>
                   Use Tumbler
                 </h3>
               </div>
@@ -671,7 +671,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                   className="w-full toggleBaseStyle"
                 >
                   <GreenEarthIcon
-                    className="size-8 xl:size-10 text-green-500"
+                    className="size-8 lg:size-10 text-green-500"
                     size={32}
                   />
                   {/* <Leaf className="text-green-500 w-4 h-4" /> */}
@@ -681,13 +681,13 @@ const ProductCard = ({ product }: { product: Product }) => {
             </div>
             <Separator className=" h-[2px] bg-muted " decorative={true} />
             {/* Note */}
-            <form className="flex justify-start items-center flex-col xl:gap-8">
+            <form className="flex justify-start items-center flex-col lg:gap-8">
               <Label
                 htmlFor="search"
                 className={`flex justify-start items-center gap-2  ${styles.small} font-semibold w-full text-left`}
               >
-                <SquarePen className="size-4 xl:size-7 " />{" "}
-                <h3 className={` ${styles.Xsmall} xl:text-2xl font-semibold`}>
+                <SquarePen className="size-4 lg:size-7 " />{" "}
+                <h3 className={` ${styles.Xsmall} lg:text-2xl font-semibold`}>
                   Note
                 </h3>
               </Label>
@@ -695,7 +695,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 value={product.note}
                 id="search"
                 placeholder="Write your Note here..."
-                className="h-10 xl:h-24 outline-none ring-0 xl:text-2xl"
+                className="h-10 lg:h-24 outline-none ring-0 lg:text-2xl"
                 onChange={(e) => setNote(e.target.value)}
               />
             </form>
@@ -709,10 +709,10 @@ const ProductCard = ({ product }: { product: Product }) => {
           {/* CTA */}
 
           <div
-            className={`grid grid-row-2 w-full gap-2 xl:gap-5 p-3 border border-muted-foreground/30  `}
+            className={`grid grid-row-2 w-full gap-2 lg:gap-5 p-3 border border-muted-foreground/30  `}
           >
             <div
-              className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 xl:p-3 border border-muted-foreground/50 rounded-t-lg`}
+              className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 lg:p-3 border border-muted-foreground/50 rounded-t-lg`}
             >
               <div
                 className={` flex justify-start items-center flex-wrap gap-1`}
@@ -722,20 +722,20 @@ const ProductCard = ({ product }: { product: Product }) => {
                   .map((addOn, addOnIndex) => (
                     <Badge
                       key={addOnIndex}
-                      className=" bg-muted-foreground rounded-b-none xl:text-xl font-medium"
+                      className=" bg-muted-foreground rounded-b-none lg:text-xl font-medium"
                     >
                       {" "}
                       +{addOn.selectedOption * addOn.price.value} {addOn.name}{" "}
                     </Badge> // Render Badge for each selected add-on
                   ))}
               </div>
-              <div className={`${styles.flexCenter} gap-2 xl:gap-4  `}>
+              <div className={`${styles.flexCenter} gap-2 lg:gap-4  `}>
                 <Button
                   variant={"default2"}
                   size={"icon"}
                   className={` ${
                     quantity == 1 && "hidden"
-                  } size-8 xl:size-10 hover:scale-100 `}
+                  } size-8 lg:size-10 hover:scale-100 `}
                   onClick={() => {
                     setQuantity(quantity - 1);
                   }}
@@ -744,14 +744,14 @@ const ProductCard = ({ product }: { product: Product }) => {
                 </Button>
                 {/* MemoizedAddOn only re-renders when addOn.selectedOption changes */}
                 <div
-                  className={`grid place-items-center ${styles.Xsmall} xl:text-2xl font-semibold `}
+                  className={`grid place-items-center ${styles.Xsmall} lg:text-2xl font-semibold `}
                 >
                   {quantity}
                 </div>
                 <Button
                   variant={"default2"}
                   size={"icon"}
-                  className="size-8 xl:size-10 hover:scale-100"
+                  className="size-8 lg:size-10 hover:scale-100"
                   onClick={() => {
                     setQuantity(quantity + 1);
                   }}
@@ -761,24 +761,24 @@ const ProductCard = ({ product }: { product: Product }) => {
               </div>
             </div>
 
-            <div className={`grid grid-cols-2 w-full gap-2 xl:gap-5 `}>
+            <div className={`grid grid-cols-2 w-full gap-2 lg:gap-5 `}>
               <DialogTrigger>
                 <Button
                   variant={"outline"}
-                  className="w-full rounded-t-none xl:h-20 xl:text-3xl xl:p-8"
+                  className="w-full rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
                 >
                   Back
                 </Button>
               </DialogTrigger>
 
               <Button
-                className=" text-primary-foreground rounded-t-none xl:h-20 xl:text-3xl xl:p-8"
+                className=" text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
                 disabled={error}
                 onClick={addToCart}
               >
                 <span className="w-full text-left">Add to cart </span>
                 {getTotalPrice()} {variantOptions.price.currency}
-                <ArrowRight className="xl:!size-8" />
+                <ArrowRight className="lg:!size-8" />
               </Button>
             </div>
           </div>

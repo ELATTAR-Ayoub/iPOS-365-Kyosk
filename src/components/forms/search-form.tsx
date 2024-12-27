@@ -12,9 +12,9 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
       <Input
         id="search"
         placeholder="Search something"
-        className="pl-8 h-12 xl:h-16 xl:text-xl"
+        className="pl-8 h-12 lg:h-16 lg:text-xl"
       />
-      <Search className="pointer-events-none relative left-1 bottom-8 xl:bottom-10 h-4 aspect-square select-none opacity-50 " />
+      <Search className="pointer-events-none relative left-1 bottom-8 lg:bottom-10 h-4 aspect-square select-none opacity-50 " />
     </form>
   );
 }

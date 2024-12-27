@@ -63,13 +63,13 @@ const Cart = () => {
           <CheckoutList />
 
           <DialogTrigger asChild>
-            <Button className=" relative w-full text-primary-foreground rounded-b-none py-6 xl:h-28 xl:text-4xl xl:gap-4">
-              <ShoppingBasket className=" xl:!size-10" /> Checkout
+            <Button className=" relative w-full text-primary-foreground rounded-b-none py-6 lg:h-28 lg:text-4xl lg:gap-4">
+              <ShoppingBasket className=" lg:!size-10" /> Checkout
               <span className={` w-full text-right`}>
                 {getTotalPrice()}{" "}
                 {products.length > 0 ? products[0].price.currency : ""}
               </span>
-              <span className=" absolute -top-2 -right-2 xl:-top-6 xl:-right-6 rounded-full p-1 xl:p-3 bg-destructive text-destructive-foreground text-xs xl:text-2xl">
+              <span className=" absolute -top-2 -right-2 lg:-top-6 lg:-right-6 rounded-full p-1 lg:p-3 bg-destructive text-destructive-foreground text-xs lg:text-2xl">
                 x {products.length}
               </span>
             </Button>
@@ -125,7 +125,7 @@ const CheckoutList = () => {
       <div className={` ${styles.flexStart} flex-col gap-2 overflow-y-auto `}>
         {/* list */}
         <div
-          className={`${styles.flexStart} flex-col gap-2 w-full h-full rounded-lg border border-muted p-2`}
+          className={`${styles.flexStart} flex-col gap-2 w-full h-full border-y border-muted p-2`}
         >
           {products.length > 0 ? (
             products.map((product, Index) => (
@@ -146,7 +146,7 @@ const CheckoutList = () => {
                   className={`grid grid-cols-[1fr,auto] w-full h-full gap-2`}
                 >
                   {/* product info */}
-                  <div className={` space-y-2 w-full h-full`}>
+                  <div className={` space-y-2 w-full h-full `}>
                     <h1 className={`${styles.small} font-semibold`}>
                       {product.title}
                     </h1>
@@ -155,16 +155,29 @@ const CheckoutList = () => {
                     <div
                       className={` space-x-1 space-y-1 gap-1 w-full ${styles.small}`}
                     >
-                      <Badge variant="outline" size={"sm"}>
+                      <Badge
+                        variant="outline"
+                        size={"sm"}
+                        className="font-medium lg:text-xl"
+                      >
                         Mode: {product.temperature}
                       </Badge>
-                      <Badge variant="outline" size={"sm"}>
+                      <Badge
+                        variant="outline"
+                        size={"sm"}
+                        className="font-medium lg:text-xl"
+                      >
                         Variant: {product.variantOptions.name}
                       </Badge>
                       {product.addOns
                         .filter((addOn) => addOn.selectedOption > 0) // Filter out add-ons with selectedOption <= 0
                         .map((addOn, addOnIndex) => (
-                          <Badge key={addOnIndex} variant="outline" size={"sm"}>
+                          <Badge
+                            key={addOnIndex}
+                            variant="outline"
+                            size={"sm"}
+                            className="font-medium lg:text-xl"
+                          >
                             {addOn.selectedOption * addOn.price.value}{" "}
                             {addOn.name}
                           </Badge>

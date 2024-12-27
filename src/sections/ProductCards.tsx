@@ -398,10 +398,10 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
       className={`${styles.flexStart} flex-col relative w-full gap-3 overflow-hidden `}
     >
       <div className={`${styles.flexBetween} w-full`}>
-        <h1 className={`${styles.normal} xl:text-2xl font-bold capitalize`}>
+        <h1 className={`${styles.normal} lg:text-2xl font-bold capitalize`}>
           {selectedCategorie}
         </h1>
-        <p className={`${styles.Xsmall} xl:text-lg text-muted-foreground`}>
+        <p className={`${styles.Xsmall} lg:text-lg text-muted-foreground`}>
           {filteredProducts.length}{" "}
           {selectedCategorie !== "all menu" ? selectedCategorie : "total"}{" "}
           results
@@ -409,7 +409,7 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
       </div>
 
       <div
-        className={`${styles.flexStart} relative w-full flex-wrap gap-3 xl:gap-16 overflow-y-auto pb-6 xl:pb-10 pt-6 xl:pt-16 border-t border-muted `}
+        className={`${styles.flexStart} relative w-full flex-wrap gap-3 lg:gap-16 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted `}
       >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
@@ -418,7 +418,7 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
         ) : (
           <div className="grid place-content-center w-full h-full">
             <p
-              className={` ${styles.Xsmall} xl:text-lg text-primary/70 w-full text-center mt-11`}
+              className={` ${styles.Xsmall} lg:text-lg text-primary/70 w-full text-center mt-11`}
             >
               No more products under this category, please check other
               categories.

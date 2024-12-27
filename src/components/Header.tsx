@@ -55,10 +55,10 @@ const Header = ({ showSearch = true }: HeaderProps) => {
         showSearchMobile && "gap-2"
       } `}
     >
-      <div className={` ${styles.flexBetween} w-full h-10 sm:h-12 xl:h-24`}>
-        <div className={`${styles.flexCenter} gap-2 xl:gap-4 sm:gap-3 `}>
+      <div className={` ${styles.flexBetween} w-full h-10 sm:h-12 lg:h-24`}>
+        <div className={`${styles.flexCenter} gap-2 lg:gap-4 sm:gap-3 `}>
           <Link
-            className={` h-10 sm:h-12 xl:h-24 aspect-square rounded-md overflow-hidden `}
+            className={` h-10 sm:h-12 lg:h-24 aspect-square rounded-md overflow-hidden `}
             to={"/"}
           >
             <img
@@ -69,11 +69,11 @@ const Header = ({ showSearch = true }: HeaderProps) => {
           </Link>
 
           <div className={`${styles.flexStart} flex-col `}>
-            <h1 className={`${styles.small} xl:text-2xl font-bold`}>
+            <h1 className={`${styles.small} lg:text-2xl font-bold`}>
               Welcome to Lava tea house
             </h1>
             <div
-              className={`${styles.flexCenter} gap-1 ${styles.Xsmall} xl:text-xl border-muted-foreground rounded-md`}
+              className={`${styles.flexCenter} gap-1 ${styles.Xsmall} lg:text-xl border-muted-foreground rounded-md`}
             >
               <p>{date}</p>
               <div className="h-1 bg-muted-foreground aspect-square rounded-full" />
@@ -83,7 +83,7 @@ const Header = ({ showSearch = true }: HeaderProps) => {
         </div>
 
         <div className={`${styles.flexCenter} gap-3`}>
-          {showSearch && <SearchForm className="hidden md:block xl:w-96" />}
+          {showSearch && <SearchForm className="hidden md:block lg:w-96" />}
           {showSearch && (
             <Button
               variant={"secondary"}

@@ -73,7 +73,7 @@ const Menu = () => {
         >
           <DineInIcon size={96} />
         </Button>
-        <p className={` ${styles.H2} xl:text-4xl`}>內用</p>
+        <p className={` ${styles.H2} lg:text-4xl`}>內用</p>
       </div>
       <div
         className={` ${styles.flexCenter} flex-col w-1/2 sm:w-1/3 py-28 sm:py-36 gap-5 text-sm md:text-xl`}
@@ -89,12 +89,12 @@ const Menu = () => {
           <TakeOutIcon size={96} />
         </Button>
 
-        <p className={` ${styles.H2} xl:text-4xl`}>外帶</p>
+        <p className={` ${styles.H2} lg:text-4xl`}>外帶</p>
       </div>
 
       {/* Language selector */}
       <div
-        className={`${styles.flexCenter} flex-col gap-4 xl:gap-9 w-full absolute bottom-0 z-10`}
+        className={`${styles.flexCenter} flex-col gap-4 lg:gap-9 w-full absolute bottom-0 z-10`}
       >
         <h4 className={` ${styles.H2} font-bold text-[#704332]`}>Language</h4>
 
@@ -110,7 +110,7 @@ const Menu = () => {
               key={index}
               htmlFor={Language.name}
               className={`border-2 [&:has([data-state=checked])]:border-accent [&:has([data-state=checked])]:shadow-lg p-[2px]
-  cursor-pointer transition-colors rounded-full overflow-hidden w-10 h-10 xl:w-20 xl:h-20`}
+  cursor-pointer transition-colors rounded-full overflow-hidden w-10 h-10 lg:w-20 lg:h-20`}
             >
               <RadioGroupItem
                 value={Language.name}
