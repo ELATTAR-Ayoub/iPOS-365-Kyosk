@@ -34,7 +34,7 @@
 }
 
 .App {
-  @apply bg-muted text-foreground flex flex-col gap-8 row-start-2 items-center h-full w-full;
+  @apply bg-background text-foreground flex flex-col gap-8 row-start-2 items-center h-full w-full;
 }
 
 a {
