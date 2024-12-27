@@ -8,7 +8,7 @@ import styles from "@/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { setProductQuantity } from "@/store/cart";
-import { ShoppingBasket, SquarePen } from "lucide-react";
+import { Minus, Plus, ShoppingBasket, SquarePen, Trash2 } from "lucide-react";
 
 // Icons
 
@@ -107,17 +107,17 @@ const CheckoutList = () => {
 
   return (
     <DialogContent
-      className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%]`}
+      className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-10`}
     >
-      <DialogHeader className=" justify-center items-center gap-2 ">
-        <div className={` h-12 w-12 rounded-md overflow-hidden `}>
+      <DialogHeader className=" justify-center items-center gap-2 lg:gap-14 pt-6">
+        <div className={` size-12 lg:size-44 rounded-md overflow-hidden `}>
           <img
             className=" h-full w-full object-cover"
             src="pics/Lava_logo.jpg"
             alt="Lava Tea House Logo"
           />
         </div>
-        <DialogTitle className=" text-center">
+        <DialogTitle className={` text-center font-semibold lg:text-4xl`}>
           Is This Order Correct ?{" "}
         </DialogTitle>
       </DialogHeader>
@@ -134,7 +134,7 @@ const CheckoutList = () => {
                 className={`${styles.flexCenter} w-full border border-muted p-2 gap-4 rounded-lg `}
               >
                 {/* image */}
-                <div className=" w-24 min-w-24 h-24 bg-muted rounded-lg shadow ">
+                <div className=" w-24 min-w-24 h-24 lg:h-32 lg:min-w-32 bg-muted rounded-lg shadow ">
                   <img
                     className="w-full h-full object-cover"
                     src={product.image}
@@ -147,7 +147,7 @@ const CheckoutList = () => {
                 >
                   {/* product info */}
                   <div className={` space-y-2 w-full h-full `}>
-                    <h1 className={`${styles.small} font-semibold`}>
+                    <h1 className={`${styles.small} lg:text-2xl font-semibold`}>
                       {product.title}
                     </h1>
 
@@ -197,15 +197,15 @@ const CheckoutList = () => {
                     <Button
                       variant={"outline"}
                       size={"icon"}
-                      className=" w-6 h-6"
+                      className=" size-6 lg:size-10 rounded-full"
                     >
-                      <SquarePen />
+                      <SquarePen className=" lg:!size-5" />
                     </Button>
                     <div className="grid grid-cols-3 gap-0">
                       <Button
                         variant={"default2"}
                         size={"icon"}
-                        className=" w-6 h-6"
+                        className=" size-6 lg:size-12 rounded-full"
                         onClick={() => {
                           dispatch(
                             setProductQuantity({
@@ -215,18 +215,22 @@ const CheckoutList = () => {
                           );
                         }}
                       >
-                        -
+                        {product.quantity > 1 ? (
+                          <Minus className=" lg:!size-5" />
+                        ) : (
+                          <Trash2 className=" lg:!size-5" />
+                        )}
                       </Button>
                       {/* MemoizedAddOn only re-renders when addOn.selectedOption changes */}
                       <div
-                        className={`${styles.small} grid place-items-center`}
+                        className={`${styles.small} lg:text-3xl font-semibold grid place-items-center `}
                       >
                         {product.quantity}
                       </div>
                       <Button
                         variant={"default2"}
                         size={"icon"}
-                        className=" w-6 h-6"
+                        className=" size-6 lg:size-12 rounded-full"
                         onClick={() => {
                           dispatch(
                             setProductQuantity({
@@ -236,7 +240,7 @@ const CheckoutList = () => {
                           );
                         }}
                       >
-                        +
+                        <Plus className=" lg:!size-5" />
                       </Button>
                     </div>
                   </div>
@@ -261,33 +265,33 @@ const CheckoutList = () => {
             className={` w-full p-1 space-y-2 rounded-lg border border-muted `}
           >
             {/* price recue */}
-            <div className={` w-full p-2 space-y-2 bg-sidebar rounded-md`}>
+            <div
+              className={` w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md ${styles.small} lg:text-2xl font-semibold`}
+            >
               <div className={` ${styles.flexBetween}`}>
-                <p className={`${styles.small} font-semibold`}>
-                  Sub Total ({products.length})
-                </p>
-                <p className={`${styles.small} font-semibold`}>
+                <p>Sub Total ({products.length})</p>
+                <p>
                   {currency} {totalPrice}
                 </p>
               </div>
 
               <div className={` ${styles.flexBetween}`}>
-                <p className={`${styles.small} font-semibold`}>Discount</p>
-                <p className={`${styles.small} font-semibold`}>{discount}%</p>
+                <p>Discount</p>
+                <p>{discount}%</p>
               </div>
 
               <div className={` ${styles.flexBetween}`}>
-                <p className={`${styles.small} font-semibold`}>Service Tax </p>
-                <p className={`${styles.small} font-semibold`}>
-                  {currency} 10.00
-                </p>
+                <p>Service Tax </p>
+                <p>{currency} 10.00</p>
               </div>
 
               <Separator />
 
-              <div className={` ${styles.flexBetween}`}>
-                <p className={`${styles.small} font-semibold`}>Total Payment</p>
-                <p className={`${styles.small} font-semibold`}>
+              <div
+                className={` ${styles.flexBetween} ${styles.small} lg:text-3xl`}
+              >
+                <p>Total Payment</p>
+                <p>
                   {currency} {totalPrice + 10}
                 </p>
               </div>
@@ -298,11 +302,19 @@ const CheckoutList = () => {
 
       <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 ">
         <DialogClose asChild>
-          <Button type="button" variant="outline">
+          <Button
+            type="button"
+            variant="outline"
+            className="rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+          >
             Back
           </Button>
         </DialogClose>
-        <Button variant={"default"} type="button" className=" text-secondary">
+        <Button
+          variant={"default"}
+          type="button"
+          className=" text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+        >
           Processes To Payment
         </Button>
       </DialogFooter>
