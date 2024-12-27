@@ -229,10 +229,10 @@ const ProductCard = ({ product }: { product: Product }) => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className={`${styles.flexStart} flex-col p-0 border-0 `}>
           <DialogHeader
-            className={` relative ${styles.flexStart} flex-row gap-2 pt-3 px-3 w-full   `}
+            className={` relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 w-full lg:min-h-[400px]   `}
           >
             {/* img */}
-            <div className=" absolute left-2 bottom-0 w-[calc(40%-.5rem)] aspect-square bg-muted rounded-lg ">
+            <div className=" absolute left-2 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(46%-.5rem)] aspect-square bg-muted rounded-lg ">
               <img
                 className="w-full h-full object-cover"
                 src={product.image}
@@ -240,21 +240,23 @@ const ProductCard = ({ product }: { product: Product }) => {
               ></img>
             </div>
             {/* img placeholder */}
-            <div className=" w-2/5 bg-muted rounded-lg "></div>
+            <div className=" rounded-lg "></div>
             {/* Title and Description and Size */}
             <div
-              className={` relative ${styles.flexEnd} flex-col gap-1 self-end w-3/5  `}
+              className={` relative ${styles.flexBetween} flex-col gap-1 self-end  `}
             >
-              <DialogTitle
-                className={` ${styles.normal} lg:text-3xl font-bold`}
-              >
-                {product.title}
-              </DialogTitle>
-              <DialogDescription
-                className={` ${styles.Xsmall} lg:text-2xl text-primary font-semibold`}
-              >
-                {product.description}
-              </DialogDescription>
+              <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
+                <DialogTitle
+                  className={` ${styles.normal} lg:text-3xl font-bold`}
+                >
+                  {product.title}
+                </DialogTitle>
+                <DialogDescription
+                  className={` ${styles.Xsmall} lg:text-2xl text-primary font-semibold`}
+                >
+                  {product.description}
+                </DialogDescription>
+              </div>
               {/* Mode */}
               <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
                 {/* <h3 className={` ${styles.small} font-semibold`}>Mode</h3> */}
