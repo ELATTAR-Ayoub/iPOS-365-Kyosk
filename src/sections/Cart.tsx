@@ -102,7 +102,7 @@ const CheckoutList = () => {
 
     // Update the state with the new total price
     setTotalPrice(totalPriceValue);
-    setCurrency(products[0].price.currency);
+    setCurrency(products.length > 0 ? products[0].price.currency : "");
   }, [products]);
 
   return (
