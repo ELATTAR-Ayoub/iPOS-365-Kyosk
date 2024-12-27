@@ -58,42 +58,49 @@ const Menu = () => {
 
   return (
     <section
-      className={` relative ${styles.flexCenter} relative w-full h-full gap-6 overflow-hidden `}
+      className={` relative ${styles.flexCenter} relative w-full h-full gap-32 overflow-hidden `}
     >
-      <Button
-        variant={"outline"}
-        onClick={() => {
-          dispatch(setLuggage({ luggage: "DineIn" }));
-          navigate("/menu");
-        }}
-        className=" w-1/2 sm:w-1/3 py-28 sm:py-36 [&_svg]:size-20 sm:[&_svg]:size-24 flex-col gap-8 text-sm md:text-xl"
+      <div
+        className={` ${styles.flexCenter} flex-col w-1/2 sm:w-1/3 py-28 sm:py-36 gap-5 text-sm md:text-xl`}
       >
-        <DineInIcon size={96} />
-        內用
-      </Button>
-      <Button
-        variant={"outline"}
-        onClick={() => {
-          dispatch(setLuggage({ luggage: "TakeOut" }));
-          navigate("/menu");
-        }}
-        className=" w-1/2 sm:w-1/3 py-28 sm:py-36 [&_svg]:size-20 sm:[&_svg]:size-24 flex-col gap-8 text-sm md:text-xl"
+        <Button
+          variant={"secondary"}
+          onClick={() => {
+            dispatch(setLuggage({ luggage: "DineIn" }));
+            navigate("/menu");
+          }}
+          className=" w-80 h-80 border [&_svg]:size-20 sm:[&_svg]:size-24 "
+        >
+          <DineInIcon size={96} />
+        </Button>
+        <p className={` ${styles.H2} xl:text-4xl`}>內用</p>
+      </div>
+      <div
+        className={` ${styles.flexCenter} flex-col w-1/2 sm:w-1/3 py-28 sm:py-36 gap-5 text-sm md:text-xl`}
       >
-        <TakeOutIcon size={96} />
-        外帶
-      </Button>
+        <Button
+          variant={"secondary"}
+          onClick={() => {
+            dispatch(setLuggage({ luggage: "TakeOut" }));
+            navigate("/menu");
+          }}
+          className=" w-80 h-80 border [&_svg]:size-20 sm:[&_svg]:size-24 "
+        >
+          <TakeOutIcon size={96} />
+        </Button>
+
+        <p className={` ${styles.H2} xl:text-4xl`}>外帶</p>
+      </div>
 
       {/* Language selector */}
       <div
-        className={`${styles.flexCenter} flex-col gap-2 w-full absolute bottom-0 z-10`}
+        className={`${styles.flexCenter} flex-col gap-4 xl:gap-9 w-full absolute bottom-0 z-10`}
       >
-        <h4 className={` ${styles.normal} font-bold text-[#704332]`}>
-          Language
-        </h4>
+        <h4 className={` ${styles.H2} font-bold text-[#704332]`}>Language</h4>
 
         <RadioGroup
-          className={`${styles.flexCenter} gap-3 w-full`}
-          value={"Chinese traditional"}
+          className={`${styles.flexCenter} gap-6 w-full`}
+          value={"English"}
           onValueChange={(value) => {
             console.log(value);
           }}
@@ -102,8 +109,8 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={Language.name}
-              className={`border-2 [&:has([data-state=checked])]:border-accent p-[2px]
-  cursor-pointer transition-colors rounded-full overflow-hidden w-8 h-8`}
+              className={`border-2 [&:has([data-state=checked])]:border-accent [&:has([data-state=checked])]:shadow-lg p-[2px]
+  cursor-pointer transition-colors rounded-full overflow-hidden w-10 h-10 xl:w-20 xl:h-20`}
             >
               <RadioGroupItem
                 value={Language.name}

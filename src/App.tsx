@@ -23,12 +23,12 @@ export default function Index() {
       ></video>
 
       <Link
-        className={`block ${styles.large} absolute bottom-20 z-10 `}
+        className={`block ${styles.large} absolute bottom-56 z-10 w-4/5 h-40 `}
         to={"/luggage"}
       >
         {" "}
         <Button
-          className={`${styles.H2} w-full h-full font-black py-4 px-10 sm:py-6 sm:px-12 text-secondary-foreground/70 bg-secondary/40 border-secondary backdrop-blur-[12px]`}
+          className={`${styles.H2} xl:text-6xl w-full h-full font-bold text-secondary-foreground/70 bg-secondary/40 border-secondary backdrop-blur-[12px]`}
           variant={"outline"}
         >
           TOUCH HERE TO ORDER

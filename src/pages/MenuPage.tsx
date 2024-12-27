@@ -8,7 +8,7 @@ import Cart from "@/sections/Cart";
 export default function Index() {
   return (
     <section
-      className={`relative ${styles.flexBetween} flex-col w-full h-screen ${styles.paddings} gap-4 `}
+      className={`relative ${styles.flexBetween} flex-col w-full h-screen ${styles.paddings} gap-4 xl:gap-7 `}
     >
       <Header></Header>
       <Menu></Menu>

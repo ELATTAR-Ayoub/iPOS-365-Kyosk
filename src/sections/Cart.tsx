@@ -55,21 +55,21 @@ const Cart = () => {
       <div
         className={` w-full md:w-2/3 ${styles.flexCenter} gap-3 bg-secondary p-2 pb-0 rounded-t-xl shadow-lg`}
       >
-        <Button variant={"outline"} className=" w-1/3 rounded-b-none py-6">
+        {/* <Button variant={"outline"} className=" w-1/3 rounded-b-none py-6">
           Back
-        </Button>
+        </Button> */}
 
         <Dialog>
           <CheckoutList />
 
           <DialogTrigger asChild>
-            <Button className=" relative w-2/3 text-primary-foreground rounded-b-none py-6">
-              <ShoppingBasket /> Checkout
+            <Button className=" relative w-full text-primary-foreground rounded-b-none py-6 xl:h-28 xl:text-4xl xl:gap-4">
+              <ShoppingBasket className=" xl:!size-10" /> Checkout
               <span className={` w-full text-right`}>
                 {getTotalPrice()}{" "}
                 {products.length > 0 ? products[0].price.currency : ""}
               </span>
-              <span className=" absolute -top-2 -right-2 rounded-full p-1 bg-destructive text-destructive-foreground text-xs">
+              <span className=" absolute -top-2 -right-2 xl:-top-6 xl:-right-6 rounded-full p-1 xl:p-3 bg-destructive text-destructive-foreground text-xs xl:text-2xl">
                 x {products.length}
               </span>
             </Button>

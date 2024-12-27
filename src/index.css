@@ -81,11 +81,12 @@ a {
 }
 
 .toggleBaseStyle {
-  @apply w-full flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm
+  @apply w-full xl:h-16 flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm xl:text-2xl
   cursor-pointer transition-colors
   [&:has([data-state=checked])]:bg-primary
   [&:has([data-state=checked])]:text-primary-foreground
-  hover:bg-muted active:scale-95 hover:scale-105;
+  hover:bg-muted active:scale-95 hover:scale-105
+  [&_svg]:pointer-events-none [&_svg]:size-7 [&_svg]:shrink-0;
 }
 
 .screen-height-with-header {
@@ -179,7 +180,7 @@ a {
 @layer base {
   :root {
     /* chadcn */
-    --background: 0 0% 98%;
+    --background: 0 0% 97.65%;
     --foreground: 215 30% 16%;
     --card: 0 0% 100%;
     --card-foreground: 215 30% 16%;
@@ -187,7 +188,7 @@ a {
     --popover-foreground: 215 30% 16%;
     --primary: 240 5.9% 10%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
+    --secondary: 0 0% 100%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 5.9% 90%;
     --muted-foreground: 240 3.8% 46.1%;

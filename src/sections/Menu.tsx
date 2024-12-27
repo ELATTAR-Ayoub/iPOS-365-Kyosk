@@ -55,10 +55,12 @@ const Menu = () => {
 
   return (
     <section
-      className={`${styles.flexStart} relative flex-col w-full h-full gap-3 overflow-hidden `}
+      className={`${styles.flexStart} relative flex-col w-full h-full gap-3 xl:gap-7 overflow-hidden `}
     >
       {/* Ad board */}
-      <section className={` w-full aspect-[16/4] rounded-lg overflow-hidden  `}>
+      <section
+        className={` w-full xl:h-64 aspect-[16/4] rounded-lg overflow-hidden  `}
+      >
         <img
           className=" w-full h-full object-cover"
           src={Data.adURl}
@@ -70,7 +72,7 @@ const Menu = () => {
       <section className={`grid w-full  `}>
         {/* categories */}
         <RadioGroup
-          className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem]`}
+          className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem] xl:h-[9.2rem]`}
           value={selectedCategories}
           onValueChange={(value) => {
             setSelectedCategories(value.toLowerCase());
@@ -81,21 +83,23 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={categorie.title}
-              className={`buttonBaseStyle h-10 md:h-24 md:w-20 md:flex-col !rounded-md md:!rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
+              className={`buttonBaseStyle h-10 md:h-24 xl:h-36 md:w-20 xl:w-32 md:flex-col !rounded-md md:!rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
             >
               <RadioGroupItem
                 value={categorie.title.toLowerCase()}
                 id={categorie.title}
                 className="sr-only"
               />
-              <div className=" h-6 md:h-8 aspect-square">
+              <div className=" h-6 md:h-8 xl:h-20 aspect-square">
                 <img
                   className="bg-cover"
                   src={categorie.image}
                   alt={categorie.title}
                 />
               </div>
-              <p className="text-xs">{categorie.title}</p>
+              <p className="text-xs xl:text-base font-bold">
+                {categorie.title}
+              </p>
             </Label>
           ))}
         </RadioGroup>

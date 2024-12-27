@@ -395,31 +395,37 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
 
   return (
     <section
-      className={`${styles.flexStart} relative w-full flex-wrap gap-3 pb-6 overflow-y-auto `}
+      className={`${styles.flexStart} flex-col relative w-full gap-3 overflow-hidden `}
     >
       <div className={`${styles.flexBetween} w-full`}>
-        <h1 className={`${styles.normal} font-bold capitalize`}>
+        <h1 className={`${styles.normal} xl:text-2xl font-bold capitalize`}>
           {selectedCategorie}
         </h1>
-        <p className={`${styles.Xsmall} text-muted-foreground`}>
+        <p className={`${styles.Xsmall} xl:text-lg text-muted-foreground`}>
           {filteredProducts.length}{" "}
           {selectedCategorie !== "all menu" ? selectedCategorie : "total"}{" "}
           results
         </p>
       </div>
-      {filteredProducts.length > 0 ? (
-        filteredProducts.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))
-      ) : (
-        <div className="grid place-content-center w-full h-full">
-          <p
-            className={` ${styles.Xsmall} text-primary/70 w-full text-center mt-11`}
-          >
-            No more products under this category, please check other categories.
-          </p>
-        </div>
-      )}
+
+      <div
+        className={`${styles.flexStart} relative w-full flex-wrap gap-3 xl:gap-16 overflow-y-auto pb-6 xl:pb-10 pt-6 xl:pt-16 border-t border-muted `}
+      >
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))
+        ) : (
+          <div className="grid place-content-center w-full h-full">
+            <p
+              className={` ${styles.Xsmall} xl:text-lg text-primary/70 w-full text-center mt-11`}
+            >
+              No more products under this category, please check other
+              categories.
+            </p>
+          </div>
+        )}
+      </div>
     </section>
   );
 };
