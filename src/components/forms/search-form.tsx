@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 
 export function SearchForm({ ...props }: React.ComponentProps<"form">) {
   return (
-    <form className=" relative w-full" {...props}>
+    <form className=" relative w-full " {...props}>
       <Label htmlFor="search" className="sr-only">
         Search Products
       </Label>

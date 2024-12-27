@@ -70,7 +70,7 @@ const Menu = () => {
       <section className={`grid w-full  `}>
         {/* categories */}
         <RadioGroup
-          className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[6.2rem]`}
+          className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem]`}
           value={selectedCategories}
           onValueChange={(value) => {
             setSelectedCategories(value.toLowerCase());
@@ -81,14 +81,14 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={categorie.title}
-              className={`buttonBaseStyle !rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
+              className={`buttonBaseStyle h-10 md:h-24 md:w-20 md:flex-col !rounded-md md:!rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
             >
               <RadioGroupItem
                 value={categorie.title.toLowerCase()}
                 id={categorie.title}
                 className="sr-only"
               />
-              <div className="h-8 aspect-square">
+              <div className=" h-6 md:h-8 aspect-square">
                 <img
                   className="bg-cover"
                   src={categorie.image}

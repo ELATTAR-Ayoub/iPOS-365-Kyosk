@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, memo } from "react";
 import styles from "../styles/index";
 import { SearchForm } from "./forms/search-form";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { Search } from "lucide-react";
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -18,7 +20,9 @@ const Header = ({ showSearch = true }: HeaderProps) => {
     year: "numeric",
   });
 
+  // values
   const [date, setDate] = useState(() => dateFormatter.format(new Date()));
+  const [showSearchMobile, setShowSearchMobile] = useState(false);
 
   // Memoize the time formatting function
   const formatTime = useCallback((date: Date) => {
@@ -46,30 +50,60 @@ const Header = ({ showSearch = true }: HeaderProps) => {
   }, [date, dateFormatter, formatTime]);
 
   return (
-    <header className={` ${styles.flexBetween} z-30 w-full h-12 `}>
-      <div className={`${styles.flexCenter} gap-3 `}>
-        <Link className={` h-12 aspect-square `} to={"/"}>
-          <img
-            className=" h-full w-full object-cover"
-            src="pics/Lava_logo.jpg"
-            alt="Lava Tea House Logo"
-          />
-        </Link>
-
-        <div className={`${styles.flexStart} flex-col `}>
-          <h1 className="text-base font-bold">Welcome to Lava tea house</h1>
-          <div
-            className={`${styles.flexCenter} gap-1 text-[12px] border-muted-foreground rounded-md`}
+    <header
+      className={` ${styles.flexStart} flex-col z-30 w-full h-fit ${
+        showSearchMobile && "gap-2"
+      } `}
+    >
+      <div className={` ${styles.flexBetween} w-full h-12 `}>
+        <div className={`${styles.flexCenter} gap-2 sm:gap-3 `}>
+          <Link
+            className={` h-10 sm:h-12 aspect-square rounded-md overflow-hidden `}
+            to={"/"}
           >
-            <p>{date}</p>
-            <div className="h-1 bg-muted-foreground aspect-square rounded-full" />
-            <p>{time}</p>
+            <img
+              className=" h-full w-full object-cover"
+              src="pics/Lava_logo.jpg"
+              alt="Lava Tea House Logo"
+            />
+          </Link>
+
+          <div className={`${styles.flexStart} flex-col `}>
+            <h1 className={`${styles.small} font-bold`}>
+              Welcome to Lava tea house
+            </h1>
+            <div
+              className={`${styles.flexCenter} gap-1 ${styles.Xsmall} border-muted-foreground rounded-md`}
+            >
+              <p>{date}</p>
+              <div className="h-1 bg-muted-foreground aspect-square rounded-full" />
+              <p>{time}</p>
+            </div>
           </div>
+        </div>
+
+        <div className={`${styles.flexCenter} gap-3`}>
+          {showSearch && <SearchForm className="hidden md:block" />}
+          {showSearch && (
+            <Button
+              variant={"secondary"}
+              size={"icon"}
+              className=" h-10 w-10 flex md:hidden"
+              onClick={() => {
+                setShowSearchMobile(!showSearchMobile);
+              }}
+            >
+              {" "}
+              <Search />{" "}
+            </Button>
+          )}
         </div>
       </div>
 
-      <div className={`${styles.flexCenter} gap-3`}>
-        {showSearch && <SearchForm className="hidden md:block" />}
+      <div className={` w-full `}>
+        <SearchForm
+          className={` ${showSearchMobile ? "p-1" : "h-0 overflow-hidden"}`}
+        />
       </div>
     </header>
   );
