@@ -229,10 +229,10 @@ const ProductCard = ({ product }: { product: Product }) => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className={`${styles.flexStart} flex-col p-0 border-0 `}>
           <DialogHeader
-            className={` relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 w-full lg:min-h-[400px]   `}
+            className={` relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 lg:p-5 lg:pb-0 w-full lg:min-h-[400px]   `}
           >
             {/* img */}
-            <div className=" absolute left-2 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(46%-.5rem)] aspect-square bg-muted rounded-lg ">
+            <div className=" absolute left-2 lg:left-5 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(48%-.5rem)] aspect-square bg-muted rounded-lg ">
               <img
                 className="w-full h-full object-cover"
                 src={product.image}
@@ -240,10 +240,10 @@ const ProductCard = ({ product }: { product: Product }) => {
               ></img>
             </div>
             {/* img placeholder */}
-            <div className=" rounded-lg "></div>
+            <div></div>
             {/* Title and Description and Size */}
             <div
-              className={` relative ${styles.flexBetween} flex-col gap-1 self-end  `}
+              className={` relative ${styles.flexBetween} h-full flex-col gap-1 self-end  `}
             >
               <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
                 <DialogTitle
@@ -252,7 +252,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                   {product.title}
                 </DialogTitle>
                 <DialogDescription
-                  className={` ${styles.Xsmall} lg:text-2xl text-primary font-semibold`}
+                  className={` ${styles.Xsmall} lg:text-2xl text-primary font-normal`}
                 >
                   {product.description}
                 </DialogDescription>
@@ -293,7 +293,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
           {/* Content */}
           <div
-            className={`grid gap-4 lg:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3   overflow-hidden `}
+            className={`grid gap-4 lg:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 lg:p-5 overflow-hidden `}
           >
             <Separator
               className={` h-[2px] bg-muted ${!showIcePercentage && "hidden"}`}
@@ -711,7 +711,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           {/* CTA */}
 
           <div
-            className={`grid grid-row-2 w-full gap-2 lg:gap-5 p-3 border border-muted-foreground/30  `}
+            className={`grid grid-row-2 w-full gap-2 lg:gap-5 p-3 lg:p-5 border border-muted-foreground/30  `}
           >
             <div
               className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 lg:p-3 border border-muted-foreground/50 rounded-t-lg`}
