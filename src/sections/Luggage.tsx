@@ -109,8 +109,8 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={Language.name}
-              className={`border-2 [&:has([data-state=checked])]:border-accent [&:has([data-state=checked])]:shadow-lg p-[2px]
-  cursor-pointer transition-colors rounded-full overflow-hidden w-10 h-10 lg:w-20 lg:h-20`}
+              className={`border-2 [&:has([data-state=checked])]:border-accent [&:has([data-state=checked])]:shadow-lg p-1
+  cursor-pointer transition-colors rounded-full overflow-hidden w-10 h-10 lg:w-16 lg:h-16`}
             >
               <RadioGroupItem
                 value={Language.name}

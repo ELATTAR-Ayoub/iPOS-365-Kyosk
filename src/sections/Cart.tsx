@@ -106,7 +106,7 @@ const CheckoutList = () => {
 
   return (
     <DialogContent
-      className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-10`}
+      className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
     >
       <DialogHeader className=" justify-center items-center gap-2 lg:gap-14 pt-6">
         <div className={` size-12 lg:size-44 rounded-md overflow-hidden `}>
@@ -122,7 +122,7 @@ const CheckoutList = () => {
       </DialogHeader>
 
       <div
-        className={` ${styles.flexStart} flex-col gap-2 lg:gap-10 overflow-hidden `}
+        className={` ${styles.flexStart} flex-col gap-2 lg:gap-8 overflow-hidden `}
       >
         {/* list */}
         <div
@@ -144,7 +144,7 @@ const CheckoutList = () => {
                 </div>
                 {/* data */}
                 <div
-                  className={`grid grid-cols-[1fr,auto] w-full h-full gap-2`}
+                  className={`grid grid-cols-[1fr,auto] w-full h-full gap-2 lg:gap-4`}
                 >
                   {/* product info */}
                   <div
@@ -277,7 +277,7 @@ const CheckoutList = () => {
             >
               {/* price recue */}
               <div
-                className={` w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md ${styles.small} lg:text-2xl font-semibold`}
+                className={` w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md text-muted-foreground ${styles.small} lg:text-2xl font-semibold`}
               >
                 <div className={` ${styles.flexBetween}`}>
                   <p>Sub Total ({products.length})</p>
@@ -302,7 +302,7 @@ const CheckoutList = () => {
                 ></div>
 
                 <div
-                  className={` ${styles.flexBetween} ${styles.small} lg:text-3xl font-bold`}
+                  className={` ${styles.flexBetween} ${styles.small} lg:text-3xl font-bold text-primary`}
                 >
                   <p>Total Payment</p>
                   <p>
@@ -315,7 +315,7 @@ const CheckoutList = () => {
         )}
       </div>
 
-      <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 ">
+      <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8 ">
         <DialogClose asChild>
           <Button
             type="button"

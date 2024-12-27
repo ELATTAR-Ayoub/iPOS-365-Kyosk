@@ -409,7 +409,7 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
       </div>
 
       <div
-        className={` grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 relative w-full flex-wrap gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted `}
+        className={` grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 relative w-full flex-wrap gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted `}
       >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (

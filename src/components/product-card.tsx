@@ -8,6 +8,7 @@ import {
 } from "@/constants/interfaces";
 import styles from "@/styles";
 import {
+  ArrowDown,
   ArrowRight,
   CopyPlus,
   Flame,
@@ -21,11 +22,12 @@ import {
 import { Button } from "./ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 
 // redux:
@@ -232,7 +234,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             className={` relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 lg:p-5 lg:pb-0 w-full lg:min-h-[400px]   `}
           >
             {/* img */}
-            <div className=" absolute left-2 lg:left-5 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(48%-.5rem)] aspect-square bg-muted rounded-lg ">
+            <div className=" absolute left-2 lg:left-5 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(45%-.5rem)] aspect-square bg-muted rounded-lg ">
               <img
                 className="w-full h-full object-cover"
                 src={product.image}
@@ -495,12 +497,10 @@ const ProductCard = ({ product }: { product: Product }) => {
               >
                 {product.addOns.map((addOn, addOnIndex) => (
                   <div
+                    key={addOnIndex}
                     className={`grid place-items-center gap-1 lg:gap-8 px-2 w-full`}
                   >
-                    <div
-                      key={addOnIndex}
-                      className={`${styles.flexBetween} gap-2 w-full`}
-                    >
+                    <div className={`${styles.flexBetween} gap-2 w-full`}>
                       <div className={`${styles.flexCenter} gap-2 lg:gap-4`}>
                         <div className={` size-4 lg:size-12`}>
                           <img
@@ -711,7 +711,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           {/* CTA */}
 
           <div
-            className={`grid grid-row-2 w-full gap-2 lg:gap-5 p-3 lg:p-5 border border-muted-foreground/30  `}
+            className={`grid grid-row-2 w-full gap-2 lg:gap-6 p-3 lg:p-5 border border-muted-foreground/30  `}
           >
             <div
               className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 lg:p-3 border border-muted-foreground/50 rounded-t-lg`}
@@ -763,15 +763,15 @@ const ProductCard = ({ product }: { product: Product }) => {
               </div>
             </div>
 
-            <div className={`grid grid-cols-2 w-full gap-2 lg:gap-5 `}>
-              <DialogTrigger>
+            <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8 ">
+              <DialogClose asChild>
                 <Button
                   variant={"outline"}
                   className="w-full rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
                 >
                   Back
                 </Button>
-              </DialogTrigger>
+              </DialogClose>
 
               <Button
                 className=" text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
@@ -780,9 +780,9 @@ const ProductCard = ({ product }: { product: Product }) => {
               >
                 <span className="w-full text-left">Add to cart </span>
                 {getTotalPrice()} {variantOptions.price.currency}
-                <ArrowRight className="lg:!size-8" />
+                <ArrowDown className="lg:!size-8" />
               </Button>
-            </div>
+            </DialogFooter>
           </div>
         </DialogContent>
       </Dialog>
