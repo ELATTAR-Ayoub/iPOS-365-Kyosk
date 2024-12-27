@@ -7,8 +7,8 @@ import styles from "@/styles";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
-import { setProductQuantity, deleteProduct } from "@/store/cart";
-import { ShoppingBasket, Trash2 } from "lucide-react";
+import { setProductQuantity } from "@/store/cart";
+import { ShoppingBasket, SquarePen } from "lucide-react";
 
 // Icons
 
@@ -106,8 +106,10 @@ const CheckoutList = () => {
   }, [products]);
 
   return (
-    <DialogContent className=" p-4">
-      <DialogHeader className=" justify-center items-center gap-2">
+    <DialogContent
+      className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%]`}
+    >
+      <DialogHeader className=" justify-center items-center gap-2 ">
         <div className={` h-12 w-12 rounded-md overflow-hidden `}>
           <img
             className=" h-full w-full object-cover"
@@ -120,14 +122,16 @@ const CheckoutList = () => {
         </DialogTitle>
       </DialogHeader>
 
-      <div className={` ${styles.flexStart} flex-col gap-2 w-full h-full `}>
+      <div className={` ${styles.flexStart} flex-col gap-2 overflow-y-auto `}>
         {/* list */}
-        <div className={` w-full h-full overflow-y-auto `}>
+        <div
+          className={`${styles.flexStart} flex-col gap-2 w-full h-full rounded-lg border border-muted p-2`}
+        >
           {products.length > 0 ? (
             products.map((product, Index) => (
               <div
                 key={Index}
-                className={`${styles.flexCenter} w-full border border-muted p-2 gap-4 `}
+                className={`${styles.flexCenter} w-full border border-muted p-2 gap-4 rounded-lg `}
               >
                 {/* image */}
                 <div className=" w-24 min-w-24 h-24 bg-muted rounded-lg shadow ">
@@ -139,35 +143,32 @@ const CheckoutList = () => {
                 </div>
                 {/* data */}
                 <div
-                  className={`${styles.flexBetweenStart} flex-col w-full h-full gap-2`}
+                  className={`grid grid-cols-[1fr,auto] w-full h-full gap-2`}
                 >
                   {/* product info */}
                   <div className={` space-y-2 w-full h-full`}>
                     <h1 className={`${styles.small} font-semibold`}>
                       {product.title}
                     </h1>
-                    <p className={` ${styles.small} opacity-70 font-bold `}>
-                      <span className=" relative text-accent text-xs bottom-1 ">
-                        $
-                      </span>{" "}
-                      {product.price && product.price.value}
-                    </p>
+
                     {/* badges */}
                     <div
-                      className={` space-x-1 space-y-1 gap-1 w-full ${styles.XXsmall}`}
+                      className={` space-x-1 space-y-1 gap-1 w-full ${styles.small}`}
                     >
                       <Badge variant="outline" size={"sm"}>
                         Mode: {product.temperature}
                       </Badge>
                       <Badge variant="outline" size={"sm"}>
-                        Size:{" "}
-                        {product.variantOptions.name.charAt(0).toUpperCase()}
+                        Variant: {product.variantOptions.name}
                       </Badge>
-                      {product.addOns.map((addon, index) => (
-                        <Badge key={index} variant="outline" size={"sm"}>
-                          {addon.name}: {addon.selectedOption}
-                        </Badge>
-                      ))}
+                      {product.addOns
+                        .filter((addOn) => addOn.selectedOption > 0) // Filter out add-ons with selectedOption <= 0
+                        .map((addOn, addOnIndex) => (
+                          <Badge key={addOnIndex} variant="outline" size={"sm"}>
+                            {addOn.selectedOption * addOn.price.value}{" "}
+                            {addOn.name}
+                          </Badge>
+                        ))}
 
                       {product.note && (
                         <Badge variant="default" size={"sm"}>
@@ -177,12 +178,21 @@ const CheckoutList = () => {
                     </div>
                   </div>
                   {/* Quantity control */}
-                  <div className={`${styles.flexBetween} w-full gap-2`}>
-                    <div className="grid grid-cols-3 border rounded-lg p-1 gap-0">
+                  <div
+                    className={`${styles.flexBetweenEnd} flex-col w-full gap-4`}
+                  >
+                    <Button
+                      variant={"outline"}
+                      size={"icon"}
+                      className=" w-6 h-6"
+                    >
+                      <SquarePen />
+                    </Button>
+                    <div className="grid grid-cols-3 gap-0">
                       <Button
                         variant={"default2"}
                         size={"icon"}
-                        className=" w-7 h-7"
+                        className=" w-6 h-6"
                         onClick={() => {
                           dispatch(
                             setProductQuantity({
@@ -203,7 +213,7 @@ const CheckoutList = () => {
                       <Button
                         variant={"default2"}
                         size={"icon"}
-                        className=" w-7 h-7"
+                        className=" w-6 h-6"
                         onClick={() => {
                           dispatch(
                             setProductQuantity({
@@ -216,15 +226,6 @@ const CheckoutList = () => {
                         +
                       </Button>
                     </div>
-                    <Button
-                      variant={"destructive"}
-                      size={"icon"}
-                      onClick={() => {
-                        dispatch(deleteProduct(product.cartUID)); // Pass product.id directly
-                      }}
-                    >
-                      <Trash2 />
-                    </Button>
                   </div>
                 </div>
                 {/* delete */}
@@ -244,7 +245,7 @@ const CheckoutList = () => {
         {/* price */}
         <div className="w-full shrink-0">
           <section
-            className={` w-full p-1 space-y-2 bg-muted-foreground/25 rounded-lg `}
+            className={` w-full p-1 space-y-2 rounded-lg border border-muted `}
           >
             {/* price recue */}
             <div className={` w-full p-2 space-y-2 bg-sidebar rounded-md`}>
@@ -282,7 +283,7 @@ const CheckoutList = () => {
         </div>
       </div>
 
-      <DialogFooter className="grid grid-cols-[30%,1fr] gap-2">
+      <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 ">
         <DialogClose asChild>
           <Button type="button" variant="outline">
             Back

@@ -395,7 +395,7 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
 
   return (
     <section
-      className={`${styles.flexStart} relative w-full flex-wrap gap-3 pb-3 overflow-y-auto `}
+      className={`${styles.flexStart} relative w-full flex-wrap gap-3 pb-6 overflow-y-auto `}
     >
       <div className={`${styles.flexBetween} w-full`}>
         <h1 className={`${styles.normal} font-bold capitalize`}>

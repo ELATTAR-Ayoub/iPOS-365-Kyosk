@@ -164,17 +164,17 @@ const ProductCard = ({ product }: { product: Product }) => {
   }
 
   return (
-    <div className={`relative w-[48%] sm:w-40 h-fit rounded-xl `}>
+    <div className={`relative w-[48%] sm:w-48 xl:w-72 h-fit rounded-xl `}>
       {/* image */}
 
-      <div className=" h-64 cursor-pointer pos-item-drop-shadow ">
+      <div className=" h-96 cursor-pointer pos-item-drop-shadow ">
         <div className="h-3/4 relative ">
           {/* <!-- Image Section --> */}
           <div
             onClick={() => {
               setIsDialogOpen(true);
             }}
-            className="absolute h-32 top-0 left-1/2 w-32  transform -translate-x-1/2 z-30 bg-muted rounded-lg"
+            className="absolute h-40 w-40 top-0 left-1/2 transform -translate-x-1/2 z-30 bg-muted rounded-lg"
           >
             <img
               className="w-full h-full object-cover"
@@ -207,7 +207,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 {product.variantOptions[0].price.value}
               </p>
             </div>
-            <div className="absolute -top-[24px] right-[-23px] -z-10 inv-rad inv-rad-6 bg-white transition size-12"></div>
+            <div className="absolute -top-[24px] right-[-23px] -z-10 inv-rad inv-rad-6 bg-secondary transition size-12"></div>
           </div>
           {/* <!-- Arrow Button Section --> */}
           <Button
