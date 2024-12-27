@@ -94,7 +94,7 @@ const Menu = () => {
 
       {/* Language selector */}
       <div
-        className={`${styles.flexCenter} flex-col gap-4 lg:gap-9 w-full absolute bottom-0 z-10`}
+        className={`${styles.flexCenter} flex-col gap-4 lg:gap-9 w-full fixed bottom-20 z-10`}
       >
         <h4 className={` ${styles.H2} font-bold text-[#704332]`}>Language</h4>
 

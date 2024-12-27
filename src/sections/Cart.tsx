@@ -22,7 +22,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useMemo, useState } from "react";
 
@@ -122,16 +121,18 @@ const CheckoutList = () => {
         </DialogTitle>
       </DialogHeader>
 
-      <div className={` ${styles.flexStart} flex-col gap-2 overflow-y-auto `}>
+      <div
+        className={` ${styles.flexStart} flex-col gap-2 lg:gap-10 overflow-hidden `}
+      >
         {/* list */}
         <div
-          className={`${styles.flexStart} flex-col gap-2 w-full h-full border-y border-muted p-2`}
+          className={`${styles.flexStart} flex-col gap-2 lg:gap-10 w-full h-full border-y border-muted p-2 lg:py-10 overflow-y-auto`}
         >
           {products.length > 0 ? (
             products.map((product, Index) => (
               <div
                 key={Index}
-                className={`${styles.flexCenter} w-full border border-muted p-2 gap-4 rounded-lg `}
+                className={`${styles.flexCenter} w-full border border-muted p-2 gap-4 rounded-lg bg-[#F6F8F9] `}
               >
                 {/* image */}
                 <div className=" w-24 min-w-24 h-24 lg:h-32 lg:min-w-32 bg-muted rounded-lg shadow ">
@@ -146,14 +147,16 @@ const CheckoutList = () => {
                   className={`grid grid-cols-[1fr,auto] w-full h-full gap-2`}
                 >
                   {/* product info */}
-                  <div className={` space-y-2 w-full h-full `}>
+                  <div
+                    className={` grid grid-rows-[auto,1fr,auto] gap-2 w-full h-full `}
+                  >
                     <h1 className={`${styles.small} lg:text-2xl font-semibold`}>
                       {product.title}
                     </h1>
 
                     {/* badges */}
                     <div
-                      className={` space-x-1 space-y-1 gap-1 w-full ${styles.small}`}
+                      className={` ${styles.flexStart} flex-wrap gap-1 w-full ${styles.small}`}
                     >
                       <Badge
                         variant="outline"
@@ -189,6 +192,13 @@ const CheckoutList = () => {
                         </Badge>
                       )}
                     </div>
+
+                    <p
+                      className={` flex justify-end ${styles.normal} lg:text-2xl opacity-70 font-bold text-accent `}
+                    >
+                      <span>{product.variantOptions.price.currency}</span>{" "}
+                      {product.variantOptions.price.value}
+                    </p>
                   </div>
                   {/* Quantity control */}
                   <div
@@ -251,7 +261,7 @@ const CheckoutList = () => {
           ) : (
             <div className="grid place-content-center w-full h-full">
               <p
-                className={` ${styles.Xsmall} text-primary/70 w-full text-center`}
+                className={` ${styles.Xsmall} lg:text-lg text-primary/70 w-full text-center`}
               >
                 No products in this cart.
               </p>
@@ -260,44 +270,49 @@ const CheckoutList = () => {
         </div>
 
         {/* price */}
-        <div className="w-full shrink-0">
-          <section
-            className={` w-full p-1 space-y-2 rounded-lg border border-muted `}
-          >
-            {/* price recue */}
-            <div
-              className={` w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md ${styles.small} lg:text-2xl font-semibold`}
+        {products.length > 0 && (
+          <div className="w-full shrink-0">
+            <section
+              className={` w-full p-1 space-y-2 rounded-lg border border-muted `}
             >
-              <div className={` ${styles.flexBetween}`}>
-                <p>Sub Total ({products.length})</p>
-                <p>
-                  {currency} {totalPrice}
-                </p>
-              </div>
-
-              <div className={` ${styles.flexBetween}`}>
-                <p>Discount</p>
-                <p>{discount}%</p>
-              </div>
-
-              <div className={` ${styles.flexBetween}`}>
-                <p>Service Tax </p>
-                <p>{currency} 10.00</p>
-              </div>
-
-              <Separator />
-
+              {/* price recue */}
               <div
-                className={` ${styles.flexBetween} ${styles.small} lg:text-3xl`}
+                className={` w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md ${styles.small} lg:text-2xl font-semibold`}
               >
-                <p>Total Payment</p>
-                <p>
-                  {currency} {totalPrice + 10}
-                </p>
+                <div className={` ${styles.flexBetween}`}>
+                  <p>Sub Total ({products.length})</p>
+                  <p>
+                    {currency} {totalPrice}
+                  </p>
+                </div>
+
+                <div className={` ${styles.flexBetween}`}>
+                  <p>Discount</p>
+                  <p>{discount}%</p>
+                </div>
+
+                <div className={` ${styles.flexBetween}`}>
+                  <p>Service Tax </p>
+                  <p>{currency} 10.00</p>
+                </div>
+
+                {/* separator */}
+                <div
+                  className={` w-full h-[1px] border-t-2 border-dashed border-muted`}
+                ></div>
+
+                <div
+                  className={` ${styles.flexBetween} ${styles.small} lg:text-3xl font-bold`}
+                >
+                  <p>Total Payment</p>
+                  <p>
+                    {currency} {totalPrice + 10}
+                  </p>
+                </div>
               </div>
-            </div>
-          </section>
-        </div>
+            </section>
+          </div>
+        )}
       </div>
 
       <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 ">
