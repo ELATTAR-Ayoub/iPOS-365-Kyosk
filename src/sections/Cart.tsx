@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // styles
 import { Button } from "@/components/ui/button";
@@ -66,21 +66,24 @@ const Cart = () => {
   // values
   //   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.cart.products);
+  const [currency, setCurrency] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  function getTotalPrice() {
+  useMemo(() => {
     let totalPriceValue = 0;
 
-    // Find how much Addons add to the price
     if (products.length > 0) {
       products.forEach((product) => {
-        const t = product.priceWithAddons.value;
-        totalPriceValue = totalPriceValue + t;
+        // Adjust price calculation to consider quantity and priceWithAddons
+        const productTotal = product.priceWithAddons.value * product.quantity;
+        totalPriceValue += productTotal;
       });
-      // Discounts in future
     }
 
-    return totalPriceValue.toFixed(2);
-  }
+    // Update the state with the new total price
+    setTotalPrice(totalPriceValue);
+    setCurrency(products.length > 0 ? products[0].price.currency : "");
+  }, [products]); // Re-run whenever the products array changes
 
   return (
     <section
@@ -102,8 +105,8 @@ const Cart = () => {
             <Button className=" relative w-full text-primary-foreground rounded-b-none py-6 lg:h-28 lg:text-4xl lg:gap-4">
               <ShoppingBasket className=" lg:!size-10" /> Checkout
               <span className={` w-full text-right`}>
-                {getTotalPrice()}{" "}
-                {products.length > 0 ? products[0].price.currency : ""}
+                {totalPrice}
+                {currency}
               </span>
               <span className=" absolute -top-2 -right-2 lg:-top-6 lg:-right-6 rounded-full p-1 lg:p-3 bg-destructive text-destructive-foreground text-xs lg:text-2xl">
                 x {products.length}
@@ -360,6 +363,7 @@ const CheckoutList = () => {
             isOpen={isEditDialogOpen}
             product={productToEdit}
             onClose={() => setIsEditDialogOpen(false)}
+            products={allProducts}
           />
         </div>
 
@@ -489,65 +493,81 @@ interface EditProductDialogProps {
   isOpen: boolean;
   product: CartProduct; // You can replace `any` with your product type if necessary
   onClose: () => void;
+  products: Product[];
 }
 
-import { products } from "@/constants/index";
+import { products as allProducts } from "@/constants/index";
 
 const EditProductDialog: React.FC<EditProductDialogProps> = ({
   isOpen,
   product,
   onClose,
+  products,
 }) => {
   // values
   const dispatch = useDispatch();
 
-  // Find the base product
-  const baseProduct: Product = products.find((p) => p.id === product.id) || {
-    id: "",
-    image: "",
-    title: "",
-    description: "",
-    variantOptions: [],
-    temperature: [],
-    icePercentage: {
-      name: "",
-      type: "percentage",
-      options: [],
-      selectedOption: "",
-    },
-    addOns: [],
-    nonpaidAddons: [],
-    isAvailable: false,
-    customisable: false,
-    categories: [],
-  };
+  const baseProduct: Product = useMemo(
+    () =>
+      products.find((p) => p.id === product.id) || {
+        id: "",
+        image: "",
+        title: "",
+        description: "",
+        variantOptions: [],
+        temperature: [],
+        icePercentage: {
+          name: "",
+          type: "percentage",
+          options: [],
+          selectedOption: "",
+        },
+        addOns: [],
+        nonpaidAddons: [],
+        isAvailable: false,
+        customisable: false,
+        categories: [],
+      },
+    [product.id, products]
+  );
 
-  // State initialization with user's previous selections
-  const [showIcePercentage, setShowIcePercentage] = useState(
-    product.temperature === "cold"
+  const [showIcePercentage, setShowIcePercentage] = useState(false);
+  const [note, setNote] = useState("");
+  const [tumbler, setTumbler] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [temperature, setTemperature] = useState<string>("");
+  const [variantOptions, setVariantOptions] = useState<VariantOptions | null>(
+    null
   );
-  const [note, setNote] = useState(product.note || "");
-  const [tumbler, setTumbler] = useState(product.tumbler);
-  const [quantity, setQuantity] = useState(product.quantity);
-  const [temperature, setTemperature] = useState(product.temperature);
-  const [variantOptions, setVariantOptions] = useState<VariantOptions>(
-    product.variantOptions
+  const [addOns, setAddOns] = useState<AddOnOption[]>([]);
+  const [nonPaidAddons, setNonPaidAddons] = useState<NonPaidAddons[]>([]);
+  const [icePercentage, setIcePercentage] = useState<NonPaidAddons | null>(
+    null
   );
-  const [addOns, setAddOns] = useState<AddOnOption[]>(product.addOns);
-  const [nonPaidAddons, setNonPaidAddons] = useState<NonPaidAddons[]>(
-    product.nonpaidAddons
-  );
-  const [icePercentage, setIcePercentage] = useState(product.icePercentage);
   const [error, setError] = useState(false);
 
-  // Memoized error checking
-  useMemo(() => {
+  // Use useEffect to initialize state when the dialog opens or product changes
+  useEffect(() => {
+    if (isOpen && product) {
+      setShowIcePercentage(product.temperature === "cold");
+      setNote(product.note || "");
+      setTumbler(product.tumbler);
+      setQuantity(product.quantity);
+      setTemperature(product.temperature);
+      setVariantOptions(product.variantOptions);
+      setAddOns(product.addOns);
+      setNonPaidAddons(product.nonpaidAddons);
+      setIcePercentage(product.icePercentage);
+    }
+  }, [isOpen, product]);
+
+  useEffect(() => {
     setError(!temperature || !variantOptions);
     setShowIcePercentage(temperature === "cold");
   }, [temperature, variantOptions]);
 
   const handleTemperatureChange = (value: string) => {
-    setTemperature(value as "hot" | "cold");
+    setTemperature(value);
     if (value === "cold") {
       setIcePercentage(baseProduct.icePercentage);
     } else {
@@ -581,6 +601,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
   };
 
   const getTotalPrice = () => {
+    if (!variantOptions) return 0;
     let totalPrice = variantOptions.price.value;
     addOns.forEach((addOn) => {
       totalPrice += addOn.price.value * addOn.selectedOption;
@@ -589,13 +610,14 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
   };
 
   const handleSubmit = () => {
+    if (!variantOptions) return;
     const updatedProduct: CartProduct = {
       ...product,
       temperature,
       variantOptions,
       addOns,
       nonpaidAddons: nonPaidAddons,
-      icePercentage,
+      icePercentage: icePercentage || product.icePercentage,
       note,
       tumbler,
       quantity,
@@ -605,9 +627,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
         value: getTotalPrice(),
       },
     };
-    dispatch(
-      editProduct({ variantId: product.cartUID, newProduct: updatedProduct })
-    );
+    dispatch(editProduct({ productId: product.cartUID, updatedProduct }));
     onClose();
   };
 
@@ -645,12 +665,12 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
                 {product?.description}
               </DialogDescription>
             </div>
-            {/* Mode */}
+            {/* Tempeture */}
             <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
               {/* <h3 className={` ${styles.small} font-semibold`}>Mode</h3> */}
               <RadioGroup
-                className="grid grid-cols-2 w-full gap-2"
-                defaultValue={temperature}
+                className={`${styles.flexCenter} w-full gap-2`}
+                value={temperature}
                 onValueChange={handleTemperatureChange}
               >
                 {baseProduct.temperature.map((temp) => (
@@ -686,7 +706,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
           />
 
           {/* Ice Percentage */}
-          {showIcePercentage && (
+          {showIcePercentage && icePercentage && (
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
@@ -700,7 +720,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
                 </div>
                 <RadioGroup
                   className="grid grid-cols-3 w-full gap-2"
-                  defaultValue={icePercentage.selectedOption.toString()}
+                  value={icePercentage.selectedOption.toString()}
                   onValueChange={(value) =>
                     setIcePercentage({
                       ...icePercentage,
@@ -738,13 +758,12 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
-                    <div className={`size-4 lg:size-7`}>
+                    <div className={` size-4 lg:size-7`}>
                       <img
+                        className=" w-full h-full object-cover"
                         src={addon.icon}
                         alt={addon.name}
-                        width={28}
-                        height={28}
-                      />
+                      ></img>{" "}
                     </div>
                   )}
                   <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
@@ -753,7 +772,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
                 </div>
                 <RadioGroup
                   className="grid grid-cols-3 w-full gap-2"
-                  defaultValue={addon.selectedOption.toString()}
+                  value={addon.selectedOption.toString()}
                   onValueChange={(value) =>
                     handleNonPaidAddonChange(index, value)
                   }
@@ -791,7 +810,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
             </div>
             <RadioGroup
               className="grid grid-cols-3 w-full gap-2"
-              defaultValue={variantOptions.name}
+              value={variantOptions?.name}
               onValueChange={handleVariantChange}
             >
               {baseProduct.variantOptions.map((variant) => {
@@ -946,7 +965,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
             <ToggleGroup
               className="w-full"
               type="single"
-              defaultValue={tumbler ? "true" : "false"}
+              value={tumbler ? "true" : "false"}
               onValueChange={(value) => setTumbler(value === "true")}
             >
               <ToggleGroupItem
@@ -1058,7 +1077,7 @@ const EditProductDialog: React.FC<EditProductDialogProps> = ({
               onClick={handleSubmit}
             >
               <span className="w-full text-left">Edit </span>
-              {getTotalPrice()} {variantOptions.price.currency}
+              {getTotalPrice()} {variantOptions?.price.currency}
               <ArrowDown className="lg:!size-8" />
             </Button>
           </DialogFooter>

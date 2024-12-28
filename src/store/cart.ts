@@ -71,16 +71,13 @@ const cartConfigSlice = createSlice({
 
     editProduct: (
       state,
-      action: PayloadAction<{ variantId: string; newProduct: CartProduct }>
+      action: PayloadAction<{ productId: string; updatedProduct: CartProduct }>
     ) => {
-      const { variantId, newProduct } = action.payload;
-      const productIndex = state.products.findIndex(
-        (product) => product.cartUID === variantId
+      const index = state.products.findIndex(
+        (item) => item.cartUID === action.payload.productId
       );
-
-      if (productIndex !== -1) {
-        // If the product is found, replace it with the new product details
-        state.products[productIndex] = newProduct;
+      if (index !== -1) {
+        state.products[index] = action.payload.updatedProduct;
       }
     },
 
