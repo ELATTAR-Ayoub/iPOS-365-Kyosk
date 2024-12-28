@@ -69,6 +69,21 @@ const cartConfigSlice = createSlice({
       }
     },
 
+    editProduct: (
+      state,
+      action: PayloadAction<{ variantId: string; newProduct: CartProduct }>
+    ) => {
+      const { variantId, newProduct } = action.payload;
+      const productIndex = state.products.findIndex(
+        (product) => product.cartUID === variantId
+      );
+
+      if (productIndex !== -1) {
+        // If the product is found, replace it with the new product details
+        state.products[productIndex] = newProduct;
+      }
+    },
+
     deleteProduct: (state, action: PayloadAction<string>) => {
       const varianttId = action.payload;
       state.products = state.products.filter(
@@ -87,6 +102,7 @@ export const {
   setProducts,
   setProductQuantity,
   addProduct,
+  editProduct,
   deleteProduct,
   deleteAllProducts,
 } = cartConfigSlice.actions;
