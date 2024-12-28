@@ -1,27 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 // styles
 import { Button } from "@/components/ui/button";
 import styles from "@/styles";
-import {
-  ArrowDown,
-  CopyPlus,
-  Flame,
-  Minus,
-  Plus,
-  Recycle,
-  ShoppingBasket,
-  Snowflake,
-  SquarePen,
-  Trash2,
-} from "lucide-react";
+import { Minus, Plus, ShoppingBasket, SquarePen, Trash2 } from "lucide-react";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
-import { editProduct, setProductQuantity } from "@/store/cart";
+import { setProductQuantity } from "@/store/cart";
 
 // Icons
 
@@ -30,7 +19,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -47,20 +35,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import {
-  AddOnOption,
-  CartProduct,
-  NonPaidAddons,
-  Product,
-  VariantOptions,
-} from "@/constants/interfaces";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { VariantIcon } from "@/components/icons/variants-icon";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { GreenEarthIcon } from "@/components/icons/green-earth-icon";
-import { Input } from "@/components/ui/input";
+import { CartProduct } from "@/constants/interfaces";
+import { products as allProducts } from "@/constants/index";
+import ProductCustomizationDialog from "@/components/product-customization-dialog";
 
 const Cart = () => {
   // values
@@ -274,7 +251,7 @@ const CheckoutList = () => {
                       className={` flex lg:justify-end ${styles.normal} lg:text-2xl opacity-70 font-bold text-accent `}
                     >
                       <span>{product.priceWithAddons.currency}</span>{" "}
-                      {product.priceWithAddons.value}
+                      {product.priceWithAddons.value * product.quantity}
                     </p>
                   </div>
                   {/* Quantity control */}
@@ -354,16 +331,22 @@ const CheckoutList = () => {
               </p>
             </div>
           )}
+          {/* Warning delete popup use */}
           <DeleteProductDialog
             isOpen={isAlertDialogOpen}
             product={productToDelete}
             onClose={() => setIsAlertDialogOpen(false)}
           />
-          <EditProductDialog
+          {/* Edit popup use */}
+          <ProductCustomizationDialog
             isOpen={isEditDialogOpen}
+            onClose={() => {
+              setIsEditDialogOpen(false);
+            }}
             product={productToEdit}
-            onClose={() => setIsEditDialogOpen(false)}
-            products={allProducts}
+            products={allProducts} // You need to provide the products array
+            mode={"edit"}
+            onSubmit={() => {}}
           />
         </div>
 
@@ -486,603 +469,5 @@ const DeleteProductDialog: React.FC<DeleteProductDialogProps> = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
-};
-
-interface EditProductDialogProps {
-  isOpen: boolean;
-  product: CartProduct; // You can replace `any` with your product type if necessary
-  onClose: () => void;
-  products: Product[];
-}
-
-import { products as allProducts } from "@/constants/index";
-
-const EditProductDialog: React.FC<EditProductDialogProps> = ({
-  isOpen,
-  product,
-  onClose,
-  products,
-}) => {
-  // values
-  const dispatch = useDispatch();
-
-  const baseProduct: Product = useMemo(
-    () =>
-      products.find((p) => p.id === product.id) || {
-        id: "",
-        image: "",
-        title: "",
-        description: "",
-        variantOptions: [],
-        temperature: [],
-        icePercentage: {
-          name: "",
-          type: "percentage",
-          options: [],
-          selectedOption: "",
-        },
-        addOns: [],
-        nonpaidAddons: [],
-        isAvailable: false,
-        customisable: false,
-        categories: [],
-      },
-    [product.id, products]
-  );
-
-  const [showIcePercentage, setShowIcePercentage] = useState(false);
-  const [note, setNote] = useState("");
-  const [tumbler, setTumbler] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [temperature, setTemperature] = useState<string>("");
-  const [variantOptions, setVariantOptions] = useState<VariantOptions | null>(
-    null
-  );
-  const [addOns, setAddOns] = useState<AddOnOption[]>([]);
-  const [nonPaidAddons, setNonPaidAddons] = useState<NonPaidAddons[]>([]);
-  const [icePercentage, setIcePercentage] = useState<NonPaidAddons | null>(
-    null
-  );
-  const [error, setError] = useState(false);
-
-  // Use useEffect to initialize state when the dialog opens or product changes
-  useEffect(() => {
-    if (isOpen && product) {
-      setShowIcePercentage(product.temperature === "cold");
-      setNote(product.note || "");
-      setTumbler(product.tumbler);
-      setQuantity(product.quantity);
-      setTemperature(product.temperature);
-      setVariantOptions(product.variantOptions);
-      setAddOns(product.addOns);
-      setNonPaidAddons(product.nonpaidAddons);
-      setIcePercentage(product.icePercentage);
-    }
-  }, [isOpen, product]);
-
-  useEffect(() => {
-    setError(!temperature || !variantOptions);
-    setShowIcePercentage(temperature === "cold");
-  }, [temperature, variantOptions]);
-
-  const handleTemperatureChange = (value: string) => {
-    setTemperature(value);
-    if (value === "cold") {
-      setIcePercentage(baseProduct.icePercentage);
-    } else {
-      setIcePercentage({ ...baseProduct.icePercentage, selectedOption: "" });
-    }
-  };
-
-  const handleVariantChange = (value: string) => {
-    const selectedVariant = baseProduct.variantOptions.find(
-      (v) => v.name === value
-    );
-    if (selectedVariant) {
-      setVariantOptions(selectedVariant);
-    }
-  };
-
-  const handleAddOnChange = (addOnIndex: number, value: number) => {
-    setAddOns((prevAddOns) =>
-      prevAddOns.map((addOn, index) =>
-        index === addOnIndex ? { ...addOn, selectedOption: value } : addOn
-      )
-    );
-  };
-
-  const handleNonPaidAddonChange = (addonIndex: number, value: string) => {
-    setNonPaidAddons((prevAddons) =>
-      prevAddons.map((addon, index) =>
-        index === addonIndex ? { ...addon, selectedOption: value } : addon
-      )
-    );
-  };
-
-  const getTotalPrice = () => {
-    if (!variantOptions) return 0;
-    let totalPrice = variantOptions.price.value;
-    addOns.forEach((addOn) => {
-      totalPrice += addOn.price.value * addOn.selectedOption;
-    });
-    return totalPrice * quantity;
-  };
-
-  const handleSubmit = () => {
-    if (!variantOptions) return;
-    const updatedProduct: CartProduct = {
-      ...product,
-      temperature,
-      variantOptions,
-      addOns,
-      nonpaidAddons: nonPaidAddons,
-      icePercentage: icePercentage || product.icePercentage,
-      note,
-      tumbler,
-      quantity,
-      price: variantOptions.price,
-      priceWithAddons: {
-        currency: variantOptions.price.currency,
-        value: getTotalPrice(),
-      },
-    };
-    dispatch(editProduct({ productId: product.cartUID, updatedProduct }));
-    onClose();
-  };
-
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${styles.flexStart} flex-col p-0 border-0 `}>
-        <DialogHeader
-          className={` relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 lg:p-5 lg:pb-0 w-full lg:min-h-[400px]   `}
-        >
-          {/* img */}
-          <div className=" absolute left-2 lg:left-5 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(45%-.5rem)] aspect-square bg-muted rounded-lg ">
-            <img
-              className="w-full h-full object-cover"
-              src={product?.image}
-              alt={product?.title}
-            ></img>
-          </div>
-          {/* img placeholder */}
-          <div></div>
-          {/* Title and Description and Size */}
-          <div
-            className={` relative ${styles.flexBetween} h-full flex-col gap-1 self-end  `}
-          >
-            <div
-              className={`${styles.flexStart} flex-col gap-2 lg:gap-8 w-full`}
-            >
-              <DialogTitle
-                className={` ${styles.normal} lg:text-3xl font-bold`}
-              >
-                {product?.title}
-              </DialogTitle>
-              <DialogDescription
-                className={` ${styles.Xsmall} lg:text-2xl text-primary font-normal`}
-              >
-                {product?.description}
-              </DialogDescription>
-            </div>
-            {/* Tempeture */}
-            <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
-              {/* <h3 className={` ${styles.small} font-semibold`}>Mode</h3> */}
-              <RadioGroup
-                className={`${styles.flexCenter} w-full gap-2`}
-                value={temperature}
-                onValueChange={handleTemperatureChange}
-              >
-                {baseProduct.temperature.map((temp) => (
-                  <Label
-                    key={temp}
-                    htmlFor={`temperature-${temp}`}
-                    className={`toggleBaseStyle capitalize`}
-                  >
-                    <RadioGroupItem
-                      value={temp}
-                      id={`temperature-${temp}`}
-                      className="sr-only"
-                    />
-                    {temp === "cold" ? (
-                      <Snowflake className="h-4 w-4 text-blue-400" />
-                    ) : (
-                      <Flame className="h-4 w-4 text-destructive" />
-                    )}
-                  </Label>
-                ))}
-              </RadioGroup>
-            </div>
-          </div>
-        </DialogHeader>
-
-        {/* Content */}
-        <div
-          className={`grid gap-4 lg:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 lg:p-5 overflow-hidden `}
-        >
-          <Separator
-            className={` h-[2px] bg-muted ${!showIcePercentage && "hidden"}`}
-            decorative={true}
-          />
-
-          {/* Ice Percentage */}
-          {showIcePercentage && icePercentage && (
-            <>
-              <Separator className={`h-[2px] bg-muted`} decorative={true} />
-              <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center w-full gap-2`}
-              >
-                <div className={`flex justify-start items-center gap-2`}>
-                  <Snowflake className="size-4 lg:size-7 text-blue-400" />
-                  <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                    Ice
-                  </h3>
-                </div>
-                <RadioGroup
-                  className="grid grid-cols-3 w-full gap-2"
-                  value={icePercentage.selectedOption.toString()}
-                  onValueChange={(value) =>
-                    setIcePercentage({
-                      ...icePercentage,
-                      selectedOption: value,
-                    })
-                  }
-                >
-                  {icePercentage.options.map((option) => (
-                    <Label
-                      key={option}
-                      htmlFor={`icePercentage-${option}`}
-                      className={`toggleBaseStyle`}
-                    >
-                      <RadioGroupItem
-                        value={option.toString()}
-                        id={`icePercentage-${option}`}
-                        className="sr-only"
-                      />
-                      {option}
-                    </Label>
-                  ))}
-                </RadioGroup>
-              </div>
-            </>
-          )}
-
-          <Separator className="h-[2px] bg-muted" decorative={true} />
-
-          {/* Non-paid Add-ons */}
-          <div className={`grid w-full gap-3`}>
-            {nonPaidAddons.map((addon, index) => (
-              <div
-                key={index}
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2`}
-              >
-                <div className={`flex justify-start items-center gap-2`}>
-                  {addon.icon && (
-                    <div className={` size-4 lg:size-7`}>
-                      <img
-                        className=" w-full h-full object-cover"
-                        src={addon.icon}
-                        alt={addon.name}
-                      ></img>{" "}
-                    </div>
-                  )}
-                  <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                    {addon.name}
-                  </h3>
-                </div>
-                <RadioGroup
-                  className="grid grid-cols-3 w-full gap-2"
-                  value={addon.selectedOption.toString()}
-                  onValueChange={(value) =>
-                    handleNonPaidAddonChange(index, value)
-                  }
-                >
-                  {addon.options.map((option) => (
-                    <Label
-                      key={option}
-                      htmlFor={`${addon.name}-${option}`}
-                      className={`toggleBaseStyle`}
-                    >
-                      <RadioGroupItem
-                        value={option.toString()}
-                        id={`${addon.name}-${option}`}
-                        className="sr-only"
-                      />
-                      {option}
-                    </Label>
-                  ))}
-                </RadioGroup>
-              </div>
-            ))}
-          </div>
-
-          <Separator className="h-[2px] bg-muted" decorative={true} />
-
-          {/* Variants */}
-          <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
-          >
-            <div className={`flex justify-start items-center gap-2`}>
-              <VariantIcon className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                Variants
-              </h3>
-            </div>
-            <RadioGroup
-              className="grid grid-cols-3 w-full gap-2"
-              value={variantOptions?.name}
-              onValueChange={handleVariantChange}
-            >
-              {baseProduct.variantOptions.map((variant) => {
-                const mediumVariant =
-                  baseProduct.variantOptions[1] ||
-                  baseProduct.variantOptions[0];
-                const priceDifference = mediumVariant
-                  ? variant.price.value - mediumVariant.price.value
-                  : 0;
-                const priceText =
-                  priceDifference === 0
-                    ? ""
-                    : priceDifference > 0
-                    ? `+${priceDifference}`
-                    : `${priceDifference}`;
-
-                return (
-                  <Label
-                    key={variant.name}
-                    htmlFor={`variantOptions-${variant.name}`}
-                    className={`toggleBaseStyle capitalize`}
-                  >
-                    <RadioGroupItem
-                      value={variant.name}
-                      id={`variantOptions-${variant.name}`}
-                      className="sr-only"
-                    />
-                    {variant.name} {priceText}
-                  </Label>
-                );
-              })}
-            </RadioGroup>
-          </div>
-
-          <Separator className="h-[2px] bg-muted" decorative={true} />
-
-          {/* Add-ons */}
-          <div className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full`}>
-            <div className={`flex justify-start items-center gap-2 pb-1`}>
-              <CopyPlus className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                Add-ons
-              </h3>
-            </div>
-            <div
-              className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full pt-7`}
-            >
-              {addOns.map((addOn, index) => (
-                <div
-                  key={index}
-                  className={`grid place-items-center gap-1 lg:gap-8 px-2 w-full`}
-                >
-                  <div className={`${styles.flexBetween} gap-2 w-full`}>
-                    <div className={`${styles.flexCenter} gap-2 lg:gap-4`}>
-                      {addOn.icon && (
-                        <div className={`size-4 lg:size-12`}>
-                          <img
-                            src={addOn.icon}
-                            alt={addOn.name}
-                            width={48}
-                            height={48}
-                          />
-                        </div>
-                      )}
-                      <h4
-                        className={`${styles.Xsmall} lg:text-2xl font-semibold`}
-                      >
-                        {addOn.name}
-                      </h4>
-                    </div>
-                    <div className={`${styles.flexCenter} gap-2`}>
-                      <div
-                        className={`${styles.small} lg:text-xl whitespace-nowrap grid place-items-center font-semibold`}
-                      >
-                        {addOn.selectedOption > 0 ? (
-                          `+ ${(
-                            addOn.price.value * addOn.selectedOption
-                          ).toFixed(2)}`
-                        ) : (
-                          <span className="opacity-50">
-                            + {addOn.price.value}
-                          </span>
-                        )}
-                      </div>
-                      <div
-                        className={`${styles.flexCenter} bg-primary text-primary-foreground rounded-md gap-2`}
-                      >
-                        <Button
-                          variant="default2"
-                          size="icon"
-                          className={`${
-                            addOn.selectedOption === 0 ? "hidden" : ""
-                          } size-8 lg:size-10 hover:scale-100`}
-                          onClick={() =>
-                            handleAddOnChange(
-                              index,
-                              Math.max(0, addOn.selectedOption - 1)
-                            )
-                          }
-                        >
-                          {addOn.selectedOption > 1 ? "-" : <Trash2 />}
-                        </Button>
-                        <div
-                          className={`${
-                            addOn.selectedOption === 0 ? "hidden" : ""
-                          } grid place-items-center size-8 lg:size-10 font-bold text-base lg:text-xl`}
-                        >
-                          {addOn.selectedOption}
-                        </div>
-                        <Button
-                          variant="default2"
-                          size="icon"
-                          className="size-8 lg:size-10 hover:scale-100"
-                          onClick={() =>
-                            handleAddOnChange(
-                              index,
-                              Math.min(
-                                parseInt(addOn.options.slice(-1)[0], 10),
-                                addOn.selectedOption + 1
-                              )
-                            )
-                          }
-                        >
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  {index !== addOns.length - 1 && (
-                    <Separator
-                      className="h-[2px] bg-muted w-10/12"
-                      decorative={true}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <Separator className="h-[2px] bg-muted" decorative={true} />
-
-          {/* Use Tumbler */}
-          <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
-          >
-            <div className={`flex justify-start items-center gap-2`}>
-              <Recycle className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                Use Tumbler
-              </h3>
-            </div>
-            <ToggleGroup
-              className="w-full"
-              type="single"
-              value={tumbler ? "true" : "false"}
-              onValueChange={(value) => setTumbler(value === "true")}
-            >
-              <ToggleGroupItem
-                value="true"
-                aria-label="Toggle personal cup"
-                variant="default"
-                className="w-full toggleBaseStyle"
-              >
-                <GreenEarthIcon className="size-8 lg:size-10 text-green-500" />
-                Use Your Personal Cup
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-
-          <Separator className="h-[2px] bg-muted" decorative={true} />
-
-          {/* Note */}
-          <form className="flex justify-start items-center flex-col lg:gap-8">
-            <Label
-              htmlFor="note"
-              className={`flex justify-start items-center gap-2 ${styles.small} font-semibold w-full text-left`}
-            >
-              <SquarePen className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
-                Note
-              </h3>
-            </Label>
-            <Input
-              value={note}
-              id="note"
-              placeholder="Write your Note here..."
-              className="h-10 lg:h-24 outline-none ring-0 lg:text-2xl"
-              onChange={(e) => setNote(e.target.value)}
-            />
-          </form>
-          {error && (
-            <p className={` ${styles.Xsmall} text-destructive`}>
-              Please make sure to select all Addons.
-            </p>
-          )}
-        </div>
-
-        {/* CTA */}
-
-        <div
-          className={`grid grid-row-2 w-full gap-2 lg:gap-6 p-3 lg:p-5 border border-muted-foreground/30  `}
-        >
-          <div
-            className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 lg:p-3 border border-muted-foreground/50 rounded-t-lg`}
-          >
-            <div className={` flex justify-start items-center flex-wrap gap-1`}>
-              {addOns
-                .filter((addOn) => addOn.selectedOption > 0)
-                .map((addOn, addOnIndex) => (
-                  <Badge
-                    key={addOnIndex}
-                    className=" bg-muted-foreground rounded-b-none lg:text-xl font-medium"
-                  >
-                    {" "}
-                    +{addOn.selectedOption * addOn.price.value} {addOn.name}{" "}
-                  </Badge>
-                ))}
-            </div>
-            <div className={`${styles.flexCenter} gap-2 lg:gap-4  `}>
-              <Button
-                variant={"default2"}
-                size={"icon"}
-                className={` ${
-                  quantity == 1 && "hidden"
-                } size-8 lg:size-10 hover:scale-100 `}
-                onClick={() => {
-                  setQuantity(quantity - 1);
-                }}
-              >
-                -
-              </Button>
-              {/* MemoizedAddOn only re-renders when addOn.selectedOption changes */}
-              <div
-                className={`grid place-items-center ${styles.Xsmall} lg:text-2xl font-semibold `}
-              >
-                {quantity}
-              </div>
-              <Button
-                variant={"default2"}
-                size={"icon"}
-                className="size-8 lg:size-10 hover:scale-100"
-                onClick={() => {
-                  setQuantity(quantity + 1);
-                }}
-              >
-                +
-              </Button>
-            </div>
-          </div>
-
-          <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8 ">
-            <DialogClose asChild>
-              <Button
-                variant={"outline"}
-                className="w-full rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
-              >
-                Back
-              </Button>
-            </DialogClose>
-
-            <Button
-              className=" text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
-              disabled={error}
-              onClick={handleSubmit}
-            >
-              <span className="w-full text-left">Edit </span>
-              {getTotalPrice()} {variantOptions?.price.currency}
-              <ArrowDown className="lg:!size-8" />
-            </Button>
-          </DialogFooter>
-        </div>
-      </DialogContent>
-    </Dialog>
   );
 };
