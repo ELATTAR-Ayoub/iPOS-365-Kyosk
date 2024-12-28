@@ -19,9 +19,13 @@ import { products } from "@/constants/index";
 
 interface ProductCards {
   selectedCategorie: string; // Parameter to define the category
+  showMenuData?: boolean; // toggle to show menu data
 }
 
-const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
+const ProductCards: React.FC<ProductCards> = ({
+  selectedCategorie,
+  showMenuData = true,
+}) => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   useMemo(() => {
@@ -46,16 +50,18 @@ const ProductCards: React.FC<ProductCards> = ({ selectedCategorie }) => {
     <section
       className={`${styles.flexStart} flex-col relative w-full gap-3 overflow-hidden `}
     >
-      <div className={`${styles.flexBetween} w-full`}>
-        <h1 className={`${styles.normal} lg:text-2xl font-bold capitalize`}>
-          {selectedCategorie}
-        </h1>
-        <p className={`${styles.Xsmall} lg:text-lg text-muted-foreground`}>
-          {filteredProducts.length}{" "}
-          {selectedCategorie !== "all menu" ? selectedCategorie : "total"}{" "}
-          results
-        </p>
-      </div>
+      {showMenuData && (
+        <div className={`${styles.flexBetween} w-full`}>
+          <h1 className={`${styles.normal} lg:text-2xl font-bold capitalize`}>
+            {selectedCategorie}
+          </h1>
+          <p className={`${styles.Xsmall} lg:text-lg text-muted-foreground`}>
+            {filteredProducts.length}{" "}
+            {selectedCategorie !== "all menu" ? selectedCategorie : "total"}{" "}
+            results
+          </p>
+        </div>
+      )}
 
       <div
         className={` grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 relative w-full gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted overflow-x-hidden `}
