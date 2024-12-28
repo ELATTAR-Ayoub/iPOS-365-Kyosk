@@ -5,12 +5,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface cartConfig {
   products: CartProduct[];
   luggage: string;
+  paymentType: string;
 }
 
 // Initial state
 const initialState: cartConfig = {
   products: [],
   luggage: "",
+  paymentType: "",
 };
 
 const cartConfigSlice = createSlice({

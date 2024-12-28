@@ -9,14 +9,18 @@ import {
 import styles from "@/styles";
 import {
   ArrowDown,
-  ArrowRight,
   CopyPlus,
   Flame,
+  Plus,
   Recycle,
   Snowflake,
   SquarePen,
   Trash2,
 } from "lucide-react";
+
+// Redux
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 // Comp
 import { Button } from "./ui/button";
@@ -46,6 +50,10 @@ import { GreenEarthIcon } from "./icons/green-earth-icon";
 
 // ProductCard component
 const ProductCard = ({ product }: { product: Product }) => {
+  // redux
+  const products = useSelector((state: RootState) => state.cart.products);
+
+  // values
   const dispatch = useDispatch();
   const [showIcePercentage, setShowIcePercentage] = useState(false);
   const [note, setNote] = useState("");
@@ -118,6 +126,10 @@ const ProductCard = ({ product }: { product: Product }) => {
       tumbler,
       quantity: quantity,
       price: {
+        currency: variantOptions.price.currency,
+        value: variantOptions.price.value,
+      },
+      priceWithAddons: {
         currency: variantOptions.price.currency,
         value: getTotalPrice(),
       },
@@ -217,13 +229,17 @@ const ProductCard = ({ product }: { product: Product }) => {
           </div>
           {/* <!-- Arrow Button Section --> */}
           <Button
-            variant={"muted"}
+            variant={
+              products.find((p) => p.title === product.title)
+                ? "default"
+                : "muted"
+            }
             onClick={() => setIsDialogOpen(true)}
-            className=" rounded-full z-20 hover:-rotate-12 lg:w-12 lg:h-12 "
+            className=" text-primary-foreground rounded-full z-20 hover:-rotate-12 lg:w-12 lg:h-12 "
             size="icon"
           >
             {" "}
-            <ArrowRight />
+            <Plus className=" size-4 lg:!size-5" />
           </Button>
         </div>
       </div>
@@ -247,7 +263,9 @@ const ProductCard = ({ product }: { product: Product }) => {
             <div
               className={` relative ${styles.flexBetween} h-full flex-col gap-1 self-end  `}
             >
-              <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
+              <div
+                className={`${styles.flexStart} flex-col gap-2 lg:gap-8 w-full`}
+              >
                 <DialogTitle
                   className={` ${styles.normal} lg:text-3xl font-bold`}
                 >

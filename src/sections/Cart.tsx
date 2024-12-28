@@ -1,14 +1,16 @@
 "use client";
 
+import { useMemo, useState } from "react";
+
 // styles
 import { Button } from "@/components/ui/button";
 import styles from "@/styles";
+import { Minus, Plus, ShoppingBasket, SquarePen, Trash2 } from "lucide-react";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { setProductQuantity } from "@/store/cart";
-import { Minus, Plus, ShoppingBasket, SquarePen, Trash2 } from "lucide-react";
 
 // Icons
 
@@ -23,7 +25,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { useMemo, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { CartProduct } from "@/constants/interfaces";
 
 const Cart = () => {
   // values
@@ -36,7 +48,7 @@ const Cart = () => {
     // Find how much Addons add to the price
     if (products.length > 0) {
       products.forEach((product) => {
-        const t = product.price.value;
+        const t = product.priceWithAddons.value;
         totalPriceValue = totalPriceValue + t;
       });
       // Discounts in future
@@ -88,21 +100,24 @@ const CheckoutList = () => {
   const [discount] = useState(0);
   const [currency, setCurrency] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<CartProduct>();
 
   useMemo(() => {
-    // Function to calculate the total price whenever products change
     let totalPriceValue = 0;
 
     if (products.length > 0) {
       products.forEach((product) => {
-        totalPriceValue += product.price.value;
+        // Adjust price calculation to consider quantity and priceWithAddons
+        const productTotal = product.priceWithAddons.value * product.quantity;
+        totalPriceValue += productTotal;
       });
     }
 
     // Update the state with the new total price
     setTotalPrice(totalPriceValue);
     setCurrency(products.length > 0 ? products[0].price.currency : "");
-  }, [products]);
+  }, [products]); // Re-run whenever the products array changes
 
   return (
     <DialogContent
@@ -193,11 +208,12 @@ const CheckoutList = () => {
                       )}
                     </div>
 
+                    {/* price */}
                     <p
                       className={` flex justify-end ${styles.normal} lg:text-2xl opacity-70 font-bold text-accent `}
                     >
-                      <span>{product.variantOptions.price.currency}</span>{" "}
-                      {product.variantOptions.price.value}
+                      <span>{product.priceWithAddons.currency}</span>{" "}
+                      {product.priceWithAddons.value}
                     </p>
                   </div>
                   {/* Quantity control */}
@@ -212,17 +228,24 @@ const CheckoutList = () => {
                       <SquarePen className=" lg:!size-5" />
                     </Button>
                     <div className="grid grid-cols-3 gap-0">
+                      {/* delete */}
+
                       <Button
                         variant={"default2"}
                         size={"icon"}
                         className=" size-6 lg:size-12 rounded-full"
                         onClick={() => {
-                          dispatch(
-                            setProductQuantity({
-                              variantId: product.cartUID,
-                              change: "decrease",
-                            })
-                          );
+                          if (product.quantity == 1) {
+                            setProductToDelete(product);
+                            setIsAlertDialogOpen(true);
+                          } else {
+                            dispatch(
+                              setProductQuantity({
+                                variantId: product.cartUID,
+                                change: "decrease",
+                              })
+                            );
+                          }
                         }}
                       >
                         {product.quantity > 1 ? (
@@ -255,7 +278,6 @@ const CheckoutList = () => {
                     </div>
                   </div>
                 </div>
-                {/* delete */}
               </div>
             ))
           ) : (
@@ -267,6 +289,11 @@ const CheckoutList = () => {
               </p>
             </div>
           )}
+          <DeleteProductDialog
+            isOpen={isAlertDialogOpen}
+            product={productToDelete}
+            onClose={() => setIsAlertDialogOpen(false)}
+          />
         </div>
 
         {/* price */}
@@ -334,5 +361,59 @@ const CheckoutList = () => {
         </Button>
       </DialogFooter>
     </DialogContent>
+  );
+};
+
+interface DeleteProductDialogProps {
+  isOpen: boolean;
+  product?: CartProduct; // You can replace `any` with your product type if necessary
+  onClose: () => void;
+}
+
+const DeleteProductDialog: React.FC<DeleteProductDialogProps> = ({
+  isOpen,
+  product,
+  onClose,
+}) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    if (product) {
+      dispatch(
+        setProductQuantity({
+          variantId: product.cartUID,
+          change: "decrease",
+        })
+      );
+      onClose(); // Close the dialog after deleting
+    }
+  };
+
+  return (
+    <AlertDialog open={isOpen} onOpenChange={onClose}>
+      <AlertDialogContent className="lg:gap-10">
+        <AlertDialogHeader className="lg:gap-2">
+          <AlertDialogTitle className="lg:text-3xl lg:font-bold">
+            Are you absolutely sure?
+          </AlertDialogTitle>
+          <AlertDialogDescription className="lg:text-2xl">
+            This action cannot be undone. This will delete{" "}
+            <span className="font-bold">"{product && product.title}"</span> from
+            your cart.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="lg:h-20 lg:text-3xl lg:p-8 w-full">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction
+            className="lg:h-20 lg:text-3xl lg:p-8 w-full"
+            onClick={handleDelete}
+          >
+            Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

@@ -72,7 +72,7 @@ const Menu = () => {
       <section className={`grid w-full  `}>
         {/* categories */}
         <RadioGroup
-          className={`flex justify-start items-center gap-2 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem] lg:h-[9.2rem]`}
+          className={`flex justify-start items-center gap-2 lg:gap-10 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem] lg:h-[9.2rem]`}
           value={selectedCategories}
           onValueChange={(value) => {
             setSelectedCategories(value.toLowerCase());
