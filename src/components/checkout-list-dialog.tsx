@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { setProductQuantity } from "@/store/cart";
-import { Minus, Plus, SquarePen, Trash2 } from "lucide-react";
+import { ArrowLeft, Minus, Plus, SquarePen, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import styles from "@/styles";
 import {
@@ -339,6 +339,7 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
             variant="outline"
             className="rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
           >
+            <ArrowLeft className="lg:!size-5" />
             Back
           </Button>
         </DialogClose>

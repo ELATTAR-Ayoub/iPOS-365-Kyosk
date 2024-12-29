@@ -4,20 +4,27 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import styles from "@/styles";
 import { ShoppingBasket } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import CheckoutList from "@/components/checkout-list";
+import CheckoutList from "@/components/checkout-list-dialog";
 import AddonBeforePayDialog from "@/components/addon-before-pay-dialog";
 import PaymentMethodDialog from "@/components/payment-method-dialog";
+import { setCartPriceSummary } from "@/store/cart";
+import PaymentTokenNumberDialog from "@/components/payment-token-number-dialog";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.cart.products);
   const [currency, setCurrency] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+  const [serviceTax] = useState(0);
+  const [discount] = useState(0);
   const [isAddonBeforePayDialogOpen, setIsAddonBeforePayDialogOpen] =
     useState(false);
   const [isPaymentMethodDialogOpen, setIsPaymentMethodDialogOpen] =
+    useState(false);
+  const [isPaymentTokenNumberDialogOpen, setIsPaymentTokenNumberDialogOpen] =
     useState(false);
 
   const handleAddonDialogClose = () => {
@@ -36,6 +43,10 @@ const Cart = () => {
     setIsPaymentMethodDialogOpen(false);
   };
 
+  const handlePaymentMethodDialogSubmit = () => {
+    setIsPaymentTokenNumberDialogOpen(true);
+  };
+
   useMemo(() => {
     let totalPriceValue = 0;
 
@@ -48,6 +59,16 @@ const Cart = () => {
 
     setTotalPrice(totalPriceValue);
     setCurrency(products.length > 0 ? products[0].price.currency : "");
+
+    dispatch(
+      setCartPriceSummary({
+        currency: currency,
+        subTotal: totalPriceValue,
+        Discount: discount,
+        ServiceTax: serviceTax,
+        TotalPay: totalPriceValue + serviceTax - discount,
+      })
+    );
   }, [products]);
 
   return (
@@ -69,7 +90,11 @@ const Cart = () => {
           <PaymentMethodDialog
             isOpen={isPaymentMethodDialogOpen}
             onClose={handlePaymentMethodDialogClose}
-            onSubmit={() => {}}
+            onSubmit={handlePaymentMethodDialogSubmit}
+          />
+          <PaymentTokenNumberDialog
+            isOpen={isPaymentTokenNumberDialogOpen}
+            onClose={() => {}}
           />
 
           <DialogTrigger asChild>

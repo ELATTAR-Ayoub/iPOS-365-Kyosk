@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { PriceSummary } from "./price-summary";
 import ProductCards from "@/sections/ProductCards";
+import { ArrowLeft } from "lucide-react";
 
 interface AddonBeforePayDialogProps {
   isOpen: boolean;
@@ -95,6 +96,7 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
               variant="outline"
               className="rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
             >
+              <ArrowLeft className="lg:!size-5" />
               Back
             </Button>
           </DialogClose>

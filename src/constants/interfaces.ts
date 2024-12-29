@@ -6,6 +6,14 @@ export interface User {
   email: string;
 }
 
+export interface CartPriceSummary {
+  subTotal: number; // The price value
+  currency: string; // Currency code, e.g., USD, EUR
+  Discount: number;
+  ServiceTax: number;
+  TotalPay: number;
+}
+
 export type Price = {
   value: number; // The price value
   currency: string; // Currency code, e.g., USD, EUR

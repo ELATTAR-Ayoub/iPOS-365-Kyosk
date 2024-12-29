@@ -1,4 +1,4 @@
-import { CartProduct } from "@/constants/interfaces";
+import { CartProduct, CartPriceSummary } from "@/constants/interfaces";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // State type
@@ -6,6 +6,7 @@ interface cartConfig {
   products: CartProduct[];
   luggage: string;
   paymentType: string;
+  cartPriceSummary: CartPriceSummary;
 }
 
 // Initial state
@@ -13,6 +14,13 @@ const initialState: cartConfig = {
   products: [],
   luggage: "",
   paymentType: "",
+  cartPriceSummary: {
+    currency: "",
+    subTotal: 0,
+    Discount: 0,
+    ServiceTax: 0,
+    TotalPay: 0,
+  },
 };
 
 const cartConfigSlice = createSlice({
@@ -26,6 +34,14 @@ const cartConfigSlice = createSlice({
 
     setLuggage(state, action) {
       state.luggage = action.payload;
+    },
+
+    setPaymentType(state, action) {
+      state.paymentType = action.payload;
+    },
+
+    setCartPriceSummary(state, action: PayloadAction<CartPriceSummary>) {
+      state.cartPriceSummary = action.payload;
     },
 
     setProductQuantity: (
@@ -96,6 +112,8 @@ const cartConfigSlice = createSlice({
 
 export const {
   setLuggage,
+  setPaymentType,
+  setCartPriceSummary,
   setProducts,
   setProductQuantity,
   addProduct,

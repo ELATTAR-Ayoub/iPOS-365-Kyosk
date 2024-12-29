@@ -1,2 +1,3 @@
 use tailwind config to set up a new viewportt called vs: (vertical screen 1080x1920) instead of lg:
 make UI usable on phone and pc
+add audio to button click, one for toggle and one for button.

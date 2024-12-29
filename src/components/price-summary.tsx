@@ -1,33 +1,11 @@
-import { CartProduct } from "@/constants/interfaces";
-import { useMemo, useState } from "react";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
-interface PriceSummaryProps {
-  products: CartProduct[];
-  discount: number;
-}
-
-export const PriceSummary: React.FC<PriceSummaryProps> = ({
-  products,
-  discount,
-}) => {
-  const [currency, setCurrency] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useMemo(() => {
-    let totalPriceValue = 0;
-
-    if (products.length > 0) {
-      products.forEach((product) => {
-        // Adjust price calculation to consider quantity and priceWithAddons
-        const productTotal = product.priceWithAddons.value * product.quantity;
-        totalPriceValue += productTotal;
-      });
-    }
-
-    // Update the state with the new total price
-    setTotalPrice(totalPriceValue);
-    setCurrency(products.length > 0 ? products[0].price.currency : "");
-  }, [products]); // Re-run whenever the products array changes
+export const PriceSummary = () => {
+  const cartPriceSummary = useSelector(
+    (state: RootState) => state.cart.cartPriceSummary
+  );
+  const products = useSelector((state: RootState) => state.cart.products);
 
   return (
     <div className="w-full shrink-0">
@@ -41,18 +19,18 @@ export const PriceSummary: React.FC<PriceSummaryProps> = ({
           <div className={`flex justify-between items-center`}>
             <p>Sub Total ({products.length})</p>
             <p>
-              {currency} {totalPrice}
+              {cartPriceSummary.currency} {cartPriceSummary.subTotal}
             </p>
           </div>
 
           <div className={`flex justify-between items-center`}>
             <p>Discount</p>
-            <p>{discount}%</p>
+            <p>{cartPriceSummary.Discount}%</p>
           </div>
 
           <div className={`flex justify-between items-center`}>
             <p>Service Tax </p>
-            <p>{currency} 10.00</p>
+            <p>{cartPriceSummary.currency} 10.00</p>
           </div>
 
           {/* separator */}
@@ -65,7 +43,7 @@ export const PriceSummary: React.FC<PriceSummaryProps> = ({
           >
             <p>Total Payment</p>
             <p>
-              {currency} {totalPrice + 10}
+              {cartPriceSummary.currency} {cartPriceSummary.TotalPay}
             </p>
           </div>
         </div>
