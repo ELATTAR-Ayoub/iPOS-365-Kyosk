@@ -240,9 +240,9 @@ export const ProductCustomizationDialog: React.FC<
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${styles.flexStart} flex-col p-0 border-0`}>
-        <DialogHeader className="relative grid grid-cols-2 kiosk:grid-cols-[480px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
+        <DialogHeader className="relative grid grid-cols-[40%,1fr] kiosk:grid-cols-[480px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
           {/* Image */}
-          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(50%-1rem)] kiosk:w-[480px] aspect-square bg-muted rounded-lg">
+          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(40%-1rem)] kiosk:w-[480px] aspect-square bg-muted rounded-lg">
             <img
               className="w-full h-full object-cover"
               src={product?.image}

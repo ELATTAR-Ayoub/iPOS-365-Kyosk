@@ -112,7 +112,7 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
                 key={method.title}
                 variant="outline"
                 onClick={() => handleSubmit(method.value)}
-                className={`flex-col h-full kiosk:text-3xl kiosk:font-semibold kiosk:gap-8 ${
+                className={`flex-col h-full kiosk:text-3xl kiosk:text-muted-foreground kiosk:gap-8 ${
                   index < 2 ? "col-span-2" : ""
                 }`}
               >
