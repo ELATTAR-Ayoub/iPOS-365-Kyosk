@@ -277,13 +277,14 @@ export const products: Product[] = [
     variantOptions: [
       { name: "small", price: { value: 80, currency: "$" } },
       { name: "medium", price: { value: 100, currency: "$" } },
+      { name: "large", price: { value: 120, currency: "$" } },
     ],
     temperature: ["cold", "hot"], // Iced coffee is cold
     icePercentage: {
       name: "Ice",
       type: "percentage",
-      options: ["20%", "50%", "70%", "100%"],
-      selectedOption: "50%", // Optional
+      options: ["20%", "40%", "60%", "80%"],
+      selectedOption: "60%", // Optional
     },
     addOns: [
       {

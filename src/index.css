@@ -81,10 +81,11 @@ a {
 }
 
 .toggleBaseStyle {
-  @apply w-full kiosk:h-16 flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm kiosk:text-2xl kiosk:rounded-xl
+  @apply w-full kiosk:h-16 flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm kiosk:text-[1.63rem] kiosk:rounded-xl
   cursor-pointer transition-colors
   [&:has([data-state=checked])]:bg-primary
   [&:has([data-state=checked])]:text-primary-foreground
+  [&:has([data-state=checked])]:font-bold
   hover:bg-muted active:scale-95 hover:scale-105
   [&_svg]:pointer-events-none kiosk:[&_svg]:size-7 [&_svg]:shrink-0;
 }

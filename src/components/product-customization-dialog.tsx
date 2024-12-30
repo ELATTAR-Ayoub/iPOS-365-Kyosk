@@ -239,10 +239,12 @@ export const ProductCustomizationDialog: React.FC<
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${styles.flexStart} flex-col p-0 border-0`}>
-        <DialogHeader className="relative grid grid-cols-[40%,1fr] kiosk:grid-cols-[480px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
+      <DialogContent
+        className={`${styles.flexStart} flex-col p-0 border-0 kiosk:top-[300px] kiosk:max-h-[calc(100%-450px)]`}
+      >
+        <DialogHeader className="relative grid grid-cols-[40%,1fr] kiosk:grid-cols-[540px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
           {/* Image */}
-          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(40%-1rem)] kiosk:w-[480px] aspect-square bg-muted rounded-lg">
+          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(40%-1rem)] kiosk:w-[540px] aspect-square bg-muted rounded-lg">
             <img
               className="w-full h-full object-cover"
               src={product?.image}
@@ -272,7 +274,7 @@ export const ProductCustomizationDialog: React.FC<
             {/* Temperature */}
             <div className={`${styles.flexStart} flex-col gap-2 w-full`}>
               <RadioGroup
-                className={`${styles.flexCenter} w-full gap-2`}
+                className={`${styles.flexEnd} w-full gap-2 kiosk:gap-8`}
                 value={temperature}
                 onValueChange={handleTemperatureChange}
               >
@@ -280,7 +282,11 @@ export const ProductCustomizationDialog: React.FC<
                   <Label
                     key={temp}
                     htmlFor={`temperature-${temp}`}
-                    className={`toggleBaseStyle capitalize`}
+                    className={`toggleBaseStyle capitalize ${
+                      baseProduct.temperature.length > 1
+                        ? "max-w-[80px] kiosk:max-w-[170px]"
+                        : "kiosk:max-w-[calc(170px*2+2rem)]"
+                    } `}
                   >
                     <RadioGroupItem
                       value={temp}
@@ -308,7 +314,7 @@ export const ProductCustomizationDialog: React.FC<
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[280px_1fr] items-center gap-2 kiosk:gap-0`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[auto_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
@@ -319,7 +325,7 @@ export const ProductCustomizationDialog: React.FC<
                   </h3>
                 </div>
                 <RadioGroup
-                  className={`grid grid-cols-4 w-full gap-8 `}
+                  className={`${styles.flexEnd} w-full kiosk:gap-8 `}
                   value={icePercentage.selectedOption.toString()}
                   onValueChange={(value) =>
                     setIcePercentage({
@@ -332,7 +338,7 @@ export const ProductCustomizationDialog: React.FC<
                     <Label
                       key={option}
                       htmlFor={`icePercentage-${option}`}
-                      className={`toggleBaseStyle !text-blue-400 max-w-[170px] `}
+                      className={`toggleBaseStyle !text-blue-400 max-w-[80px] kiosk:max-w-[170px] w-full `}
                     >
                       <RadioGroupItem
                         value={option.toString()}
@@ -354,7 +360,7 @@ export const ProductCustomizationDialog: React.FC<
             {nonPaidAddons.map((addon, index) => (
               <div
                 key={index}
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[auto_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
@@ -373,7 +379,7 @@ export const ProductCustomizationDialog: React.FC<
                   </h3>
                 </div>
                 <RadioGroup
-                  className={`grid grid-cols-${addon.options.length} w-full gap-2`}
+                  className={`${styles.flexEnd} w-full kiosk:gap-8 `}
                   value={addon.selectedOption.toString()}
                   onValueChange={(value) =>
                     handleNonPaidAddonChange(index, value)
@@ -383,7 +389,7 @@ export const ProductCustomizationDialog: React.FC<
                     <Label
                       key={option}
                       htmlFor={`${addon.name}-${option}`}
-                      className={`toggleBaseStyle !text-[#C95D2F]`}
+                      className={`toggleBaseStyle !text-[#C95D2F] max-w-[80px] kiosk:max-w-[170px] w-full`}
                     >
                       <RadioGroupItem
                         value={option.toString()}
@@ -402,7 +408,7 @@ export const ProductCustomizationDialog: React.FC<
 
           {/* Variants */}
           <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
+            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[auto_1fr] items-center gap-2 kiosk:gap-0`}
           >
             <div className={`flex justify-start items-center gap-2`}>
               <VariantIcon className="size-4 kiosk:size-7" />
@@ -411,7 +417,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <RadioGroup
-              className={`grid grid-cols-${baseProduct.variantOptions.length} w-full gap-2`}
+              className={`${styles.flexEnd} w-full kiosk:gap-8 `}
               value={variantOptions?.name}
               onValueChange={handleVariantChange}
             >
@@ -433,7 +439,7 @@ export const ProductCustomizationDialog: React.FC<
                   <Label
                     key={variant.name}
                     htmlFor={`variantOptions-${variant.name}`}
-                    className={`toggleBaseStyle capitalize`}
+                    className={`toggleBaseStyle capitalize max-w-[80px] kiosk:max-w-[170px] w-full`}
                   >
                     <RadioGroupItem
                       value={variant.name}
@@ -441,7 +447,9 @@ export const ProductCustomizationDialog: React.FC<
                       className="sr-only"
                     />
                     {variant.name}{" "}
-                    <span className="!text-[#C95D2F]">{priceText}</span>
+                    {priceText && (
+                      <span className="!text-[#C95D2F]">{priceText}</span>
+                    )}
                   </Label>
                 );
               })}
@@ -461,7 +469,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <div
-              className={`${styles.flexStart} flex-col gap-4 kiosk:gap-8 w-full pt-0 kiosk:pt-7`}
+              className={`${styles.flexStart} flex-col gap-4 kiosk:gap-8 w-full pt-0 kiosk:pt-2`}
             >
               {addOns.map((addOn, index) => (
                 <div
@@ -469,14 +477,13 @@ export const ProductCustomizationDialog: React.FC<
                   className={`grid place-items-center gap-1 kiosk:gap-8 px-2 w-full`}
                 >
                   <div className={`${styles.flexBetween} gap-2 w-full`}>
-                    <div className={`${styles.flexCenter} gap-2 kiosk:gap-4`}>
+                    <div className={`${styles.flexCenter} gap-2 kiosk:gap-5`}>
                       {addOn.icon && (
-                        <div className={`size-4 kiosk:size-12`}>
+                        <div className={`size-4 kiosk:size-14`}>
                           <img
                             src={addOn.icon}
                             alt={addOn.name}
-                            width={48}
-                            height={48}
+                            className=" w-full h-full object-cover"
                           />
                         </div>
                       )}
@@ -568,7 +575,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <ToggleGroup
-              className="w-full"
+              className={`${styles.flexEnd} w-full gap-8 `}
               type="single"
               value={tumbler ? "true" : "false"}
               onValueChange={(value) => setTumbler(value === "true")}
@@ -577,7 +584,7 @@ export const ProductCustomizationDialog: React.FC<
                 value="true"
                 aria-label="Toggle personal cup"
                 variant="default"
-                className="w-full toggleBaseStyle"
+                className="w-full toggleBaseStyle kiosk:max-w-[calc(170px*3+4rem)] "
               >
                 <GreenEarthIcon className="kiosk:!size-8 text-green-500" />
                 Use Your Personal Cup
@@ -615,12 +622,14 @@ export const ProductCustomizationDialog: React.FC<
 
         {/* CTA */}
         <div
-          className={`grid grid-row-2 w-full gap-2 kiosk:gap-6 p-3 kiosk:p-5 border border-muted-foreground/30`}
+          className={`grid grid-row-2 w-full gap-2 kiosk:gap-5 p-3 kiosk:p-5 border border-muted-foreground/30`}
         >
           <div
             className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 kiosk:p-3 border border-muted-foreground/50 rounded-t-lg`}
           >
-            <div className={`flex justify-start items-center flex-wrap gap-1`}>
+            <div
+              className={`flex justify-start items-center flex-wrap gap-1 kiosk:gap-4`}
+            >
               {addOns
                 .filter((addOn) => addOn.selectedOption > 0)
                 .map((addOn, addOnIndex) => (
