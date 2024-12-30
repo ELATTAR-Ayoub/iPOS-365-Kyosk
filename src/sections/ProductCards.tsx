@@ -105,8 +105,8 @@ const ProductCards: React.FC<ProductCards> = ({
         className={`kiosk:grid kiosk:grid-cols-4 flex ${
           centerMenuItems
             ? "justify-center items-center"
-            : "justify-start items-start"
-        } flex-wrap relative w-full gap-3 kiosk:gap-14 overflow-y-auto pb-6 kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted overflow-x-hidden`}
+            : "justify-start items-start border-t border-muted"
+        } flex-wrap relative w-full gap-3 kiosk:gap-14 overflow-y-auto pb-6 kiosk:pb-10 pt-6 kiosk:pt-16  overflow-x-hidden`}
       >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
