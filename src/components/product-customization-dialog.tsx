@@ -239,9 +239,9 @@ export const ProductCustomizationDialog: React.FC<
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${styles.flexStart} flex-col p-0 border-0`}>
-        <DialogHeader className="relative grid grid-cols-2 lg:grid-cols-[480px,1fr] gap-2 pt-3 px-3 lg:p-5 lg:pb-0 w-full lg:min-h-[400px]">
+        <DialogHeader className="relative grid grid-cols-2 kiosk:grid-cols-[480px,1fr] gap-2 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
           {/* Image */}
-          <div className="absolute left-2 lg:left-5 bottom-0 w-[calc(40%-.5rem)] lg:w-[calc(45%-.5rem)] aspect-square bg-muted rounded-lg">
+          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(40%-.5rem)] kiosk:w-[calc(45%-.5rem)] aspect-square bg-muted rounded-lg">
             <img
               className="w-full h-full object-cover"
               src={product?.image}
@@ -255,13 +255,15 @@ export const ProductCustomizationDialog: React.FC<
             className={`relative ${styles.flexBetween} h-full flex-col gap-1 self-end`}
           >
             <div
-              className={`${styles.flexStart} flex-col gap-2 lg:gap-8 w-full`}
+              className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 w-full`}
             >
-              <DialogTitle className={`${styles.normal} lg:text-3xl font-bold`}>
+              <DialogTitle
+                className={`${styles.normal} kiosk:text-3xl font-bold`}
+              >
                 {product?.title}
               </DialogTitle>
               <DialogDescription
-                className={`${styles.Xsmall} lg:text-2xl text-primary font-normal`}
+                className={`${styles.Xsmall} kiosk:text-2xl text-primary font-normal`}
               >
                 {product?.description}
               </DialogDescription>
@@ -298,7 +300,7 @@ export const ProductCustomizationDialog: React.FC<
 
         {/* Content */}
         <div
-          className={`grid gap-4 lg:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 lg:p-5 overflow-hidden`}
+          className={`grid gap-4 kiosk:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 kiosk:p-5 overflow-hidden`}
         >
           {/* Ice Percentage */}
           {showIcePercentage && icePercentage && (
@@ -308,8 +310,10 @@ export const ProductCustomizationDialog: React.FC<
                 className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center w-full gap-2`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
-                  <Snowflake className="size-4 lg:size-7 text-blue-400" />
-                  <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+                  <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
+                  <h3
+                    className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}
+                  >
                     Ice
                   </h3>
                 </div>
@@ -353,7 +357,7 @@ export const ProductCustomizationDialog: React.FC<
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
-                    <div className={`size-4 lg:size-7`}>
+                    <div className={`size-4 kiosk:size-7`}>
                       <img
                         className="w-full h-full object-cover"
                         src={addon.icon}
@@ -361,7 +365,9 @@ export const ProductCustomizationDialog: React.FC<
                       />
                     </div>
                   )}
-                  <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+                  <h3
+                    className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}
+                  >
                     {addon.name}
                   </h3>
                 </div>
@@ -398,8 +404,8 @@ export const ProductCustomizationDialog: React.FC<
             className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2 w-full`}
           >
             <div className={`flex justify-start items-center gap-2`}>
-              <VariantIcon className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+              <VariantIcon className="size-4 kiosk:size-7" />
+              <h3 className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}>
                 Variants
               </h3>
             </div>
@@ -443,25 +449,27 @@ export const ProductCustomizationDialog: React.FC<
           <Separator className="h-[2px] bg-muted" decorative={true} />
 
           {/* Add-ons */}
-          <div className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full`}>
+          <div
+            className={`${styles.flexStart} flex-col gap-4 kiosk:gap-8 w-full`}
+          >
             <div className={`flex justify-start items-center gap-2 pb-1`}>
-              <CopyPlus className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+              <CopyPlus className="size-4 kiosk:size-7" />
+              <h3 className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}>
                 Add-ons
               </h3>
             </div>
             <div
-              className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full pt-0 kiosk:pt-7`}
+              className={`${styles.flexStart} flex-col gap-4 kiosk:gap-8 w-full pt-0 kiosk:pt-7`}
             >
               {addOns.map((addOn, index) => (
                 <div
                   key={index}
-                  className={`grid place-items-center gap-1 lg:gap-8 px-2 w-full`}
+                  className={`grid place-items-center gap-1 kiosk:gap-8 px-2 w-full`}
                 >
                   <div className={`${styles.flexBetween} gap-2 w-full`}>
-                    <div className={`${styles.flexCenter} gap-2 lg:gap-4`}>
+                    <div className={`${styles.flexCenter} gap-2 kiosk:gap-4`}>
                       {addOn.icon && (
-                        <div className={`size-4 lg:size-12`}>
+                        <div className={`size-4 kiosk:size-12`}>
                           <img
                             src={addOn.icon}
                             alt={addOn.name}
@@ -471,14 +479,14 @@ export const ProductCustomizationDialog: React.FC<
                         </div>
                       )}
                       <h4
-                        className={`${styles.Xsmall} lg:text-2xl font-semibold`}
+                        className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}
                       >
                         {addOn.name}
                       </h4>
                     </div>
                     <div className={`${styles.flexCenter} gap-2`}>
                       <div
-                        className={`${styles.small} lg:text-xl whitespace-nowrap grid place-items-center font-semibold`}
+                        className={`${styles.small} kiosk:text-xl whitespace-nowrap grid place-items-center font-semibold`}
                       >
                         {addOn.selectedOption > 0 ? (
                           `+ ${(
@@ -498,7 +506,7 @@ export const ProductCustomizationDialog: React.FC<
                           size="icon"
                           className={`${
                             addOn.selectedOption === 0 ? "hidden" : ""
-                          } size-8 lg:size-10 hover:scale-100`}
+                          } size-8 kiosk:size-10 hover:scale-100`}
                           onClick={() =>
                             handleAddOnChange(
                               index,
@@ -511,14 +519,14 @@ export const ProductCustomizationDialog: React.FC<
                         <div
                           className={`${
                             addOn.selectedOption === 0 ? "hidden" : ""
-                          } grid place-items-center size-8 lg:size-10 font-bold text-base lg:text-xl`}
+                          } grid place-items-center size-8 kiosk:size-10 font-bold text-base kiosk:text-xl`}
                         >
                           {addOn.selectedOption}
                         </div>
                         <Button
                           variant="default2"
                           size="icon"
-                          className="size-8 lg:size-10 hover:scale-100"
+                          className="size-8 kiosk:size-10 hover:scale-100"
                           onClick={() =>
                             handleAddOnChange(
                               index,
@@ -552,8 +560,8 @@ export const ProductCustomizationDialog: React.FC<
             className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2 w-full`}
           >
             <div className={`flex justify-start items-center gap-2`}>
-              <Recycle className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+              <Recycle className="size-4 kiosk:size-7" />
+              <h3 className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}>
                 Use Tumbler
               </h3>
             </div>
@@ -569,7 +577,7 @@ export const ProductCustomizationDialog: React.FC<
                 variant="default"
                 className="w-full toggleBaseStyle"
               >
-                <GreenEarthIcon className="lg:!size-8 text-green-500" />
+                <GreenEarthIcon className="kiosk:!size-8 text-green-500" />
                 Use Your Personal Cup
               </ToggleGroupItem>
             </ToggleGroup>
@@ -578,13 +586,13 @@ export const ProductCustomizationDialog: React.FC<
           <Separator className="h-[2px] bg-muted" decorative={true} />
 
           {/* Note */}
-          <form className="flex justify-start items-center flex-col gap-2 lg:gap-8">
+          <form className="flex justify-start items-center flex-col gap-2 kiosk:gap-8">
             <Label
               htmlFor="note"
               className={`flex justify-start items-center gap-2 ${styles.small} font-semibold w-full text-left`}
             >
-              <SquarePen className="size-4 lg:size-7" />
-              <h3 className={`${styles.Xsmall} lg:text-2xl font-semibold`}>
+              <SquarePen className="size-4 kiosk:size-7" />
+              <h3 className={`${styles.Xsmall} kiosk:text-2xl font-semibold`}>
                 Note
               </h3>
             </Label>
@@ -592,7 +600,7 @@ export const ProductCustomizationDialog: React.FC<
               value={note}
               id="note"
               placeholder="Write your Note here..."
-              className="h-10 lg:h-24 outline-none ring-0 lg:text-2xl"
+              className="h-10 kiosk:h-24 outline-none ring-0 kiosk:text-2xl"
               onChange={(e) => setNote(e.target.value)}
             />
           </form>
@@ -605,10 +613,10 @@ export const ProductCustomizationDialog: React.FC<
 
         {/* CTA */}
         <div
-          className={`grid grid-row-2 w-full gap-2 lg:gap-6 p-3 lg:p-5 border border-muted-foreground/30`}
+          className={`grid grid-row-2 w-full gap-2 kiosk:gap-6 p-3 kiosk:p-5 border border-muted-foreground/30`}
         >
           <div
-            className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 lg:p-3 border border-muted-foreground/50 rounded-t-lg`}
+            className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 kiosk:p-3 border border-muted-foreground/50 rounded-t-lg`}
           >
             <div className={`flex justify-start items-center flex-wrap gap-1`}>
               {addOns
@@ -616,19 +624,19 @@ export const ProductCustomizationDialog: React.FC<
                 .map((addOn, addOnIndex) => (
                   <Badge
                     key={addOnIndex}
-                    className="bg-muted-foreground rounded-b-none lg:text-xl font-medium"
+                    className="bg-muted-foreground rounded-b-none kiosk:text-xl font-medium"
                   >
                     +{addOn.selectedOption * addOn.price.value} {addOn.name}
                   </Badge>
                 ))}
             </div>
-            <div className={`${styles.flexCenter} gap-2 lg:gap-4`}>
+            <div className={`${styles.flexCenter} gap-2 kiosk:gap-4`}>
               <Button
                 variant="default2"
                 size="icon"
                 className={`${
                   quantity === 1 && "hidden"
-                } size-8 lg:size-10 hover:scale-100`}
+                } size-8 kiosk:size-10 hover:scale-100`}
                 onClick={() => {
                   setQuantity(quantity - 1);
                 }}
@@ -636,14 +644,14 @@ export const ProductCustomizationDialog: React.FC<
                 -
               </Button>
               <div
-                className={`grid place-items-center ${styles.Xsmall} lg:text-2xl font-semibold`}
+                className={`grid place-items-center ${styles.Xsmall} kiosk:text-2xl font-semibold`}
               >
                 {quantity}
               </div>
               <Button
                 variant="default2"
                 size="icon"
-                className="size-8 lg:size-10 hover:scale-100"
+                className="size-8 kiosk:size-10 hover:scale-100"
                 onClick={() => {
                   setQuantity(quantity + 1);
                 }}
@@ -653,18 +661,18 @@ export const ProductCustomizationDialog: React.FC<
             </div>
           </div>
 
-          <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8">
+          <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 kiosk:gap-8">
             <DialogClose asChild>
               <Button
                 variant="outline"
-                className="w-full rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+                className="w-full rounded-t-none kiosk:h-20 kiosk:text-3xl kiosk:p-8"
               >
                 Back
               </Button>
             </DialogClose>
 
             <Button
-              className="text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+              className="text-primary-foreground rounded-t-none kiosk:h-20 kiosk:text-3xl kiosk:p-8"
               disabled={error}
               onClick={handleSubmit}
             >
@@ -672,7 +680,7 @@ export const ProductCustomizationDialog: React.FC<
                 {mode === "edit" ? "Edit" : "Add to cart"}
               </span>
               {getTotalPrice()} {variantOptions?.price.currency}
-              <ArrowDown className="lg:!size-8" />
+              <ArrowDown className="kiosk:!size-8" />
             </Button>
           </DialogFooter>
         </div>

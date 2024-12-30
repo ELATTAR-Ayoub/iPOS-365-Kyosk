@@ -24,11 +24,13 @@ import { products } from "@/constants/index";
 interface ProductCards {
   selectedCategorie: string; // Parameter to define the category
   showMenuData?: boolean; // toggle to show menu data
+  centerMenuItems?: boolean; // toggle to show menu data
 }
 
 const ProductCards: React.FC<ProductCards> = ({
   selectedCategorie,
   showMenuData = true,
+  centerMenuItems = false,
 }) => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const menuSearch = useSelector(
@@ -67,10 +69,12 @@ const ProductCards: React.FC<ProductCards> = ({
     >
       {showMenuData && (
         <div className={`${styles.flexBetween} w-full`}>
-          <h1 className={`${styles.normal} lg:text-2xl font-bold capitalize`}>
+          <h1
+            className={`${styles.normal} kiosk:text-2xl font-bold capitalize`}
+          >
             {selectedCategorie}
           </h1>
-          <p className={`${styles.Xsmall} lg:text-lg text-muted-foreground`}>
+          <p className={`${styles.Xsmall} kiosk:text-lg text-muted-foreground`}>
             {filteredProducts.length}{" "}
             {selectedCategorie !== "all menu" ? selectedCategorie : "total"}{" "}
             results
@@ -79,7 +83,11 @@ const ProductCards: React.FC<ProductCards> = ({
       )}
 
       <div
-        className={` kiosk:grid kiosk:grid-cols-4 flex justify-start items-start flex-wrap relative w-full gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted overflow-x-hidden `}
+        className={` kiosk:grid kiosk:grid-cols-4 flex ${
+          centerMenuItems
+            ? "justify-center items-center"
+            : "justify-start items-start"
+        }  flex-wrap relative w-full gap-3 kiosk:gap-14 overflow-y-auto pb-6 kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted overflow-x-hidden `}
       >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
@@ -88,7 +96,7 @@ const ProductCards: React.FC<ProductCards> = ({
         ) : (
           <div className="grid col-span-8 place-content-center w-full h-full">
             <p
-              className={` ${styles.Xsmall} lg:text-lg text-primary/70 w-full text-center mt-11`}
+              className={` ${styles.Xsmall} kiosk:text-lg text-primary/70 w-full text-center mt-11`}
             >
               No more products under this category, please check other
               categories.

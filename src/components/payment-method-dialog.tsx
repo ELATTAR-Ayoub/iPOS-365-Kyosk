@@ -27,35 +27,35 @@ const paymentMethods = [
     title: "Pay At The Counter",
     value: "counter",
     icon: (
-      <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-36 lg:!h-36" />
+      <PayAtCounterIcon className="!size-10 sm:!size-12 kiosk:!w-36 kiosk:!h-36" />
     ),
   },
   {
     title: "Card Payment",
     value: "card",
     icon: (
-      <CardPaymentIcon className="!w-24 !h-10 sm:!w-32 sm:!h-12 lg:!w-4/5 lg:!h-36" />
+      <CardPaymentIcon className="!w-24 !h-10 sm:!w-32 sm:!h-12 kiosk:!w-4/5 kiosk:!h-36" />
     ),
   },
   {
     title: "LINE Pay",
     value: "line",
-    icon: <LinePayIcon className="!size-10 sm:!size-12 lg:!w-32" />,
+    icon: <LinePayIcon className="!size-10 sm:!size-12 kiosk:!w-32" />,
   },
   {
     title: "Apple Pay",
     value: "apple",
-    icon: <ApplePayIcon className="!size-10 sm:!size-12 lg:!w-28" />,
+    icon: <ApplePayIcon className="!size-10 sm:!size-12 kiosk:!w-28" />,
   },
   {
     title: "Google Pay",
     value: "google",
-    icon: <GooglePayIcon className="!size-10 sm:!size-12 lg:!w-28" />,
+    icon: <GooglePayIcon className="!size-10 sm:!size-12 kiosk:!w-28" />,
   },
   {
     title: "Samsung Pay",
     value: "samsung",
-    icon: <SamsungPayIcon className="!size-10 sm:!size-12 lg:!w-32" />,
+    icon: <SamsungPayIcon className="!size-10 sm:!size-12 kiosk:!w-32" />,
   },
 ];
 
@@ -88,31 +88,31 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
         if (!open) onClose();
       }}
     >
-      <DialogContent className="grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8">
-        <DialogHeader className="justify-center items-center gap-2 lg:gap-14 pt-6">
-          <div className="size-12 lg:size-44 rounded-md overflow-hidden">
+      <DialogContent className="grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] kiosk:gap-8">
+        <DialogHeader className="justify-center items-center gap-2 kiosk:gap-14 pt-6">
+          <div className="size-12 kiosk:size-44 rounded-md overflow-hidden">
             <img
               className="h-full w-full object-cover"
               src="pics/Lava_logo.jpg"
               alt="Lava Tea House Logo"
             />
           </div>
-          <DialogTitle className="text-center font-semibold lg:text-4xl">
+          <DialogTitle className="text-center font-semibold kiosk:text-4xl">
             Payment Process
           </DialogTitle>
         </DialogHeader>
         <div
-          className={`${styles.flexStart} flex-col gap-2 lg:gap-8 overflow-hidden lg:pb-10 pt-6 lg:pt-16 border-t border-muted`}
+          className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted`}
         >
           <div
-            className={`grid grid-cols-2 lg:grid-cols-4 grid-rows-[100px,100px] lg:grid-rows-[250px,170px] lg:place-content-center gap-2 lg:gap-y-28 lg:gap-x-10 w-full h-full p-2 lg:py-10 overflow-y-auto`}
+            className={`grid grid-cols-2 kiosk:grid-cols-4 grid-rows-[100px,100px] kiosk:grid-rows-[250px,170px] kiosk:place-content-center gap-2 kiosk:gap-y-28 kiosk:gap-x-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto`}
           >
             {paymentMethods.map((method, index) => (
               <Button
                 key={method.title}
                 variant="outline"
                 onClick={() => handleSubmit(method.value)}
-                className={`flex-col h-full lg:text-3xl lg:font-semibold lg:gap-8 ${
+                className={`flex-col h-full kiosk:text-3xl kiosk:font-semibold kiosk:gap-8 ${
                   index < 2 ? "col-span-2" : ""
                 }`}
               >
@@ -123,14 +123,14 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
           </div>
           {products.length > 0 && <PriceSummary />}
         </div>
-        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8">
+        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 kiosk:gap-8">
           <DialogClose asChild>
             <Button
               type="button"
               variant="outline"
-              className="rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+              className="rounded-t-none kiosk:h-20 kiosk:text-3xl kiosk:p-8"
             >
-              <ArrowLeft className="lg:!size-5" />
+              <ArrowLeft className="kiosk:!size-5" />
               Back
             </Button>
           </DialogClose>

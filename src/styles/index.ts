@@ -1,9 +1,9 @@
 const styles = {
   innerWidth: "2lg:max-w-[1440px] w-full",
   interWidth: "lg:w-[80%] w-[100%]",
-  paddings: "sm:py-4 py-4 lg:py-8 sm:px-4 px-4 lg:px-12",
-  yPaddings: "sm:py-4 py-4 lg:py-12",
-  xPaddings: "sm:px-4 px-4 lg:px-12",
+  paddings: "sm:py-4 py-4 lg:py-6 kiosk:py-8 sm:px-4 px-4 lg:px-6 kiosk:px-12",
+  yPaddings: "sm:py-4 py-4 lg:py-6 kiosk:py-12",
+  xPaddings: "sm:px-4 px-4 lg:px-6 kiosk:px-12",
   topPaddings: "sm:pt-12 xs:pt-4 pt-12",
   bottomPaddings: "sm:pb-12 xs:pb-4 pb-12",
   flexCenter: "flex justify-center items-center",

@@ -64,49 +64,49 @@ export const PaymentTokenNumberDialog: React.FC<PaymentMethodDialogProps> = ({
           onInteractOutside={(e) => {
             e.preventDefault();
           }}
-          className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
+          className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] kiosk:gap-8`}
         >
-          <DialogHeader className="justify-center items-center gap-2 lg:gap-14 pt-6">
-            <div className={`size-12 lg:size-44 rounded-md overflow-hidden`}>
+          <DialogHeader className="justify-center items-center gap-2 kiosk:gap-14 pt-6">
+            <div className={`size-12 kiosk:size-44 rounded-md overflow-hidden`}>
               <img
                 className="h-full w-full object-cover"
                 src="pics/Lava_logo.jpg"
                 alt="Lava Tea House Logo"
               />
             </div>
-            <DialogTitle className={`text-center font-semibold lg:text-4xl`}>
+            <DialogTitle className={`text-center font-semibold kiosk:text-4xl`}>
               Your Order Token Number
             </DialogTitle>
           </DialogHeader>
 
           <div
-            className={`${styles.flexBetween} flex-col gap-2 lg:gap-8 overflow-hidden lg:pb-10 pt-6 lg:pt-16 border-t border-muted`}
+            className={`${styles.flexBetween} flex-col gap-2 kiosk:gap-8 overflow-hidden kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted`}
           >
             <div className={`relative ${styles.flexCenterStart} w-full h-full`}>
-              <div className="relative !size-[300px] sm:!size-[324px] lg:!w-[624px] lg:!h-[624px]">
+              <div className="relative !size-[300px] sm:!size-[324px] kiosk:!w-[624px] kiosk:!h-[624px]">
                 <RecieptPaperIcon className="w-full h-full" />
                 <span
-                  className={`absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl lg:text-5xl font-semibold whitespace-nowrap`}
+                  className={`absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl kiosk:text-5xl font-semibold whitespace-nowrap`}
                 >
                   Your Order <span className="underline font-bold">No</span>
                 </span>
                 <span
-                  className={`absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl lg:text-8xl font-semibold`}
+                  className={`absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl kiosk:text-8xl font-semibold`}
                 >
                   {orderNumber}
                 </span>
               </div>
             </div>
             <div
-              className={`${styles.flexCenter} flex-col w-full gap-2 lg:gap-12 `}
+              className={`${styles.flexCenter} flex-col w-full gap-2 kiosk:gap-12 `}
             >
               <p
-                className={`${styles.large} text-balance text-center font-semibold lg:!text-5xl`}
+                className={`${styles.large} text-balance text-center font-semibold kiosk:!text-5xl`}
               >
                 {getMessage()}
               </p>
               {paymentType === "counter" && (
-                <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-48 lg:!h-48" />
+                <PayAtCounterIcon className="!size-10 sm:!size-12 kiosk:!w-48 kiosk:!h-48" />
               )}
             </div>
           </div>

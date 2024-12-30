@@ -14,7 +14,7 @@ export const PriceSummary = () => {
       >
         {/* price recue */}
         <div
-          className={`w-full p-2 space-y-2 lg:space-y-4 bg-sidebar rounded-md text-muted-foreground text-sm lg:text-2xl font-semibold`}
+          className={`w-full p-2 space-y-2 kiosk:space-y-4 bg-sidebar rounded-md text-muted-foreground text-sm kiosk:text-2xl font-semibold`}
         >
           <div className={`flex justify-between items-center`}>
             <p>Sub Total ({products.length})</p>
@@ -39,7 +39,7 @@ export const PriceSummary = () => {
           ></div>
 
           <div
-            className={`flex justify-between items-center text-sm lg:text-3xl font-bold text-primary`}
+            className={`flex justify-between items-center text-sm kiosk:text-3xl font-bold text-primary`}
           >
             <p>Total Payment</p>
             <p>

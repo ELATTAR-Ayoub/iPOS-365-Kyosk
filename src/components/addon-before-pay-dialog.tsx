@@ -53,31 +53,35 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
       }}
     >
       <DialogContent
-        className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
+        className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] kiosk:gap-8`}
       >
-        <DialogHeader className=" justify-center items-center gap-2 lg:gap-14 pt-6">
-          <div className={` size-12 lg:size-44 rounded-md overflow-hidden `}>
+        <DialogHeader className=" justify-center items-center gap-2 kiosk:gap-14 pt-6">
+          <div className={` size-12 kiosk:size-44 rounded-md overflow-hidden `}>
             <img
               className=" h-full w-full object-cover"
               src="pics/Lava_logo.jpg"
               alt="Lava Tea House Logo"
             />
           </div>
-          <DialogTitle className={` text-center font-semibold lg:text-4xl`}>
+          <DialogTitle className={` text-center font-semibold kiosk:text-4xl`}>
             Anything To Add on ?{" "}
           </DialogTitle>
         </DialogHeader>
 
         <div
-          className={` ${styles.flexStart} flex-col gap-2 lg:gap-8 overflow-hidden `}
+          className={` ${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden `}
         >
           {/* menu items list */}
           <div
-            className={`${styles.flexStart} flex-col gap-2 lg:gap-10 w-full h-full p-2 lg:py-10 overflow-y-auto`}
+            className={`${styles.flexStart} flex-col gap-2 kiosk:gap-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto`}
           >
             {/* product cards */}
 
-            <ProductCards selectedCategorie={"all menu"} showMenuData={false} />
+            <ProductCards
+              selectedCategorie={"all menu"}
+              showMenuData={false}
+              centerMenuItems={true}
+            />
           </div>
 
           {/* price here */}
@@ -85,21 +89,21 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
         </div>
 
         {/* CTA */}
-        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8 ">
+        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 kiosk:gap-8 ">
           <DialogClose asChild>
             <Button
               type="button"
               variant="outline"
-              className="rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+              className="rounded-t-none kiosk:h-20 kiosk:text-3xl kiosk:p-8"
             >
-              <ArrowLeft className="lg:!size-5" />
+              <ArrowLeft className="kiosk:!size-5" />
               Back
             </Button>
           </DialogClose>
           <Button
             variant={"default"}
             type="button"
-            className=" text-primary-foreground rounded-t-none lg:h-20 lg:text-3xl lg:p-8"
+            className=" text-primary-foreground rounded-t-none kiosk:h-20 kiosk:text-3xl kiosk:p-8"
             onClick={handleSubmit}
           >
             Processes To Payment

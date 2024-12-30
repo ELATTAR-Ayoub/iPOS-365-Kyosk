@@ -23,7 +23,7 @@ export default function Index() {
       ></video>
 
       <Link
-        className={`block ${styles.large} absolute bottom-10 lg:bottom-56 z-10 h-16 lg:w-4/5 lg:h-40 `}
+        className={`block ${styles.large} absolute bottom-10 kiosk:bottom-56 z-10 h-16 kiosk:w-4/5 kiosk:h-40 `}
         to={"/luggage"}
       >
         {" "}

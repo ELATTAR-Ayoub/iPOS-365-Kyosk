@@ -84,7 +84,7 @@ const Cart = () => {
       } bottom-0 gap-3 ${products.length == 0 && "hidden"}`}
     >
       <div
-        className={`w-full md:w-2/3 ${styles.flexCenter} gap-3 bg-secondary p-2 pb-0 rounded-t-xl shadow-lg`}
+        className={`w-full md:w-2/3 lg:w-1/2 kiosk:w-2/3 ${styles.flexCenter} gap-3 bg-secondary p-2 pb-0 rounded-t-xl shadow-lg`}
       >
         <Dialog>
           <CheckoutList onClose={() => {}} onSubmit={handleCheckoutSubmit} />
@@ -110,13 +110,13 @@ const Cart = () => {
           )}
 
           <DialogTrigger asChild>
-            <Button className="relative w-full text-primary-foreground rounded-b-none py-6 lg:h-28 lg:text-4xl lg:gap-4">
-              <ShoppingBasket className="lg:!size-10" /> Checkout
+            <Button className="relative w-full text-primary-foreground rounded-b-none py-6 kiosk:h-28 kiosk:text-4xl kiosk:gap-4">
+              <ShoppingBasket className="kiosk:!size-10" /> Checkout
               <span className={`w-full text-right`}>
                 {totalPrice}
                 {currency}
               </span>
-              <span className="absolute -top-2 -right-2 lg:-top-6 lg:-right-6 rounded-full p-1 lg:p-3 bg-destructive text-destructive-foreground text-xs lg:text-2xl">
+              <span className="absolute -top-2 -right-2 kiosk:-top-6 kiosk:-right-6 rounded-full p-1 kiosk:p-3 bg-destructive text-destructive-foreground text-xs kiosk:text-2xl">
                 x {products.length}
               </span>
             </Button>

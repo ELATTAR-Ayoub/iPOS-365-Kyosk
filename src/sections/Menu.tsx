@@ -55,11 +55,11 @@ const Menu = () => {
 
   return (
     <section
-      className={`${styles.flexStart} relative flex-col w-full h-full gap-3 lg:gap-7 overflow-hidden `}
+      className={`${styles.flexStart} relative flex-col w-full h-full gap-3 kiosk:gap-7 overflow-hidden `}
     >
       {/* Ad board */}
       <section
-        className={` w-full lg:h-64 aspect-[16/4] rounded-lg overflow-hidden  `}
+        className={` w-full h-56 kiosk:h-64 aspect-[16/4] rounded-lg overflow-hidden  `}
       >
         <img
           className=" w-full h-full object-cover"
@@ -72,7 +72,7 @@ const Menu = () => {
       <section className={`grid w-full  `}>
         {/* categories */}
         <RadioGroup
-          className={`flex justify-start items-center gap-2 lg:gap-10 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem] lg:h-[9.2rem]`}
+          className={`flex justify-start items-center gap-2 kiosk:gap-10 w-auto overflow-x-auto h-[2.7rem] md:h-[6.2rem] kiosk:h-[9.2rem]`}
           value={selectedCategories}
           onValueChange={(value) => {
             setSelectedCategories(value.toLowerCase());
@@ -83,21 +83,21 @@ const Menu = () => {
             <Label
               key={index}
               htmlFor={categorie.title}
-              className={`buttonBaseStyle h-10 md:h-24 lg:h-36 md:w-20 lg:w-32 md:flex-col !rounded-md md:!rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
+              className={`buttonBaseStyle h-10 md:h-24 kiosk:h-36 md:w-20 kiosk:w-32 md:flex-col !rounded-md md:!rounded-xl bg-secondary [&:has([data-state=checked])]:bg-accent/20 [&:has([data-state=checked])]:text-primary [&:has([data-state=checked])]:border-accent/30 shadow hover:bg-accent/30 `}
             >
               <RadioGroupItem
                 value={categorie.title.toLowerCase()}
                 id={categorie.title}
                 className="sr-only"
               />
-              <div className=" h-6 md:h-8 lg:h-20 aspect-square">
+              <div className=" h-6 md:h-8 kiosk:h-20 aspect-square">
                 <img
                   className="bg-cover"
                   src={categorie.image}
                   alt={categorie.title}
                 />
               </div>
-              <p className="text-xs lg:text-base font-bold">
+              <p className="text-xs kiosk:text-base font-bold">
                 {categorie.title}
               </p>
             </Label>
