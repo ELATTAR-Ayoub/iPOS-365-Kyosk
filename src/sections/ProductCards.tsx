@@ -40,9 +40,12 @@ const ProductCards: React.FC<ProductCards> = ({
 
     // filter customisable
     filtered = products.filter((product) => product.customisable === true);
-    if (menuSearch) {
-      filtered = filtered.filter((product) =>
-        product.title.includes(menuSearch)
+    if (menuSearch.trim()) {
+      const searchQuery = menuSearch.toLowerCase();
+      filtered = filtered.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchQuery) ||
+          product.description.toLowerCase().includes(searchQuery)
       );
     }
 
