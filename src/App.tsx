@@ -31,7 +31,7 @@ export default function Index() {
           className={`${styles.H2} kiosk:text-6xl w-full h-full font-bold text-secondary-foreground/70 bg-secondary/40 border-secondary backdrop-blur-[12px]`}
           variant={"outline"}
         >
-          TOUCH HERE TO ORDER
+          TOUCH HERE TO ORDERs
         </Button>
       </Link>
     </section>
