@@ -101,7 +101,7 @@ export const PaymentTokenNumberDialog: React.FC<PaymentMethodDialogProps> = ({
               className={`${styles.flexCenter} flex-col w-full gap-2 kiosk:gap-12 `}
             >
               <p
-                className={`${styles.large} text-balance text-center font-semibold kiosk:!text-5xl kiosk:w-1/2 kiosk:!leading-normal `}
+                className={`${styles.large} text-balance text-center font-semibold kiosk:!text-5xl kiosk:w-2/3 kiosk:!leading-normal `}
               >
                 {getMessage()}
               </p>
