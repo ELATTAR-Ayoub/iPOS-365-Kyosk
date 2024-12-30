@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        kiosk: { raw: "(min-height: 1280px),(min-width:1024px)" },
+        kiosk: {
+          raw: "(min-height: 1280px) and (min-width:1024px) (hover: none) and (pointer: coarse)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
