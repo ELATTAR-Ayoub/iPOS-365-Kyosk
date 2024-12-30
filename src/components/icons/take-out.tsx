@@ -4,7 +4,7 @@ import { type ComponentProps } from "react";
 export function TakeOutIcon(props: ComponentProps<typeof Icon>) {
   return (
     <Icon viewBox="0 0 24 24" {...props}>
-      <g clip-path="url(#clip0_4461_19786)">
+      <g clipPath="url(#clip0_4461_19786)">
         <path
           d="M0.375 4.875H16.875V22.125C16.875 22.5228 16.717 22.9044 16.4357 23.1857C16.1544 23.467 15.7728 23.625 15.375 23.625H1.875C1.47718 23.625 1.09564 23.467 0.81434 23.1857C0.533035 22.9044 0.375 22.5228 0.375 22.125V4.875Z"
           fill="#F8C460"

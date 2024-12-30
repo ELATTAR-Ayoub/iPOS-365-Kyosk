@@ -4,7 +4,7 @@ import { type ComponentProps } from "react";
 export function DineInIcon(props: ComponentProps<typeof Icon>) {
   return (
     <Icon viewBox="0 0 24 24" {...props}>
-      <g clip-path="url(#clip0_4461_19758)">
+      <g clipPath="url(#clip0_4461_19758)">
         <path
           d="M2.625 12.375H4.875L3.654 2.60775C3.57672 1.99142 3.27714 1.42449 2.81149 1.01339C2.34584 0.602292 1.74615 0.375289 1.125 0.375L2.625 12.375Z"
           fill="#F97878"

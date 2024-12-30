@@ -290,7 +290,7 @@ export const ProductCustomizationDialog: React.FC<
                     {temp === "cold" ? (
                       <Snowflake className="h-4 w-4 text-blue-400" />
                     ) : (
-                      <Flame className="h-4 w-4 text-destructive" />
+                      <Flame className="h-4 w-4 text-[#C95D2F]" />
                     )}
                   </Label>
                 ))}
@@ -308,7 +308,7 @@ export const ProductCustomizationDialog: React.FC<
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
@@ -332,7 +332,7 @@ export const ProductCustomizationDialog: React.FC<
                     <Label
                       key={option}
                       htmlFor={`icePercentage-${option}`}
-                      className={`toggleBaseStyle`}
+                      className={`toggleBaseStyle !text-blue-400`}
                     >
                       <RadioGroupItem
                         value={option.toString()}
@@ -354,7 +354,7 @@ export const ProductCustomizationDialog: React.FC<
             {nonPaidAddons.map((addon, index) => (
               <div
                 key={index}
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
@@ -383,7 +383,7 @@ export const ProductCustomizationDialog: React.FC<
                     <Label
                       key={option}
                       htmlFor={`${addon.name}-${option}`}
-                      className={`toggleBaseStyle`}
+                      className={`toggleBaseStyle !text-[#C95D2F]`}
                     >
                       <RadioGroupItem
                         value={option.toString()}
@@ -402,7 +402,7 @@ export const ProductCustomizationDialog: React.FC<
 
           {/* Variants */}
           <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2 w-full`}
+            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
           >
             <div className={`flex justify-start items-center gap-2`}>
               <VariantIcon className="size-4 kiosk:size-7" />
@@ -440,7 +440,8 @@ export const ProductCustomizationDialog: React.FC<
                       id={`variantOptions-${variant.name}`}
                       className="sr-only"
                     />
-                    {variant.name} {priceText}
+                    {variant.name}{" "}
+                    <span className="!text-[#C95D2F]">{priceText}</span>
                   </Label>
                 );
               })}

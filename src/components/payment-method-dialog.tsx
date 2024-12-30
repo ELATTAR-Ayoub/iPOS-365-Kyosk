@@ -105,7 +105,7 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
           className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted`}
         >
           <div
-            className={`grid grid-cols-2 kiosk:grid-cols-4 grid-rows-[100px,100px] kiosk:grid-rows-[250px,170px] kiosk:place-content-center gap-2 kiosk:gap-y-28 kiosk:gap-x-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto`}
+            className={`grid grid-cols-2 kiosk:grid-cols-4 grid-rows-[100px,100px] kiosk:grid-rows-[250px,170px] kiosk:place-content-center gap-2 kiosk:gap-y-28 kiosk:gap-x-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto overflow-x-hidden`}
           >
             {paymentMethods.map((method, index) => (
               <Button

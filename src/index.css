@@ -81,7 +81,7 @@ a {
 }
 
 .toggleBaseStyle {
-  @apply w-full kiosk:h-16 flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm kiosk:text-2xl
+  @apply w-full kiosk:h-16 flex items-center justify-center gap-2 rounded-sm border p-2 text-xs sm:text-sm kiosk:text-2xl kiosk:rounded-xl
   cursor-pointer transition-colors
   [&:has([data-state=checked])]:bg-primary
   [&:has([data-state=checked])]:text-primary-foreground
