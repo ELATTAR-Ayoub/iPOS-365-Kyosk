@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       screens: {
         kiosk: {
-          raw: "(min-height: 1280px) and (max-height: 1980px) and (min-width: 1024px) and (max-width: 1080px)",
+          raw: "(min-height: 1280px) and (max-height: 1980px) and (min-width: 1024px) and (max-width: 1540px)",
         },
       },
       borderRadius: {

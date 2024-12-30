@@ -96,6 +96,7 @@ export const ProductCustomizationDialog: React.FC<
         isAvailable: false,
         customisable: false,
         categories: [],
+        isVegan: false,
       },
     [product.id, products]
   );
@@ -239,9 +240,9 @@ export const ProductCustomizationDialog: React.FC<
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${styles.flexStart} flex-col p-0 border-0`}>
-        <DialogHeader className="relative grid grid-cols-2 kiosk:grid-cols-[480px,1fr] gap-2 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
+        <DialogHeader className="relative grid grid-cols-2 kiosk:grid-cols-[480px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
           {/* Image */}
-          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(40%-.5rem)] kiosk:w-[calc(45%-.5rem)] aspect-square bg-muted rounded-lg">
+          <div className="absolute left-2 kiosk:left-5 bottom-0 w-[calc(50%-1rem)] kiosk:w-[480px] aspect-square bg-muted rounded-lg">
             <img
               className="w-full h-full object-cover"
               src={product?.image}
@@ -300,14 +301,14 @@ export const ProductCustomizationDialog: React.FC<
 
         {/* Content */}
         <div
-          className={`grid gap-4 kiosk:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 kiosk:p-5 overflow-hidden`}
+          className={`grid gap-4 kiosk:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 kiosk:p-5 kiosk:pt-0 overflow-hidden`}
         >
           {/* Ice Percentage */}
           {showIcePercentage && icePercentage && (
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center w-full gap-2`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
@@ -318,7 +319,7 @@ export const ProductCustomizationDialog: React.FC<
                   </h3>
                 </div>
                 <RadioGroup
-                  className="grid grid-cols-3 w-full gap-2"
+                  className={`grid grid-cols-${icePercentage.options.length} w-full gap-2 `}
                   value={icePercentage.selectedOption.toString()}
                   onValueChange={(value) =>
                     setIcePercentage({
@@ -372,7 +373,7 @@ export const ProductCustomizationDialog: React.FC<
                   </h3>
                 </div>
                 <RadioGroup
-                  className="grid grid-cols-3 w-full gap-2"
+                  className={`grid grid-cols-${addon.options.length} w-full gap-2`}
                   value={addon.selectedOption.toString()}
                   onValueChange={(value) =>
                     handleNonPaidAddonChange(index, value)
@@ -410,7 +411,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <RadioGroup
-              className="grid grid-cols-3 w-full gap-2"
+              className={`grid grid-cols-${baseProduct.variantOptions.length} w-full gap-2`}
               value={variantOptions?.name}
               onValueChange={handleVariantChange}
             >

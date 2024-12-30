@@ -59,6 +59,7 @@ export interface Product {
   customisable: boolean; // Whether the product is Customisable by the client or not
   categories: string[];
   note?: string; // Whether the product is Customisable by the client or not
+  isVegan: boolean;
 }
 
 export interface CartProduct {
@@ -80,4 +81,5 @@ export interface CartProduct {
   tumbler: boolean;
   price: Price;
   priceWithAddons: Price;
+  isVegan: boolean;
 }

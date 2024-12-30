@@ -87,6 +87,7 @@ export const products: Product[] = [
     isAvailable: true,
     customisable: true,
     categories: ["coffee", "desert"],
+    isVegan: false,
   },
   {
     id: "2",
@@ -175,6 +176,7 @@ export const products: Product[] = [
     isAvailable: true,
     customisable: true,
     categories: ["coffee", "tea"],
+    isVegan: true,
   },
   {
     id: "3",
@@ -262,6 +264,7 @@ export const products: Product[] = [
     isAvailable: true,
     customisable: true,
     categories: ["coffee"],
+    isVegan: false,
   },
   {
     id: "4",
@@ -274,7 +277,6 @@ export const products: Product[] = [
     variantOptions: [
       { name: "small", price: { value: 80, currency: "$" } },
       { name: "medium", price: { value: 100, currency: "$" } },
-      { name: "large", price: { value: 120, currency: "$" } },
     ],
     temperature: ["cold", "hot"], // Iced coffee is cold
     icePercentage: {
@@ -342,7 +344,7 @@ export const products: Product[] = [
       {
         name: "Honey",
         type: "percentage",
-        options: ["20%", "50%", "70%"],
+        options: ["20%", "50%"],
         selectedOption: "50%", // Optional
         icon: "https://i.ibb.co/7YWh9k2/Honey.png",
       },
@@ -350,5 +352,6 @@ export const products: Product[] = [
     isAvailable: true,
     customisable: true,
     categories: ["desert", "snacks"],
+    isVegan: true,
   },
 ];

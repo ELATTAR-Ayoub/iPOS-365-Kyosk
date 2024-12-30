@@ -128,6 +128,7 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
     tumbler: false,
     price: { value: 0, currency: "USD" },
     priceWithAddons: { value: 0, currency: "USD" },
+    isVegan: false,
   });
 
   useMemo(() => {
@@ -235,7 +236,7 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
                       className={`flex kiosk:justify-end ${styles.normal} kiosk:text-2xl opacity-70 font-bold text-accent`}
                     >
                       <span>{product.priceWithAddons.currency}</span>{" "}
-                      {product.priceWithAddons.value * product.quantity}
+                      {product.priceWithAddons.value}
                     </p>
                   </div>
                   <div
