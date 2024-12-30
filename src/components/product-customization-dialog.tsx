@@ -266,7 +266,7 @@ export const ProductCustomizationDialog: React.FC<
                 {product?.title}
               </DialogTitle>
               <DialogDescription
-                className={`${styles.Xsmall} kiosk:text-2xl text-primary font-normal`}
+                className={`${styles.Xsmall} kiosk:text-2xl text-primary font-semibold`}
               >
                 {product?.description}
               </DialogDescription>
@@ -294,9 +294,9 @@ export const ProductCustomizationDialog: React.FC<
                       className="sr-only"
                     />
                     {temp === "cold" ? (
-                      <Snowflake className="h-4 w-4 text-blue-400" />
+                      <Snowflake className=" size-4 sm:size-5 kiosk:!size-10 text-blue-400" />
                     ) : (
-                      <Flame className="h-4 w-4 text-[#C95D2F]" />
+                      <Flame className="size-4 sm:size-5 kiosk:!size-10 text-[#C95D2F]" />
                     )}
                   </Label>
                 ))}
@@ -448,7 +448,7 @@ export const ProductCustomizationDialog: React.FC<
                     />
                     {variant.name}{" "}
                     {priceText && (
-                      <span className="!text-[#C95D2F]">{priceText}</span>
+                      <span className="!text-[#C95D2F] ">{priceText}</span>
                     )}
                   </Label>
                 );
