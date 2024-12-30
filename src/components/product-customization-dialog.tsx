@@ -240,7 +240,7 @@ export const ProductCustomizationDialog: React.FC<
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
-        className={`${styles.flexStart} flex-col p-0 border-0 kiosk:top-[300px] kiosk:max-h-[calc(100%-450px)]`}
+        className={`${styles.flexStart} flex-col p-0 border-0 kiosk:top-[296px] kiosk:max-h-[calc(100%-(150px+296px))]`}
       >
         <DialogHeader className="relative grid grid-cols-[40%,1fr] kiosk:grid-cols-[540px,1fr] gap-2 kiosk:gap-8 pt-3 px-3 kiosk:p-5 kiosk:pb-0 w-full kiosk:min-h-[400px]">
           {/* Image */}
@@ -307,7 +307,7 @@ export const ProductCustomizationDialog: React.FC<
 
         {/* Content */}
         <div
-          className={`grid gap-4 kiosk:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 kiosk:p-5 kiosk:pt-0 overflow-hidden`}
+          className={`grid gap-4 kiosk:gap-8 w-full h-full overflow-x-hidden overflow-y-auto pb-4 px-3 kiosk:p-5 kiosk:pt-0 overflow-hidden `}
         >
           {/* Ice Percentage */}
           {showIcePercentage && icePercentage && (
@@ -625,7 +625,7 @@ export const ProductCustomizationDialog: React.FC<
           className={`grid grid-row-2 w-full gap-2 kiosk:gap-5 p-3 kiosk:p-5 border border-muted-foreground/30`}
         >
           <div
-            className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 kiosk:p-3 border border-muted-foreground/50 rounded-t-lg`}
+            className={`grid grid-cols-[1fr_auto] w-full gap-3 p-1 kiosk:p-3 border border-muted-foreground/50 rounded-t-2xl`}
           >
             <div
               className={`flex justify-start items-center flex-wrap gap-1 kiosk:gap-4`}

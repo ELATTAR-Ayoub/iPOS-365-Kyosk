@@ -163,10 +163,10 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
       </DialogHeader>
 
       <div
-        className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden`}
+        className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 border-t border-muted-foreground overflow-hidden`}
       >
         <div
-          className={`${styles.flexStart} flex-col gap-2 kiosk:gap-10 w-full h-full border-y border-muted p-2 kiosk:py-10 overflow-y-auto`}
+          className={`${styles.flexStart} flex-col gap-2 kiosk:gap-10 w-full h-full border-b border-muted-foreground p-2 kiosk:py-10  overflow-y-auto`}
         >
           {products.length > 0 ? (
             products.map((product, Index) => (

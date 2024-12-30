@@ -69,11 +69,11 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
         </DialogHeader>
 
         <div
-          className={` ${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden `}
+          className={` ${styles.flexStart} flex-col gap-2 kiosk:gap-8 border-t border-muted-foreground overflow-hidden `}
         >
           {/* menu items list */}
           <div
-            className={`${styles.flexStart} flex-col gap-2 kiosk:gap-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto`}
+            className={`${styles.flexStart} flex-col gap-2 kiosk:gap-10 w-full h-full p-2 kiosk:py-10 border-b border-muted-foreground overflow-y-auto`}
           >
             {/* product cards */}
 

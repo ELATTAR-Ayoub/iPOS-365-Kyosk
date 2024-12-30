@@ -102,17 +102,17 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
           </DialogTitle>
         </DialogHeader>
         <div
-          className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted`}
+          className={`${styles.flexStart} flex-col gap-2 kiosk:gap-8 overflow-hidden kiosk:pb-10 pt-6 kiosk:pt-16 border-t border-muted-foreground`}
         >
           <div
-            className={`grid grid-cols-2 kiosk:grid-cols-4 grid-rows-[100px,100px] kiosk:grid-rows-[250px,170px] kiosk:place-content-center gap-2 kiosk:gap-y-28 kiosk:gap-x-10 w-full h-full p-2 kiosk:py-10 overflow-y-auto overflow-x-hidden`}
+            className={`grid grid-cols-2 kiosk:grid-cols-4 grid-rows-[100px,100px] kiosk:grid-rows-[250px,170px] kiosk:place-content-center gap-2 kiosk:gap-y-28 kiosk:gap-x-10 w-full h-full p-2 kiosk:py-10 border-b border-muted-foreground overflow-y-auto overflow-x-hidden`}
           >
             {paymentMethods.map((method, index) => (
               <Button
                 key={method.title}
                 variant="outline"
                 onClick={() => handleSubmit(method.value)}
-                className={`flex-col h-full kiosk:text-3xl kiosk:text-muted-foreground kiosk:gap-8 ${
+                className={`flex-col bg-secondary h-full kiosk:text-3xl kiosk:text-muted-foreground kiosk:gap-8 ${
                   index < 2 ? "col-span-2" : ""
                 }`}
               >

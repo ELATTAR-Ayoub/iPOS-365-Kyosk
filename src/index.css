@@ -42,8 +42,7 @@ a {
   @apply font-bold text-xs text-[#4D81E7] !no-underline hover:!underline hover:scale-105 transition-all;
 }
 
-/* Selections  */
-
+/* Selections */
 ::-moz-selection {
   /* Code for Firefox */
   @apply text-secondary bg-ring;
@@ -53,25 +52,32 @@ a {
   @apply text-secondary bg-ring;
 }
 
-/* scrollbar width */
+/* Chrome/Safari scrollbar */
 ::-webkit-scrollbar {
   @apply w-[0px] h-0;
 }
 
-/* scrollbar Track */
 ::-webkit-scrollbar-track {
   background: var(--muted);
   @apply rounded-full;
 }
 
-/* scrollbar Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-accent;
 }
 
-/* scrollbar Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: none; /* "none" or "thin" */
+  scrollbar-color: var(--accent) var(--muted); /* thumb and track color */
+}
+
+*:hover {
+  scrollbar-color: var(--primary) var(--muted); /* thumb and track color on hover */
 }
 
 /* body */
