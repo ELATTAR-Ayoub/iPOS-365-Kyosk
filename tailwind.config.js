@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       screens: {
         kiosk: {
-          raw: "(hover: none) and (pointer: coarse) and (min-device-width: 768px) and (min-width: 1080px)",
+          raw: "(min-height: 1280px) and (min-width: 720px) and (hover: none) and (pointer: coarse) and (min-device-width: 720px)",
         },
       },
       borderRadius: {
