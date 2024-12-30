@@ -308,7 +308,7 @@ export const ProductCustomizationDialog: React.FC<
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
@@ -354,7 +354,7 @@ export const ProductCustomizationDialog: React.FC<
             {nonPaidAddons.map((addon, index) => (
               <div
                 key={index}
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
@@ -402,7 +402,7 @@ export const ProductCustomizationDialog: React.FC<
 
           {/* Variants */}
           <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2rem)_1fr] items-center gap-2 kiosk:gap-0`}
+            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
           >
             <div className={`flex justify-start items-center gap-2`}>
               <VariantIcon className="size-4 kiosk:size-7" />
