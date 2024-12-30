@@ -469,7 +469,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <div
-              className={`${styles.flexStart} flex-col gap-4 kiosk:gap-8 w-full pt-0 kiosk:pt-2`}
+              className={`${styles.flexStart} flex-col gap-4 kiosk:gap-5 w-full pt-0 kiosk:pt-2`}
             >
               {addOns.map((addOn, index) => (
                 <div
