@@ -308,7 +308,7 @@ export const ProductCustomizationDialog: React.FC<
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[calc(240px+2.4rem)_1fr] items-center gap-2 kiosk:gap-0`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[280px_1fr] items-center gap-2 kiosk:gap-0`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 kiosk:size-7 text-blue-400" />
@@ -319,7 +319,7 @@ export const ProductCustomizationDialog: React.FC<
                   </h3>
                 </div>
                 <RadioGroup
-                  className={`grid grid-cols-${icePercentage.options.length} w-full gap-2 `}
+                  className={`grid grid-cols-4 w-full gap-8 `}
                   value={icePercentage.selectedOption.toString()}
                   onValueChange={(value) =>
                     setIcePercentage({
@@ -332,7 +332,7 @@ export const ProductCustomizationDialog: React.FC<
                     <Label
                       key={option}
                       htmlFor={`icePercentage-${option}`}
-                      className={`toggleBaseStyle !text-blue-400`}
+                      className={`toggleBaseStyle !text-blue-400 max-w-[170px] `}
                     >
                       <RadioGroupItem
                         value={option.toString()}

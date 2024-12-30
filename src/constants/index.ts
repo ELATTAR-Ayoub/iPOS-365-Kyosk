@@ -282,7 +282,7 @@ export const products: Product[] = [
     icePercentage: {
       name: "Ice",
       type: "percentage",
-      options: ["20%", "50%", "70%"],
+      options: ["20%", "50%", "70%", "100%"],
       selectedOption: "50%", // Optional
     },
     addOns: [
