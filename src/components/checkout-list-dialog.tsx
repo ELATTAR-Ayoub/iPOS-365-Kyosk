@@ -96,7 +96,6 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.cart.products);
-  const [discount] = useState(0);
   const [, setCurrency] = useState("");
   const [, setTotalPrice] = useState(0);
   const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
@@ -327,9 +326,7 @@ export const CheckoutList: React.FC<CheckoutListDialogProps> = ({
           />
         </div>
 
-        {products.length > 0 && (
-          <PriceSummary products={products} discount={discount} />
-        )}
+        {products.length > 0 && <PriceSummary />}
       </div>
 
       <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8">

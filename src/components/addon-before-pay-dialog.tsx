@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 // constants
-import { useState } from "react";
 
 // Icons
 
@@ -45,7 +44,6 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
 
   // values
   const products = useSelector((state: RootState) => state.cart.products);
-  const [discount] = useState(0);
 
   return (
     <Dialog
@@ -83,9 +81,7 @@ export const AddonBeforePayDialog: React.FC<AddonBeforePayDialogProps> = ({
           </div>
 
           {/* price here */}
-          {products.length > 0 && (
-            <PriceSummary products={products} discount={discount} />
-          )}
+          {products.length > 0 && <PriceSummary />}
         </div>
 
         {/* CTA */}

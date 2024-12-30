@@ -6,6 +6,10 @@
 // constants
 import { Product } from "@/constants/interfaces";
 
+// redux
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
+
 // compo
 import ProductCard from "@/components/product-card";
 import styles from "@/styles";
@@ -27,12 +31,20 @@ const ProductCards: React.FC<ProductCards> = ({
   showMenuData = true,
 }) => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const menuSearch = useSelector(
+    (state: RootState) => state.UIConfig.menuSearch
+  );
 
   useMemo(() => {
     let filtered: Product[] = [];
 
     // filter customisable
     filtered = products.filter((product) => product.customisable === true);
+    if (menuSearch) {
+      filtered = filtered.filter((product) =>
+        product.title.includes(menuSearch)
+      );
+    }
 
     // filter selectedCategorie
 
@@ -44,7 +56,7 @@ const ProductCards: React.FC<ProductCards> = ({
 
     // Finish
     setFilteredProducts(filtered);
-  }, [selectedCategorie]);
+  }, [selectedCategorie, menuSearch]);
 
   return (
     <section
@@ -64,7 +76,7 @@ const ProductCards: React.FC<ProductCards> = ({
       )}
 
       <div
-        className={` grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 relative w-full gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted overflow-x-hidden `}
+        className={` kiosk:grid kiosk:grid-cols-4 flex justify-start items-start flex-wrap relative w-full gap-3 lg:gap-14 overflow-y-auto pb-6 lg:pb-10 pt-6 lg:pt-16 border-t border-muted overflow-x-hidden `}
       >
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (

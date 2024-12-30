@@ -305,7 +305,7 @@ export const ProductCustomizationDialog: React.FC<
             <>
               <Separator className={`h-[2px] bg-muted`} decorative={true} />
               <div
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center w-full gap-2`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center w-full gap-2`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   <Snowflake className="size-4 lg:size-7 text-blue-400" />
@@ -349,7 +349,7 @@ export const ProductCustomizationDialog: React.FC<
             {nonPaidAddons.map((addon, index) => (
               <div
                 key={index}
-                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2`}
+                className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2`}
               >
                 <div className={`flex justify-start items-center gap-2`}>
                   {addon.icon && (
@@ -395,7 +395,7 @@ export const ProductCustomizationDialog: React.FC<
 
           {/* Variants */}
           <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
+            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2 w-full`}
           >
             <div className={`flex justify-start items-center gap-2`}>
               <VariantIcon className="size-4 lg:size-7" />
@@ -451,7 +451,7 @@ export const ProductCustomizationDialog: React.FC<
               </h3>
             </div>
             <div
-              className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full pt-7`}
+              className={`${styles.flexStart} flex-col gap-4 lg:gap-8 w-full pt-0 kiosk:pt-7`}
             >
               {addOns.map((addOn, index) => (
                 <div
@@ -549,7 +549,7 @@ export const ProductCustomizationDialog: React.FC<
 
           {/* Use Tumbler */}
           <div
-            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[33%_1fr] items-center gap-2 w-full`}
+            className={`grid grid-rows-[auto_auto] sm:grid-rows-none sm:grid-cols-[23.7%_1fr] kiosk:grid-cols-[22.8%_1fr] items-center gap-2 w-full`}
           >
             <div className={`flex justify-start items-center gap-2`}>
               <Recycle className="size-4 lg:size-7" />
@@ -569,7 +569,7 @@ export const ProductCustomizationDialog: React.FC<
                 variant="default"
                 className="w-full toggleBaseStyle"
               >
-                <GreenEarthIcon className="size-8 lg:size-10 text-green-500" />
+                <GreenEarthIcon className="lg:!size-8 text-green-500" />
                 Use Your Personal Cup
               </ToggleGroupItem>
             </ToggleGroup>
@@ -578,7 +578,7 @@ export const ProductCustomizationDialog: React.FC<
           <Separator className="h-[2px] bg-muted" decorative={true} />
 
           {/* Note */}
-          <form className="flex justify-start items-center flex-col lg:gap-8">
+          <form className="flex justify-start items-center flex-col gap-2 lg:gap-8">
             <Label
               htmlFor="note"
               className={`flex justify-start items-center gap-2 ${styles.small} font-semibold w-full text-left`}

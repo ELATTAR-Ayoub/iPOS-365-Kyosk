@@ -28,7 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   return (
-    <div className={`relative h-fit rounded-xl `}>
+    <div className={`relative h-fit rounded-xl w-[48%] sm:w-40 kiosk:w-auto `}>
       {/* image */}
 
       <div className=" h-64 lg:h-80 cursor-pointer pos-item-drop-shadow ">

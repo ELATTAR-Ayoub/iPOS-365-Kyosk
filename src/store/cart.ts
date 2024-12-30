@@ -28,6 +28,19 @@ const cartConfigSlice = createSlice({
   initialState,
   reducers: {
     // Action to update the entire cartConfig state
+    resetCartConfig(state) {
+      state.products = [];
+      state.luggage = "";
+      state.paymentType = "";
+      state.cartPriceSummary = {
+        currency: "",
+        subTotal: 0,
+        Discount: 0,
+        ServiceTax: 0,
+        TotalPay: 0,
+      };
+    },
+
     setProducts(state, action) {
       state.products = action.payload;
     },
@@ -38,6 +51,7 @@ const cartConfigSlice = createSlice({
 
     setPaymentType(state, action) {
       state.paymentType = action.payload;
+      console.log(state.paymentType);
     },
 
     setCartPriceSummary(state, action: PayloadAction<CartPriceSummary>) {
@@ -111,6 +125,7 @@ const cartConfigSlice = createSlice({
 });
 
 export const {
+  resetCartConfig,
   setLuggage,
   setPaymentType,
   setCartPriceSummary,

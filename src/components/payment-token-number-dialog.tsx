@@ -1,14 +1,6 @@
 "use client";
 
-// styles
 import styles from "@/styles";
-
-// constants
-
-// Icons
-
-// components
-
 import {
   Dialog,
   DialogContent,
@@ -16,6 +8,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { PayAtCounterIcon } from "./icons/pay-at-counter-icon";
+import { RecieptPaperIcon } from "./icons/reciept-paper-icon";
+import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { resetCartConfig } from "@/store/cart";
 
 interface PaymentMethodDialogProps {
   isOpen: boolean;
@@ -24,47 +22,97 @@ interface PaymentMethodDialogProps {
 
 export const PaymentTokenNumberDialog: React.FC<PaymentMethodDialogProps> = ({
   isOpen,
-  onClose,
 }) => {
-  return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(open) => {
-        if (!open) onClose();
-      }}
-    >
-      <DialogContent
-        className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
-      >
-        <DialogHeader className=" justify-center items-center gap-2 lg:gap-14 pt-6">
-          <div className={` size-12 lg:size-44 rounded-md overflow-hidden `}>
-            <img
-              className=" h-full w-full object-cover"
-              src="pics/Lava_logo.jpg"
-              alt="Lava Tea House Logo"
-            />
-          </div>
-          <DialogTitle className={` text-center font-semibold lg:text-4xl`}>
-            Your Order Token Number
-          </DialogTitle>
-        </DialogHeader>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const paymentType = useSelector((state: RootState) => state.cart.paymentType);
+  const orderNumber = "23"; // You might want to generate this dynamically
+  const [, setCountdown] = useState(30); // Countdown timer for half 1 min
 
-        <div
-          className={` ${styles.flexBetween} flex-col gap-2 lg:gap-8 overflow-hidden `}
+  const getMessage = () => {
+    return paymentType === "counter"
+      ? "Please Pay Your Order At the Counter."
+      : "Thank You, Please wait for your order.";
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      // Start countdown when dialog is opened
+      const timer = setInterval(() => {
+        setCountdown((prev: number) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            // clean cart config
+            dispatch(resetCartConfig());
+            // Redirect to index page
+            navigate("/");
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      // Cleanup timer on unmount
+      return () => clearInterval(timer);
+    }
+  }, [isOpen, navigate, dispatch, paymentType]);
+
+  return (
+    <>
+      <Dialog open={isOpen} onOpenChange={() => {}}>
+        <DialogContent
+          onInteractOutside={(e) => {
+            e.preventDefault();
+          }}
+          className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
         >
+          <DialogHeader className="justify-center items-center gap-2 lg:gap-14 pt-6">
+            <div className={`size-12 lg:size-44 rounded-md overflow-hidden`}>
+              <img
+                className="h-full w-full object-cover"
+                src="pics/Lava_logo.jpg"
+                alt="Lava Tea House Logo"
+              />
+            </div>
+            <DialogTitle className={`text-center font-semibold lg:text-4xl`}>
+              Your Order Token Number
+            </DialogTitle>
+          </DialogHeader>
+
           <div
-            className={`${styles.flexCenter} flex-col w-full gap-2 lg:gap-12`}
+            className={`${styles.flexBetween} flex-col gap-2 lg:gap-8 overflow-hidden lg:pb-10 pt-6 lg:pt-16 border-t border-muted`}
           >
-            <p
-              className={` ${styles.large} text-balance font-semibold lg:text-5xl`}
+            <div className={`relative ${styles.flexCenterStart} w-full h-full`}>
+              <div className="relative !size-[300px] sm:!size-[324px] lg:!w-[624px] lg:!h-[624px]">
+                <RecieptPaperIcon className="w-full h-full" />
+                <span
+                  className={`absolute top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl lg:text-5xl font-semibold whitespace-nowrap`}
+                >
+                  Your Order <span className="underline font-bold">No</span>
+                </span>
+                <span
+                  className={`absolute top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl lg:text-8xl font-semibold`}
+                >
+                  {orderNumber}
+                </span>
+              </div>
+            </div>
+            <div
+              className={`${styles.flexCenter} flex-col w-full gap-2 lg:gap-12 `}
             >
-              Please Pay Your Order At the Counter
-            </p>
-            <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-36 lg:!h-36 " />
+              <p
+                className={`${styles.large} text-balance text-center font-semibold lg:!text-5xl`}
+              >
+                {getMessage()}
+              </p>
+              {paymentType === "counter" && (
+                <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-48 lg:!h-48" />
+              )}
+            </div>
           </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

@@ -32,6 +32,7 @@ const Cart = () => {
   };
 
   const handleAddonDialogSubmit = () => {
+    setIsAddonBeforePayDialogOpen(false);
     setIsPaymentMethodDialogOpen(true);
   };
 
@@ -44,7 +45,12 @@ const Cart = () => {
   };
 
   const handlePaymentMethodDialogSubmit = () => {
+    setIsPaymentMethodDialogOpen(false);
     setIsPaymentTokenNumberDialogOpen(true);
+  };
+
+  const handlePaymentTokenNumberDialogClose = () => {
+    setIsPaymentTokenNumberDialogOpen(false);
   };
 
   useMemo(() => {
@@ -69,7 +75,7 @@ const Cart = () => {
         TotalPay: totalPriceValue + serviceTax - discount,
       })
     );
-  }, [products]);
+  }, [products, currency, discount, serviceTax, dispatch]);
 
   return (
     <section
@@ -82,20 +88,26 @@ const Cart = () => {
       >
         <Dialog>
           <CheckoutList onClose={() => {}} onSubmit={handleCheckoutSubmit} />
-          <AddonBeforePayDialog
-            isOpen={isAddonBeforePayDialogOpen}
-            onClose={handleAddonDialogClose}
-            onSubmit={handleAddonDialogSubmit}
-          />
-          <PaymentMethodDialog
-            isOpen={isPaymentMethodDialogOpen}
-            onClose={handlePaymentMethodDialogClose}
-            onSubmit={handlePaymentMethodDialogSubmit}
-          />
-          <PaymentTokenNumberDialog
-            isOpen={isPaymentTokenNumberDialogOpen}
-            onClose={() => {}}
-          />
+          {isAddonBeforePayDialogOpen && (
+            <AddonBeforePayDialog
+              isOpen={isAddonBeforePayDialogOpen}
+              onClose={handleAddonDialogClose}
+              onSubmit={handleAddonDialogSubmit}
+            />
+          )}
+          {isPaymentMethodDialogOpen && (
+            <PaymentMethodDialog
+              isOpen={isPaymentMethodDialogOpen}
+              onClose={handlePaymentMethodDialogClose}
+              onSubmit={handlePaymentMethodDialogSubmit}
+            />
+          )}
+          {isPaymentTokenNumberDialogOpen && (
+            <PaymentTokenNumberDialog
+              isOpen={isPaymentTokenNumberDialogOpen}
+              onClose={handlePaymentTokenNumberDialogClose}
+            />
+          )}
 
           <DialogTrigger asChild>
             <Button className="relative w-full text-primary-foreground rounded-b-none py-6 lg:h-28 lg:text-4xl lg:gap-4">

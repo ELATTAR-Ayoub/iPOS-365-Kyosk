@@ -69,7 +69,7 @@ const Menu = () => {
             dispatch(setLuggage({ luggage: "DineIn" }));
             navigate("/menu");
           }}
-          className=" w-full h-full max-h-80 lg:size-80 border [&_svg]:size-20 sm:[&_svg]:size-24 "
+          className=" w-full h-full max-h-80 lg:size-80 border [&_svg]:size-20 sm:[&_svg]:size-24 lg:[&_svg]:size-36 "
         >
           <DineInIcon size={96} />
         </Button>
@@ -84,7 +84,7 @@ const Menu = () => {
             dispatch(setLuggage({ luggage: "TakeOut" }));
             navigate("/menu");
           }}
-          className="  w-full h-full max-h-80 lg:size-80 border [&_svg]:size-20 sm:[&_svg]:size-24 "
+          className="  w-full h-full max-h-80 lg:size-80 border [&_svg]:size-20 sm:[&_svg]:size-24 lg:[&_svg]:size-36"
         >
           <TakeOutIcon size={96} />
         </Button>

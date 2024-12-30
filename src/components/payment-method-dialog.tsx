@@ -1,20 +1,10 @@
 "use client";
 
-// styles
 import { Button } from "@/components/ui/button";
 import styles from "@/styles";
-
-// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { setPaymentType } from "@/store/cart";
-
-// constants
-
-// Icons
-
-// components
-
 import {
   Dialog,
   DialogClose,
@@ -37,35 +27,35 @@ const paymentMethods = [
     title: "Pay At The Counter",
     value: "counter",
     icon: (
-      <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-36 lg:!h-36 " />
+      <PayAtCounterIcon className="!size-10 sm:!size-12 lg:!w-36 lg:!h-36" />
     ),
   },
   {
     title: "Card Payment",
     value: "card",
     icon: (
-      <CardPaymentIcon className=" !size-10 sm:!size-12 lg:!w-4/5 lg:!h-36 " />
+      <CardPaymentIcon className="!w-24 !h-10 sm:!w-32 sm:!h-12 lg:!w-4/5 lg:!h-36" />
     ),
   },
   {
     title: "LINE Pay",
     value: "line",
-    icon: <LinePayIcon className=" !size-10 sm:!size-12 lg:!w-32 " />,
+    icon: <LinePayIcon className="!size-10 sm:!size-12 lg:!w-32" />,
   },
   {
     title: "Apple Pay",
     value: "apple",
-    icon: <ApplePayIcon className=" !size-10 sm:!size-12 lg:!w-28 " />,
+    icon: <ApplePayIcon className="!size-10 sm:!size-12 lg:!w-28" />,
   },
   {
     title: "Google Pay",
     value: "google",
-    icon: <GooglePayIcon className=" !size-10 sm:!size-12 lg:!w-28 " />,
+    icon: <GooglePayIcon className="!size-10 sm:!size-12 lg:!w-28" />,
   },
   {
     title: "Samsung Pay",
     value: "samsung",
-    icon: <SamsungPayIcon className=" !size-10 sm:!size-12 lg:!w-32 " />,
+    icon: <SamsungPayIcon className="!size-10 sm:!size-12 lg:!w-32" />,
   },
 ];
 
@@ -81,15 +71,15 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
   onSubmit,
 }) => {
   const dispatch = useDispatch();
-
-  const handleSubmit = (paymentTypeTitle: string) => {
-    // adding payment type to the cart redux slice
-    dispatch(setPaymentType({ paymentTypeTitle }));
-    onSubmit();
-  };
-
-  // values
   const products = useSelector((state: RootState) => state.cart.products);
+
+  const handleSubmit = (paymentType: string) => {
+    dispatch(setPaymentType(paymentType));
+    // Add a small delay to ensure state is updated before proceeding
+    setTimeout(() => {
+      onSubmit();
+    }, 100);
+  };
 
   return (
     <Dialog
@@ -98,37 +88,32 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
         if (!open) onClose();
       }}
     >
-      <DialogContent
-        className={`grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8`}
-      >
-        <DialogHeader className=" justify-center items-center gap-2 lg:gap-14 pt-6">
-          <div className={` size-12 lg:size-44 rounded-md overflow-hidden `}>
+      <DialogContent className="grid grid-rows-[auto,1fr,auto] flex-col p-4 h-[90%] lg:gap-8">
+        <DialogHeader className="justify-center items-center gap-2 lg:gap-14 pt-6">
+          <div className="size-12 lg:size-44 rounded-md overflow-hidden">
             <img
-              className=" h-full w-full object-cover"
+              className="h-full w-full object-cover"
               src="pics/Lava_logo.jpg"
               alt="Lava Tea House Logo"
             />
           </div>
-          <DialogTitle className={` text-center font-semibold lg:text-4xl`}>
-            Payment Process{" "}
+          <DialogTitle className="text-center font-semibold lg:text-4xl">
+            Payment Process
           </DialogTitle>
         </DialogHeader>
-
         <div
-          className={` ${styles.flexStart} flex-col gap-2 lg:gap-8 overflow-hidden `}
+          className={`${styles.flexStart} flex-col gap-2 lg:gap-8 overflow-hidden lg:pb-10 pt-6 lg:pt-16 border-t border-muted`}
         >
-          {/* payments items list */}
           <div
             className={`grid grid-cols-2 lg:grid-cols-4 grid-rows-[100px,100px] lg:grid-rows-[250px,170px] lg:place-content-center gap-2 lg:gap-y-28 lg:gap-x-10 w-full h-full p-2 lg:py-10 overflow-y-auto`}
           >
-            {/* payments cards */}
             {paymentMethods.map((method, index) => (
               <Button
                 key={method.title}
-                variant={"outline"}
+                variant="outline"
                 onClick={() => handleSubmit(method.value)}
-                className={` flex-col h-full lg:text-3xl lg:font-semibold lg:gap-8 ${
-                  index < 2 ? "col-span-2 " : ""
+                className={`flex-col h-full lg:text-3xl lg:font-semibold lg:gap-8 ${
+                  index < 2 ? "col-span-2" : ""
                 }`}
               >
                 {method.icon}
@@ -136,13 +121,9 @@ export const PaymentMethodDialog: React.FC<PaymentMethodDialogProps> = ({
               </Button>
             ))}
           </div>
-
-          {/* price here */}
           {products.length > 0 && <PriceSummary />}
         </div>
-
-        {/* CTA */}
-        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8 ">
+        <DialogFooter className="grid grid-cols-[30%,1fr] gap-2 lg:gap-8">
           <DialogClose asChild>
             <Button
               type="button"
